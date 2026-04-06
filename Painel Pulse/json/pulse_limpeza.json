@@ -1,0 +1,249 @@
+[
+  {
+    "Id": "limpeza.arquivos-temporarios",
+    "TabKey": "limpeza",
+    "limpeza": "1, 2",
+    "Name": "Limpar Arquivos Temporários",
+    "Description": "Remove arquivos temporários do sistema, navegadores, usuário e aplicativos, liberando espaço em disco e eliminando dados obsoletos acumulados.",
+    "Tooltip": {
+      "Pros": [
+        "Libera espaço significativo em disco ocupado por arquivos desnecessários",
+        "Reduz tempo de indexação e varredura de antivírus em pastas temporárias",
+        "Elimina resíduos de instaladores, atualizações e caches de navegadores"
+      ],
+      "Cons": [
+        "Caches de navegadores serão apagados, exigindo novo carregamento de sites",
+        "Arquivos temporários de sessões abertas podem ser removidos",
+        "Algumas aplicações podem demorar mais na próxima inicialização ao recriar caches"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\limpeza\\limpeza_arquivos-temporarios.bat apply",
+    "Revert": ".\\comandos\\limpeza\\limpeza_arquivos-temporarios.bat revert"
+  },
+  {
+    "Id": "limpeza.cache-miniaturas",
+    "TabKey": "limpeza",
+    "limpeza": "1, 2",
+    "Name": "Limpar Cache de Miniaturas, Ícones e Fontes",
+    "Description": "Remove os bancos de dados de cache de miniaturas de imagens, cache de ícones do Explorer e cache do serviço de fontes do Windows.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina ícones corrompidos ou desatualizados que persistem no Explorer",
+        "Resolve miniaturas incorretas ou que não atualizam em pastas de imagens e vídeos",
+        "Libera espaço e força regeneração limpa dos caches visuais do sistema"
+      ],
+      "Cons": [
+        "O Explorer reiniciará brevemente durante a limpeza, causando interrupção visual",
+        "Miniaturas e ícones serão regenerados gradualmente ao navegar pelas pastas",
+        "A regeneração do cache de fontes pode aumentar o uso de CPU temporariamente"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\limpeza\\limpeza_cache-miniaturas.bat apply",
+    "Revert": ".\\comandos\\limpeza\\limpeza_cache-miniaturas.bat revert"
+  },
+  {
+    "Id": "limpeza.cache-windows-update",
+    "TabKey": "limpeza",
+    "limpeza": "2",
+    "Name": "Limpar Cache do Windows Update e Otimização de Entrega",
+    "Description": "Remove os arquivos de instalação baixados pelo Windows Update e os dados em cache do serviço de Otimização de Entrega (peer-to-peer de atualizações).",
+    "Tooltip": {
+      "Pros": [
+        "Libera vários gigabytes de espaço em disco usado por atualizações antigas",
+        "Elimina pacotes de atualização corrompidos que podem causar falhas no Windows Update",
+        "Remove dados do serviço de entrega ponto a ponto que consome banda em segundo plano"
+      ],
+      "Cons": [
+        "O Windows precisará baixar novamente os pacotes necessários para futuras atualizações",
+        "O serviço Windows Update pode demorar mais na próxima verificação após a limpeza",
+        "Não remove atualizações já instaladas, apenas os arquivos de instalação em cache"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\limpeza\\limpeza_cache-windows-update.bat apply",
+    "Revert": ".\\comandos\\limpeza\\limpeza_cache-windows-update.bat revert"
+  },
+  {
+    "Id": "limpeza.prefetch",
+    "TabKey": "limpeza",
+    "limpeza": "1, 2",
+    "Name": "Limpar Prefetch e Superfetch",
+    "Description": "Remove os arquivos de pré-carregamento (.pf) e o banco de dados do Superfetch (SysMain), que armazenam padrões de uso para antecipar o carregamento de aplicações.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina arquivos obsoletos de aplicações que não são mais utilizadas",
+        "Pode resolver casos de alto uso de disco causado por padrões desatualizados do SysMain",
+        "Útil após reinstalação de software ou mudança de hábitos de uso do sistema"
+      ],
+      "Cons": [
+        "As primeiras inicializações de aplicações podem ser levemente mais lentas após a limpeza",
+        "O Superfetch precisará aprender novamente os padrões de uso do sistema",
+        "Em SSDs, o benefício é mínimo pois o Prefetch já tem impacto reduzido"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\limpeza\\limpeza_prefetch.bat apply",
+    "Revert": ".\\comandos\\limpeza\\limpeza_prefetch.bat revert"
+  },
+  {
+    "Id": "limpeza.logs-erros",
+    "TabKey": "limpeza",
+    "limpeza": "2",
+    "Name": "Limpar Logs e Relatórios de Erros",
+    "Description": "Remove logs do Visualizador de Eventos, relatórios de erros do WER, arquivos de minidump de travamentos e logs de diagnóstico acumulados pelo sistema.",
+    "Tooltip": {
+      "Pros": [
+        "Libera espaço em disco ocupado por logs e dumps de memória de erros antigos",
+        "Facilita diagnóstico ao manter apenas eventos recentes no Visualizador de Eventos",
+        "Remove arquivos de crash dump que podem ocupar centenas de megabytes"
+      ],
+      "Cons": [
+        "Histórico de erros e eventos do sistema será perdido permanentemente",
+        "Diagnóstico de problemas anteriores ficará indisponível após a limpeza",
+        "Logs serão gerados novamente automaticamente conforme o sistema opera"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\limpeza\\limpeza_logs-erros.bat apply",
+    "Revert": ".\\comandos\\limpeza\\limpeza_logs-erros.bat revert"
+  },
+  {
+    "Id": "limpeza.historico-atividades",
+    "TabKey": "limpeza",
+    "limpeza": "1, 2",
+    "Name": "Limpar Histórico de Atividades",
+    "Description": "Remove e desativa o Histórico de Atividades do Windows (Timeline), que registra aplicativos usados, documentos abertos e atividades da conta Microsoft.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina o rastreamento local e em nuvem de atividades do usuário",
+        "Remove o banco de dados ActivitiesCache.db com histórico de uso de apps e arquivos",
+        "Reduz sincronização de dados de uso com a conta Microsoft"
+      ],
+      "Cons": [
+        "A linha do tempo de atividades (Timeline) ficará sem histórico após a limpeza",
+        "A sincronização de atividades entre dispositivos com a mesma conta será desativada",
+        "O recurso de continuar tarefas entre dispositivos Windows pode ser afetado"
+      ],
+      "Unavailable": [
+        "O Histórico de Atividades e a Timeline do Windows ficarão indisponíveis",
+        "A sincronização de atividades entre dispositivos via conta Microsoft ficará indisponível"
+      ]
+    },
+    "Apply": ".\\comandos\\limpeza\\limpeza_historico-atividades.bat apply",
+    "Revert": ".\\comandos\\limpeza\\limpeza_historico-atividades.bat revert"
+  },
+  {
+    "Id": "limpeza.cache-store",
+    "TabKey": "limpeza",
+    "limpeza": "2",
+    "Name": "Limpar Cache da Microsoft Store",
+    "Description": "Reseta o cache da Microsoft Store via WSReset e remove manualmente arquivos temporários de pacotes, instalações e downloads pendentes da Store.",
+    "Tooltip": {
+      "Pros": [
+        "Resolve erros de carregamento, instalação ou atualização de apps da Store",
+        "Libera espaço de pacotes parcialmente baixados e instalações incompletas",
+        "Útil para resolver o erro 0x80073CF9 e outros erros comuns da Store"
+      ],
+      "Cons": [
+        "A Store precisará recarregar informações de apps na próxima abertura",
+        "Downloads em progresso na Store serão interrompidos durante a limpeza",
+        "O WSReset fecha a Store automaticamente se estiver aberta"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\limpeza\\limpeza_cache-store.bat apply",
+    "Revert": ".\\comandos\\limpeza\\limpeza_cache-store.bat revert"
+  },
+  {
+    "Id": "limpeza.historico-explorer",
+    "TabKey": "limpeza",
+    "limpeza": "1, 2",
+    "Name": "Limpar Histórico do Explorador de Arquivos",
+    "Description": "Remove o histórico de arquivos e pastas recentes, atalhos do Acesso Rápido, histórico de digitação na barra de endereços e histórico de pesquisa do Explorer.",
+    "Tooltip": {
+      "Pros": [
+        "Aumenta privacidade removendo registros de arquivos e pastas acessados recentemente",
+        "Limpa atalhos desatualizados do Acesso Rápido que apontam para locais inexistentes",
+        "Remove histórico de pesquisas e digitação acumuladas na barra de endereços"
+      ],
+      "Cons": [
+        "A lista de arquivos e pastas recentes no Acesso Rápido será apagada",
+        "Itens fixados manualmente no Acesso Rápido podem ser removidos junto ao histórico",
+        "O Explorer reiniciará brevemente durante a aplicação"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\limpeza\\limpeza_historico-explorer.bat apply",
+    "Revert": ".\\comandos\\limpeza\\limpeza_historico-explorer.bat revert"
+  },
+  {
+    "Id": "limpeza.cache-directx",
+    "TabKey": "limpeza",
+    "limpeza": "",
+    "Name": "Limpar Cache do DirectX",
+    "Description": "Remove o cache de shaders compilados do DirectX (D3DSCache), além dos caches de shader de GPU de fabricantes como NVIDIA, AMD e Intel.",
+    "Tooltip": {
+      "Pros": [
+        "Resolve stuttering causado por shaders corrompidos ou incompatíveis com drivers atuais",
+        "Útil após atualização de drivers de GPU para forçar recompilação limpa dos shaders",
+        "Elimina ocupação de espaço por shaders de jogos desinstalados"
+      ],
+      "Cons": [
+        "Shaders serão recompilados nos primeiros minutos de jogo, causando stuttering temporário",
+        "O impacto é mais perceptível em jogos com compilação de shader intensa (ex.: DX12, Vulkan)",
+        "A recompilação consome CPU e GPU nas primeiras sessões após a limpeza"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\limpeza\\limpeza_cache-directx.bat apply",
+    "Revert": ".\\comandos\\limpeza\\limpeza_cache-directx.bat revert"
+  },
+  {
+    "Id": "limpeza.windows-old",
+    "TabKey": "limpeza",
+    "limpeza": "2",
+    "Name": "Limpar Instalações Anteriores do Windows",
+    "Description": "Remove a pasta Windows.old gerada após atualização de versão do Windows, que contém os arquivos do sistema operacional anterior e pode ocupar vários gigabytes.",
+    "Tooltip": {
+      "Pros": [
+        "Libera entre 10 GB e 30 GB de espaço em disco ocupado pela instalação anterior",
+        "Remove arquivos de sistema antigos que não são mais necessários após a atualização",
+        "Elimina a pasta de forma segura via DISM e limpeza de disco do sistema"
+      ],
+      "Cons": [
+        "Após a remoção, não será possível reverter para a versão anterior do Windows",
+        "A pasta só existe se o sistema foi atualizado de uma versão anterior do Windows",
+        "A operação é irreversível e pode levar alguns minutos para ser concluída"
+      ],
+      "Unavailable": [
+        "A reversão para a instalação anterior do Windows ficará permanentemente indisponível"
+      ]
+    },
+    "Apply": ".\\comandos\\limpeza\\limpeza_windows-old.bat apply",
+    "Revert": ".\\comandos\\limpeza\\limpeza_windows-old.bat revert"
+  },
+  {
+    "Id": "limpeza.lixeira",
+    "TabKey": "limpeza",
+    "limpeza": "",
+    "Name": "Esvaziar Lixeira",
+    "Description": "Esvazia permanentemente a lixeira de todos os drives do sistema, removendo todos os arquivos marcados para exclusão que ainda ocupam espaço em disco.",
+    "Tooltip": {
+      "Pros": [
+        "Libera imediatamente todo o espaço em disco ocupado por arquivos na lixeira",
+        "Operação rápida e sem necessidade de reinicialização",
+        "Funciona em todos os drives presentes no sistema simultaneamente"
+      ],
+      "Cons": [
+        "Todos os arquivos na lixeira serão removidos permanentemente e não poderão ser recuperados",
+        "Arquivos importantes excluídos acidentalmente serão perdidos se ainda estiverem na lixeira",
+        "Ferramentas de recuperação de arquivos ainda podem recuperar os dados em alguns casos"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\limpeza\\limpeza_lixeira.bat apply",
+    "Revert": ".\\comandos\\limpeza\\limpeza_lixeira.bat revert"
+  }
+]
