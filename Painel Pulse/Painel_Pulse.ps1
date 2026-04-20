@@ -1,4 +1,4 @@
-﻿#Requires -Version 5.1
+#Requires -Version 5.1
 <#
 .SYNOPSIS
   Painel Pulse - Base Limpa e Definitiva
@@ -35,6 +35,7 @@ if (-not $isExclusive) {
 # CAMINHO BASE DO SCRIPT
 # ==========================================
 $script:BaseDir = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Path }
+$script:RepoBaseUrl = "https://raw.githubusercontent.com/cbarboza02/pulse/main/Painel%20Pulse"
 
 # ==========================================
 # GESTÃO DE DIRETÓRIOS E LOG DIÁRIO
@@ -337,6 +338,10 @@ $global:PulseQueueTimer.Add_Tick({
         } catch {}
         
         $global:PulseCurrentProc = $null
+        # Deleta o .bat após execução
+        if (-not [string]::IsNullOrWhiteSpace($global:PulseCurrentJob.BatPath)) {
+            try { Remove-Item -Path $global:PulseCurrentJob.BatPath -Force -ErrorAction SilentlyContinue } catch {}
+        }
         $global:PulseCurrentJob = $null
     }
 
@@ -354,20 +359,53 @@ $global:PulseQueueTimer.Add_Tick({
 })
 $global:PulseQueueTimer.Start()
 
+function Get-PulseBat {
+    param([string]$BatAbsPath)
+    
+    # Calcula o caminho relativo ao BaseDir para montar a URL
+    $relPath = $BatAbsPath.Substring($script:BaseDir.Length).TrimStart('\', '/')
+    $urlPath = $relPath -replace '\\', '/'
+    $url = "$script:RepoBaseUrl/$urlPath"
+    
+    # Cria a pasta de destino se não existir
+    $destDir = Split-Path $BatAbsPath
+    if (-not (Test-Path $destDir)) {
+        New-Item -ItemType Directory -Path $destDir -Force | Out-Null
+    }
+    
+    try {
+        Invoke-WebRequest -Uri $url -OutFile $BatAbsPath -UseBasicParsing -ErrorAction Stop
+        Write-PulseLog "Baixado: $urlPath"
+        return $true
+    } catch {
+        Write-PulseLog "ERRO ao baixar $urlPath`: $($_.Exception.Message)"
+        return $false
+    }
+}
+
 function Add-PulseJob {
     param([string]$BatPath, [string]$Param, [string]$OptName, [string]$Action)
-    if ([string]::IsNullOrWhiteSpace($BatPath) -or -not (Test-Path $BatPath)) { return }
+    if ([string]::IsNullOrWhiteSpace($BatPath)) { return }
+    
+    # Baixa o .bat do repositório se ele não existir localmente
+    if (-not (Test-Path $BatPath)) {
+        $ok = Get-PulseBat -BatAbsPath $BatPath
+        if (-not $ok -or -not (Test-Path $BatPath)) {
+            Write-PulseLog "ERRO: Não foi possível obter o arquivo para '$OptName'."
+            return
+        }
+    }
     
     $job = [PSCustomObject]@{
-        File   = 'cmd.exe'
-        Args   = @('/c', "`"$BatPath`"", $Param)
-        Dir    = (Split-Path $BatPath)
-        Name   = $OptName
-        Action = $Action
+        File      = 'cmd.exe'
+        Args      = @('/c', "`"$BatPath`"", $Param)
+        Dir       = (Split-Path $BatPath)
+        Name      = $OptName
+        Action    = $Action
+        BatPath   = $BatPath   # <-- guardado para deletar depois
     }
     $global:PulseQueue.Enqueue($job)
     
-    # Registra no log assim que entra na fila
     $pos = $global:PulseQueue.Count
     Write-PulseLog "Fila: Posição $pos | $OptName - $Action"
 }
@@ -3928,5 +3966,18 @@ Load-LimpezaItems
 Init-PulseModeTabs
 Update-PulseModeItems
 Update-MasterPulseToggleState
+
+$window.Add_Closing({
+    Write-PulseLog "Painel Pulse encerrado. Iniciando limpeza de arquivos temporários."
+    $global:PulseQueueTimer.Stop()
+    
+    # Remove a pasta inteira do temp em background para não travar o fechamento
+    $dirToDelete = $script:BaseDir
+    Start-Job -ScriptBlock {
+        param($d)
+        Start-Sleep -Seconds 2  # Aguarda o PS1 encerrar completamente
+        Remove-Item -Path $d -Recurse -Force -ErrorAction SilentlyContinue
+    } -ArgumentList $dirToDelete | Out-Null
+})
 
 $window.ShowDialog() | Out-Null
