@@ -1755,35 +1755,35 @@ function New-OptCard {
     $null = $grid.Children.Add($leftPanel)
 
     # Mapeamento dos ícones e informação do tooltip
-    $focoMap = @{
-        'jogos'       = 0xe7fc
-        'fluidez'     = 0xec4a
-        'windows'     = 0xe8a9
-        'segurança'   = 0xe730
-        'visual'      = 0xf4a5
-        'privacidade' = 0xed1a
-        'internet'    = 0xe774
-        'limpeza'     = 0xea99
+    $focoMap = @{ 
+        'jogos'       = 0xe7fc 
+        'fluidez'     = 0xec4a 
+        'windows'     = 0xe8a9 
+        'segurança'   = 0xe730 
+        'visual'      = 0xf4a5 
+        'privacidade' = 0xed1a 
+        'internet'    = 0xe774 
+        'limpeza'     = 0xea99 
     }
-    $focoSizeMap = @{
-        'jogos'       = 18
-        'fluidez'     = 17
-        'windows'     = 17
-        'segurança'   = 16
-        'visual'      = 17
-        'privacidade' = 16
-        'internet'    = 16
-        'limpeza'     = 17
+    $focoSizeMap = @{ 
+        'jogos'       = 18 
+        'fluidez'     = 17 
+        'windows'     = 17 
+        'segurança'   = 16 
+        'visual'      = 17 
+        'privacidade' = 16 
+        'internet'    = 16 
+        'limpeza'     = 17 
     }
-    $focoTooltipMap = @{
-        'jogos'       = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência."
-        'fluidez'     = "Melhora a responsividade e fluidez do Windows, geralmente não melhora o desempenho em jogos."
-        'windows'     = "Ajustes para melhorar a sua experiência e facilitar o uso do sistema."
-        'segurança'   = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável."
-        'visual'      = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho."
-        'privacidade' = "Desativa telemetrias, coleta de dados e semelhantes, aumentando a privacidade."
-        'internet'    = "Ajustes para melhorar a internet, removendo limitações/gargalos artificiais."
-        'limpeza'     = "Remove arquivos para liberar espaço em disco, podendo otimizar o sistema e corrigir problemas específicos."
+    $focoTooltipMap = @{ 
+        'jogos'       = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência." 
+        'fluidez'     = "Melhora a responsividade e fluidez do Windows, geralmente não melhora o desempenho em jogos." 
+        'windows'     = "Ajustes para melhorar a sua experiência e facilitar o uso do sistema." 
+        'segurança'   = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável." 
+        'visual'      = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho." 
+        'privacidade' = "Desativa telemetrias, coleta de dados e semelhantes, aumentando a privacidade." 
+        'internet'    = "Ajustes para melhorar a internet, removendo limitações/gargalos artificiais." 
+        'limpeza'     = "Remove arquivos para liberar espaço em disco, podendo otimizar o sistema e corrigir problemas específicos." 
     }
     
     $focoVal = ([string]$item.Foco).Trim().ToLower()
