@@ -3156,7 +3156,7 @@ function Load-LimpezaItems {
                 $icoFoco = [System.Windows.Controls.TextBlock]::new()
                 $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
                 $icoFoco.Text = [char]0xea99
-                $icoFoco.FontSize = 16
+                $icoFoco.FontSize = 14
                 $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
                 $icoFoco.VerticalAlignment = 'Center'
                 $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
