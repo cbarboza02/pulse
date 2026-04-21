@@ -301,7 +301,7 @@
     },
     "Apply": ".\\comandos\\hw_gpu_atualizacao-automatica.bat apply",
     "Revert": ".\\comandos\\hw_gpu_atualizacao-automatica.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "hardware.relive",
@@ -406,7 +406,7 @@
     },
     "Apply": ".\\comandos\\hw_gpu_crash-defender.bat apply",
     "Revert": ".\\comandos\\hw_gpu_crash-defender.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "hardware.estacionamento-nucleos",
@@ -483,7 +483,7 @@
     },
     "Apply": ".\\comandos\\hw_cpu_modern-standby.bat apply",
     "Revert": ".\\comandos\\hw_cpu_modern-standby.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "hardware.cpu-max-desempenho",
@@ -534,7 +534,7 @@
     },
     "Apply": ".\\comandos\\hw_ram_compressao-memoria.bat apply",
     "Revert": ".\\comandos\\hw_ram_compressao-memoria.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "hardware.diagnostico-memoria",
@@ -560,7 +560,7 @@
     },
     "Apply": ".\\comandos\\hw_ram_diagnostico-memoria.bat apply",
     "Revert": ".\\comandos\\hw_ram_diagnostico-memoria.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "hardware.paginacao-kernel",
@@ -585,7 +585,7 @@
     },
     "Apply": ".\\comandos\\hw_ram_paginacao-kernel.bat apply",
     "Revert": ".\\comandos\\hw_ram_paginacao-kernel.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "hardware.page-combining",
@@ -610,7 +610,7 @@
     },
     "Apply": ".\\comandos\\hw_ram_page-combining.bat apply",
     "Revert": ".\\comandos\\hw_ram_page-combining.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "hardware.inicializacao-rapida",
@@ -635,7 +635,7 @@
     },
     "Apply": ".\\comandos\\hw_ram_inicializacao-rapida.bat apply",
     "Revert": ".\\comandos\\hw_ram_inicializacao-rapida.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -685,7 +685,7 @@
     },
     "Apply": ".\\comandos\\hw_perifericos_repeticao-teclado.bat apply",
     "Revert": ".\\comandos\\hw_perifericos_repeticao-teclado.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "hardware.energia-usb",
@@ -708,7 +708,7 @@
     },
     "Apply": ".\\comandos\\hw_perifericos_energia-usb.bat apply",
     "Revert": ".\\comandos\\hw_perifericos_energia-usb.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -734,7 +734,7 @@
     },
     "Apply": ".\\comandos\\hw_storage_disk-timeout.bat apply",
     "Revert": ".\\comandos\\hw_storage_disk-timeout.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "hardware.io-latency-cap",
@@ -757,7 +757,7 @@
     },
     "Apply": ".\\comandos\\hw_storage_io-latency-cap.bat apply",
     "Revert": ".\\comandos\\hw_storage_io-latency-cap.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "hardware.nvme-power-state",
@@ -783,7 +783,7 @@
     },
     "Apply": ".\\comandos\\hw_storage_nvme-power-state.bat apply",
     "Revert": ".\\comandos\\hw_storage_nvme-power-state.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "hardware.otimizar-ntfs",
@@ -809,7 +809,7 @@
     },
     "Apply": ".\\comandos\\hw_storage_otimizar-ntfs.bat apply",
     "Revert": ".\\comandos\\hw_storage_otimizar-ntfs.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   }
 ]
