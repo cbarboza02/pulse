@@ -3981,7 +3981,10 @@ $window.Add_Closing({
     $global:PulseQueueTimer.Stop()
 
     $dirToDelete = $script:BaseDir
-    Start-Process powershell -ArgumentList "-WindowStyle Hidden -Command `"Start-Sleep -Seconds 3; Remove-Item -Path '$dirToDelete' -Recurse -Force -ErrorAction SilentlyContinue`"" -WindowStyle Hidden
+    $cmd = "Start-Sleep -Seconds 3; Remove-Item -LiteralPath '$dirToDelete' -Recurse -Force -ErrorAction SilentlyContinue"
+    $bytes = [System.Text.Encoding]::Unicode.GetBytes($cmd)
+    $encoded = [Convert]::ToBase64String($bytes)
+    Start-Process powershell -ArgumentList "-WindowStyle Hidden -EncodedCommand $encoded" -WindowStyle Hidden
 })
 
 $window.ShowDialog() | Out-Null
