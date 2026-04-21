@@ -20,8 +20,8 @@
         "Jogos e serviços da Microsoft Store que utilizam Teredo para conectividade IPv6 podem ser afetados"
       ]
     },
-    "Apply": ".\\comandos\\internet\\internet_teredo.bat apply",
-    "Revert": ".\\comandos\\internet\\internet_teredo.bat revert",
+    "Apply": ".\\comandos\\internet_teredo.bat apply",
+    "Revert": ".\\comandos\\internet_teredo.bat revert",
     "Favorito": "sim"
   },
   {
@@ -43,8 +43,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\internet\\internet_nagle-algorithm.bat apply",
-    "Revert": ".\\comandos\\internet\\internet_nagle-algorithm.bat revert",
+    "Apply": ".\\comandos\\internet_nagle-algorithm.bat apply",
+    "Revert": ".\\comandos\\internet_nagle-algorithm.bat revert",
     "Favorito": "sim"
   },
   {
@@ -66,8 +66,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\internet\\internet_network-throttling.bat apply",
-    "Revert": ".\\comandos\\internet\\internet_network-throttling.bat revert",
+    "Apply": ".\\comandos\\internet_network-throttling.bat apply",
+    "Revert": ".\\comandos\\internet_network-throttling.bat revert",
     "Favorito": "sim"
   },
   {
@@ -92,8 +92,8 @@
         "A suspensão automática da NIC para economia de energia ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\internet\\internet_energia-nic.bat apply",
-    "Revert": ".\\comandos\\internet\\internet_energia-nic.bat revert",
+    "Apply": ".\\comandos\\internet_energia-nic.bat apply",
+    "Revert": ".\\comandos\\internet_energia-nic.bat revert",
     "Favorito": "sim"
   },
   {
@@ -115,8 +115,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\internet\\internet_rcs-lso-interrupt.bat apply",
-    "Revert": ".\\comandos\\internet\\internet_rcs-lso-interrupt.bat revert",
+    "Apply": ".\\comandos\\internet_rcs-lso-interrupt.bat apply",
+    "Revert": ".\\comandos\\internet_rcs-lso-interrupt.bat revert",
     "Favorito": "sim"
   },
   {
@@ -138,7 +138,7 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\internet\\internet_tcp-connection.bat apply",
-    "Revert": ".\\comandos\\internet\\internet_tcp-connection.bat revert"
+    "Apply": ".\\comandos\\internet_tcp-connection.bat apply",
+    "Revert": ".\\comandos\\internet_tcp-connection.bat revert"
   }
 ]
