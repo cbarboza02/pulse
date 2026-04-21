@@ -1735,91 +1735,30 @@ function New-OptCard {
     $grid = [System.Windows.Controls.Grid]::new()
     $grid.VerticalAlignment = 'Center'
     
-    $r0 = [System.Windows.Controls.RowDefinition]::new()
-    $r0.Height = 'Auto'
-    $r1 = [System.Windows.Controls.RowDefinition]::new()
-    $r1.Height = 'Auto'
-    $grid.RowDefinitions.Add($r0)
-    $grid.RowDefinitions.Add($r1)
+    # 2 Linhas: Nome e Descrição
+    $r0 = [System.Windows.Controls.RowDefinition]::new(); $r0.Height = 'Auto'
+    $r1 = [System.Windows.Controls.RowDefinition]::new(); $r1.Height = 'Auto'
+    $grid.RowDefinitions.Add($r0); $grid.RowDefinitions.Add($r1)
     
-    # Adicionando 3 colunas: Esquerda (Foco), Meio (Textos), Direita (Toggle)
+    # 3 Colunas: [0] Ícone Foco | [1] Textos | [2] Botões/Toggle
     $c0 = [System.Windows.Controls.ColumnDefinition]::new(); $c0.Width = 'Auto'
     $c1 = [System.Windows.Controls.ColumnDefinition]::new(); $c1.Width = '*'
     $c2 = [System.Windows.Controls.ColumnDefinition]::new(); $c2.Width = 'Auto'
-    $grid.ColumnDefinitions.Add($c0)
-    $grid.ColumnDefinitions.Add($c1)
-    $grid.ColumnDefinitions.Add($c2)
+    $grid.ColumnDefinitions.Add($c0); $grid.ColumnDefinitions.Add($c1); $grid.ColumnDefinitions.Add($c2)
 
-    # --- Left Panel para o Ícone de Foco ---
+    # --- COLUNA 0: PAINEL ESQUERDO (Ícone de Foco) ---
     $leftPanel = [System.Windows.Controls.StackPanel]::new()
     $leftPanel.VerticalAlignment = 'Center'
-    $leftPanel.Margin = [System.Windows.Thickness]::new(0,0,14,0) # Espaçamento entre o ícone e os textos
+    $leftPanel.Margin = [System.Windows.Thickness]::new(0,0,14,0)
     [System.Windows.Controls.Grid]::SetRowSpan($leftPanel, 2)
     [System.Windows.Controls.Grid]::SetColumn($leftPanel, 0)
     $null = $grid.Children.Add($leftPanel)
 
-    # --- Linha do Nome com Ícone de Favorito ---
-    $nameRow = [System.Windows.Controls.StackPanel]::new()
-    $nameRow.Orientation = 'Horizontal'
-    $nameRow.VerticalAlignment = 'Center'
-    # Removida a margem direita que havia antes, pois agora a coluna C1 cuida do espaçamento
-    [System.Windows.Controls.Grid]::SetRow($nameRow, 0)
-    [System.Windows.Controls.Grid]::SetColumn($nameRow, 1)
-
-    # Ícone de Favorito (amarelo, estrela) - Fica no nameRow
-    $favVal = ([string]$item.Favorito).Trim().ToLower()
-    if ($favVal -eq 'sim') {
-        $icoFav = [System.Windows.Controls.TextBlock]::new()
-        $icoFav.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-        $icoFav.Text = [char]0xe735
-        $icoFav.FontSize = 12
-        $icoFav.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FFD700')
-        $icoFav.VerticalAlignment = 'Center'
-        $icoFav.Margin = [System.Windows.Thickness]::new(0,0,7,0)
-        $null = $nameRow.Children.Add($icoFav)
-    }
-
-    $tbName = [System.Windows.Controls.TextBlock]::new()
-    $tbName.Text = $item.Name
-    $tbName.FontSize = 14
-    $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
-    $tbName.Foreground = $primaryText
-    $tbName.VerticalAlignment = 'Center'
-    $tbName.TextTrimming = 'CharacterEllipsis'
-    $null = $nameRow.Children.Add($tbName)
-    $null = $grid.Children.Add($nameRow)
-
-    # Ícone de Foco (Vai para o $leftPanel)
-    $focoMap = @{
-        'jogos'       = 0xe7fc
-        'fluidez'     = 0xec4a
-        'windows'     = 0xe8a9
-        'segurança'   = 0xe730
-        'visual'      = 0xf4a5
-        'privacidade' = 0xed1a
-        'internet'    = 0xe774
-        'limpeza'     = 0xea99
-    }
-    $focoSizeMap = @{
-        'jogos'       = 17
-        'fluidez'     = 16
-        'windows'     = 16
-        'segurança'   = 15
-        'visual'      = 16
-        'privacidade' = 15
-        'internet'    = 15
-        'limpeza'     = 16
-    }
-    $focoTooltipMap = @{
-        'jogos'       = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência."
-        'fluidez'     = "Melhora a responsividade e fluidez do Windows, geralmente não melhora o desempenho em jogos."
-        'windows'     = "Ajustes para melhorar a sua experiência e facilitar o uso do sistema."
-        'segurança'   = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável."
-        'visual'      = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho."
-        'privacidade' = "Desativa telemetrias, coleta de dados e semelhantes, aumentando a privacidade."
-        'internet'    = "Ajustes para melhorar a internet, removendo limitações/gargalos artificiais."
-        'limpeza'     = "Remove arquivos para liberar espaço em disco, podendo otimizar o sistema e corrigir problemas específicos."
-    }
+    # Lógica de seleção do ícone de Foco
+    $focoMap = @{ 'jogos'=0xe7fc; 'fluidez'=0xec4a; 'windows'=0xe8a9; 'segurança'=0xe730; 'visual'=0xf4a5; 'privacidade'=0xed1a; 'internet'=0xe774; 'limpeza'=0xea99 }
+    $focoSizeMap = @{ 'jogos'=17; 'fluidez'=16; 'windows'=16; 'segurança'=15; 'visual'=16; 'privacidade'=15; 'internet'=15; 'limpeza'=16 }
+    $focoTooltipMap = @{ 'jogos'="Prioriza recursos para o ambiente de jogo..."; 'fluidez'="Melhora a responsividade..."; 'windows'="Ajustes para melhorar a sua experiência..."; 'segurança'="Desativa recursos de segurança..."; 'visual'="Ajusta animações e efeitos..."; 'privacidade'="Desativa telemetrias..."; 'internet'="Ajustes para melhorar a internet..."; 'limpeza'="Remove arquivos para liberar espaço..." }
+    
     $focoVal = ([string]$item.Foco).Trim().ToLower()
     if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
         $icoFoco = [System.Windows.Controls.TextBlock]::new()
@@ -1830,114 +1769,73 @@ function New-OptCard {
         $icoFoco.VerticalAlignment = 'Center'
         $icoFoco.HorizontalAlignment = 'Center'
         $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
-
-        $ttFoco = [System.Windows.Controls.ToolTip]::new() # Dica de Ferramenta
-        $ttFoco.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
-        $ttFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#F4F4F4')
-        $ttFoco.BorderBrush = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#242436')
-        $ttFoco.BorderThickness = [System.Windows.Thickness]::new(1)
-        $ttFoco.Padding = [System.Windows.Thickness]::new(12,8,12,8)
-        $ttFoco.Placement = [System.Windows.Controls.Primitives.PlacementMode]::Bottom
-        $ttFoco.IsHitTestVisible = $false
-
-        $ttFocoText = [System.Windows.Controls.TextBlock]::new()
-        $ttFocoText.Text = $focoTooltipMap[$focoVal]
-        $ttFocoText.TextWrapping = 'Wrap'
-        $ttFocoText.MaxWidth = 320
-        $ttFocoText.FontSize = 11.5
-        $ttFoco.Content = $ttFocoText
-
-        [System.Windows.Controls.ToolTipService]::SetInitialShowDelay($icoFoco, 400)
-        [System.Windows.Controls.ToolTipService]::SetShowDuration($icoFoco, 60000)
+        
+        # Tooltip do Foco
+        $ttFoco = [System.Windows.Controls.ToolTip]::new()
+        $ttFoco.Content = $focoTooltipMap[$focoVal]
         $icoFoco.ToolTip = $ttFoco
-
-        $icoFoco.Add_MouseLeave({
-            if ($this.ToolTip -is [System.Windows.Controls.ToolTip]) {
-                $this.ToolTip.IsOpen = $false
-            }
-        })
-
         $null = $leftPanel.Children.Add($icoFoco)
     }
+
+    # --- COLUNA 1: TEXTOS (Nome e Descrição) ---
+    $nameRow = [System.Windows.Controls.StackPanel]::new()
+    $nameRow.Orientation = 'Horizontal'
+    $nameRow.VerticalAlignment = 'Center'
+    [System.Windows.Controls.Grid]::SetRow($nameRow, 0)
+    [System.Windows.Controls.Grid]::SetColumn($nameRow, 1)
+
+    # Favorito
+    if (([string]$item.Favorito).Trim().ToLower() -eq 'sim') {
+        $icoFav = [System.Windows.Controls.TextBlock]::new()
+        $icoFav.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+        $icoFav.Text = [char]0xe735; $icoFav.FontSize = 12
+        $icoFav.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FFD700')
+        $icoFav.Margin = [System.Windows.Thickness]::new(0,0,7,0)
+        $null = $nameRow.Children.Add($icoFav)
+    }
+
+    $tbName = [System.Windows.Controls.TextBlock]::new()
+    $tbName.Text = $item.Name; $tbName.FontSize = 14; $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
+    $tbName.Foreground = $primaryText; $tbName.TextTrimming = 'CharacterEllipsis'
+    $null = $nameRow.Children.Add($tbName)
+    $null = $grid.Children.Add($nameRow)
 
     $tbDesc = [System.Windows.Controls.TextBlock]::new()
     $tbDesc.Text = $item.Description; $tbDesc.FontSize = 12
     $tbDesc.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#6F7581')
-    $tbDesc.VerticalAlignment = 'Center'; $tbDesc.TextTrimming = 'CharacterEllipsis'
+    $tbDesc.TextTrimming = 'CharacterEllipsis'
     $tbDesc.Margin = [System.Windows.Thickness]::new(0,6,0,0)
     [System.Windows.Controls.Grid]::SetRow($tbDesc, 1)
-    [System.Windows.Controls.Grid]::SetColumn($tbDesc, 1) # Descrição agora fica na Coluna 1
+    [System.Windows.Controls.Grid]::SetColumn($tbDesc, 1)
     $null = $grid.Children.Add($tbDesc)
-    
-    if (-not [string]::IsNullOrWhiteSpace($item.TooltipText)) {
-        $tt = [System.Windows.Controls.ToolTip]::new()
-        $tt.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
-        $tt.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#F4F4F4')
-        $tt.BorderBrush = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#242436')
-        $tt.BorderThickness = [System.Windows.Thickness]::new(1)
-        $tt.Padding = [System.Windows.Thickness]::new(14)
-        $tt.Placement = [System.Windows.Controls.Primitives.PlacementMode]::Bottom
 
-        $ttText = [System.Windows.Controls.TextBlock]::new()
-        $ttText.Text = $item.TooltipText
-        $ttText.TextWrapping = 'Wrap'
-        $ttText.MaxWidth = 450
-        $ttText.FontSize = 11.5
-        
-        $tt.Content = $ttText
-        $tt.IsHitTestVisible = $false
-        
-        [System.Windows.Controls.ToolTipService]::SetInitialShowDelay($tbDesc, 1000)
-        [System.Windows.Controls.ToolTipService]::SetShowDuration($tbDesc, 60000)
-        
-        $tbDesc.ToolTip = $tt
-        
-        $tbDesc.Add_MouseLeave({
-            if ($this.ToolTip -is [System.Windows.Controls.ToolTip]) {
-                $this.ToolTip.IsOpen = $false
-            }
-        })
-    }
-
-    [System.Windows.Controls.Grid]::SetRow($tbDesc, 1)
-    [System.Windows.Controls.Grid]::SetColumn($tbDesc, 0)
-
+    # --- COLUNA 2: PAINEL DIREITO (Edit e Toggle) ---
     $rightPanel = [System.Windows.Controls.StackPanel]::new()
     $rightPanel.Orientation = 'Horizontal'
     $rightPanel.HorizontalAlignment = 'Right'
     $rightPanel.VerticalAlignment = 'Center'
     [System.Windows.Controls.Grid]::SetRow($rightPanel, 0)
     [System.Windows.Controls.Grid]::SetRowSpan($rightPanel, 2)
-    [System.Windows.Controls.Grid]::SetColumn($rightPanel, 1)
+    [System.Windows.Controls.Grid]::SetColumn($rightPanel, 2) # << CORRIGIDO PARA COLUNA 2
 
     $btnEdit = [System.Windows.Controls.TextBlock]::new()
     $btnEdit.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-    $btnEdit.Text = [char]0xF8B0
-    $btnEdit.FontSize = 16
+    $btnEdit.Text = [char]0xF8B0; $btnEdit.FontSize = 16
     $btnEdit.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
-    $btnEdit.Cursor = [System.Windows.Input.Cursors]::Hand
-    $btnEdit.Margin = [System.Windows.Thickness]::new(0,0,12,0)
-    $btnEdit.VerticalAlignment = 'Center'
+    $btnEdit.Cursor = [System.Windows.Input.Cursors]::Hand; $btnEdit.Margin = [System.Windows.Thickness]::new(0,0,12,0)
     $btnEdit.Visibility = 'Collapsed'
-    $btnEdit.ToolTip = "Alterar Valor"
     
-    $btnEdit.Add_MouseEnter({ $this.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#F4F4F4') })
-    $btnEdit.Add_MouseLeave({ $this.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8') })
-
     $toggle = [System.Windows.Controls.Primitives.ToggleButton]::new()
     $toggle.Style = $toggleStyle
-    $toggle.VerticalAlignment = 'Center'
-    
-    # LÊ A MEMÓRIA INICIAL
     $toggle.IsChecked = if ($item.IsChecked -eq $true) { $true } else { $false }
 
-    # Exibe o botão de edição se já estiver ativado e tiver perfis
     if ($toggle.IsChecked -eq $true -and $null -ne $item.Values -and $item.Values.Count -gt 0) {
         $btnEdit.Visibility = 'Visible'
     }
 
     $null = $rightPanel.Children.Add($btnEdit)
     $null = $rightPanel.Children.Add($toggle)
+    $null = $grid.Children.Add($rightPanel)
 
     $applyBat    = $item.ApplyBat
     $applyParam  = $item.ApplyParam
