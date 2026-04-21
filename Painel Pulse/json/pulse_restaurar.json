@@ -2,6 +2,7 @@
   {
     "Id": "restaurar.impressao",
     "TabKey": "restaurar",
+    "Foco": "restaurar",
     "Favorito": "sim",
     "Name": "Restaurar Impressão",
     "Description": "Reativa o Spooler de Impressão e os serviços relacionados que foram desativados pela ISO, restaurando o suporte a impressoras, fax e scanners.",
@@ -23,6 +24,7 @@
   {
     "Id": "restaurar.virtualizacao-hyper-v",
     "TabKey": "restaurar",
+    "Foco": "restaurar",
     "Favorito": "sim",
     "Name": "Restaurar Virtualização e Hyper-V",
     "Description": "Reativa o Hyper-V, a Plataforma de Máquina Virtual e o Hypervisor, desativados pela ISO. Necessário para usar máquinas virtuais, WSL 2 e aplicativos que dependem de virtualização. Requer reinicialização.",
@@ -45,6 +47,7 @@
   {
     "Id": "restaurar.microsoft-store",
     "TabKey": "restaurar",
+    "Foco": "reparar",
     "Favorito": "sim",
     "Name": "Restaurar Microsoft Store",
     "Description": "Remove políticas restritivas, reativa os serviços necessários e reseta o cache da Store, corrigindo problemas de carregamento ou instalação causados pelas otimizações da ISO.",
@@ -67,6 +70,7 @@
   {
     "Id": "restaurar.game-bar",
     "TabKey": "restaurar",
+    "Foco": "restaurar",
     "Favorito": "sim",
     "Name": "Restaurar Game Bar",
     "Description": "Reativa a Game Bar (Win+G), o GameDVR e os serviços Xbox, permitindo captura de tela, gravação de gameplay e o overlay de jogo desativados pela ISO.",
@@ -89,6 +93,7 @@
   {
     "Id": "restaurar.bluetooth",
     "TabKey": "restaurar",
+    "Foco": "restaurar",
     "Name": "Restaurar Bluetooth",
     "Description": "Corrige permissões de acesso, reativa serviços e reescaneia dispositivos para resolver problemas de Bluetooth que possam ter sido causados pelas otimizações de privacidade da ISO.",
     "Tooltip": {
@@ -109,6 +114,7 @@
   {
     "Id": "restaurar.aeroshake",
     "TabKey": "restaurar",
+    "Foco": "restaurar",
     "Name": "Restaurar AeroShake",
     "Description": "Reativa o gesto AeroShake (sacudir a janela com o mouse para minimizar todas as outras), desativado pela ISO via política de máquina e configuração de usuário.",
     "Tooltip": {
@@ -128,6 +134,7 @@
   {
     "Id": "restaurar.configuracoes-inicio",
     "TabKey": "restaurar",
+    "Foco": "restaurar",
     "Name": "Restaurar Página 'Início' nas Configurações",
     "Description": "Restaura a exibição da página 'Início' no aplicativo Configurações do Windows 11, ocultada pela ISO via política de grupo.",
     "Tooltip": {
@@ -147,6 +154,7 @@
   {
     "Id": "restaurar.explorer-inicio-acesso-rapido",
     "TabKey": "restaurar",
+    "Foco": "restaurar",
     "Name": "Restaurar Início e Acesso Rápido no Explorador",
     "Description": "Restaura a página Início, o Acesso Rápido com arquivos e pastas recentes, as Bibliotecas e a seção Recomendados do Menu Iniciar, desativados pela ISO.",
     "Tooltip": {
@@ -167,6 +175,7 @@
   {
     "Id": "restaurar.widgets",
     "TabKey": "restaurar",
+    "Foco": "restaurar",
     "Name": "Restaurar Widgets",
     "Description": "Restaura o botão e o painel de Widgets na barra de tarefas do Windows 11, com o feed de notícias e interesses desativado pela ISO.",
     "Tooltip": {
@@ -186,6 +195,7 @@
   {
     "Id": "restaurar.assistente-de-foco",
     "TabKey": "restaurar",
+    "Foco": "restaurar",
     "Name": "Restaurar Assistente de Foco",
     "Description": "Restaura o Assistente de Foco (Focus Assist) e o Não Perturbe ao padrão do Windows 11, reativando as regras automáticas e os alertas críticos na tela de bloqueio.",
     "Tooltip": {
@@ -205,6 +215,7 @@
   {
     "Id": "restaurar.visualizador-de-fotos",
     "TabKey": "restaurar",
+    "Foco": "restaurar",
     "Name": "Restaurar Visualizador de Fotos do Windows 11",
     "Description": "Remove o Visualizador de Fotos Clássico do Windows e restaura o aplicativo Fotos moderno como visualizador padrão para imagens.",
     "Tooltip": {
@@ -224,6 +235,7 @@
   {
     "Id": "restaurar.som-de-inicializacao",
     "TabKey": "restaurar",
+    "Foco": "restaurar",
     "Name": "Restaurar Som de Inicialização",
     "Description": "Restaura o som tocado durante o boot e o login do Windows, desativado pela ISO.",
     "Tooltip": {
@@ -241,6 +253,7 @@
   {
     "Id": "restaurar.jump-lists",
     "TabKey": "restaurar",
+    "Foco": "restaurar",
     "Name": "Restaurar Jump Lists",
     "Description": "Reativa o rastreamento de programas e documentos recentes das Jump Lists, acessíveis pelo clique direito na barra de tarefas, desativado pela ISO.",
     "Tooltip": {
