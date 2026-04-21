@@ -462,7 +462,7 @@
     },
     "Apply": ".\\comandos\\pulsemode_windows-update.bat apply",
     "Revert": ".\\comandos\\pulsemode_windows-update.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -470,7 +470,7 @@
     "TabKey": "pulsemode",
     "pulsemode": "exclusivo",
     "Favorito": "sim",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Name": "Configurar SvcHostSplitThresholdInKB",
     "Description": "Configura o limite de RAM a partir do qual o Windows separa cada serviço em um processo svchost.exe próprio. Valores altos agrupam mais serviços, reduzindo o número de processos em segundo plano.",
     "Tooltip": {
@@ -608,6 +608,6 @@
     },
     "Apply": ".\\comandos\\pulsemode_fth.bat apply",
     "Revert": ".\\comandos\\pulsemode_fth.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   }
 ]
