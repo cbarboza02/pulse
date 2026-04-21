@@ -3,6 +3,7 @@
     "Id": "internet.teredo",
     "TabKey": "internet",
     "pulsemode": "",
+    "Foco": "internet",
     "Name": "Desativar Teredo",
     "Description": "Desativa o Teredo, mecanismo de tunelamento IPv6 sobre IPv4, eliminando o overhead de encapsulamento e as conexões periódicas ao servidor Teredo da Microsoft.",
     "Tooltip": {
@@ -28,6 +29,7 @@
     "Id": "internet.nagle-algorithm",
     "TabKey": "internet",
     "pulsemode": "sim",
+    "Foco": "internet",
     "Name": "Desativar Algoritmo de Nagle",
     "Description": "Desativa o Algoritmo de Nagle, que agrupa pacotes TCP pequenos antes de enviá-los, introduzindo latência artificial em troca de eficiência de throughput.",
     "Tooltip": {
@@ -51,6 +53,7 @@
     "Id": "internet.network-throttling",
     "TabKey": "internet",
     "pulsemode": "sim",
+    "Foco": "internet",
     "Name": "Desativar Network Throttling Index",
     "Description": "Desativa o limite de processamento de pacotes de rede imposto pelo Windows, que por padrão restringe a cerca de 10 pacotes por milissegundo para priorizar multimídia.",
     "Tooltip": {
@@ -74,6 +77,7 @@
     "Id": "internet.energia-nic",
     "TabKey": "internet",
     "pulsemode": "sim",
+    "Foco": "internet",
     "Name": "Desativar Economia de Energia NIC",
     "Description": "Desativa o gerenciamento de energia da placa de rede, impedindo que o Windows reduza sua velocidade ou a suspenda para economizar energia.",
     "Tooltip": {
@@ -100,6 +104,7 @@
     "Id": "internet.rsc-lso-interrupt",
     "TabKey": "internet",
     "pulsemode": "sim",
+    "Foco": "internet",
     "Name": "Desativar RSC, LSO e Interrupt Moderation",
     "Description": "Desativa o Receive Segment Coalescing (RSC) Large Send Offload (LSO) e o Interrupt Moderation, que agrupam segmentos TCP para aumentar eficiência, mas adicionam latência no processo.",
     "Tooltip": {
@@ -123,6 +128,7 @@
     "Id": "internet.tcp-connection",
     "TabKey": "internet",
     "pulsemode": "sim",
+    "Foco": "internet",
     "Name": "Ajustar TCP Connection Settings",
     "Description": "Ajusta parâmetros TCP globais: desativa auto-tuning e timestamps, ativa ECN e define janela de recepção fixa de 1 MB, reduzindo overhead por pacote e latência de congestionamento.",
     "Tooltip": {
