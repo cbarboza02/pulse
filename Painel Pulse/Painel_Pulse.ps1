@@ -1755,35 +1755,32 @@ function New-OptCard {
     $null = $grid.Children.Add($leftPanel)
 
     # Mapeamento dos ícones e informação do tooltip
-    $focoMap = @{ 
-        'jogos'       = 0xe7fc 
-        'fluidez'     = 0xec4a 
-        'windows'     = 0xe8a9 
-        'segurança'   = 0xe730 
-        'visual'      = 0xf4a5 
-        'privacidade' = 0xed1a 
-        'internet'    = 0xe774 
-        'limpeza'     = 0xea99 
+    $focoMap = @{
+         'jogos'       = 0xe7fc
+         'fluidez'     = 0xec4a
+         'windows'     = 0xe8a9
+         'segurança'   = 0xe730
+         'visual'      = 0xf4a5
+         'privacidade' = 0xed1a
+         'internet'    = 0xe774
     }
-    $focoSizeMap = @{ 
-        'jogos'       = 18 
-        'fluidez'     = 17 
-        'windows'     = 17 
-        'segurança'   = 16 
-        'visual'      = 17 
-        'privacidade' = 16 
-        'internet'    = 16 
-        'limpeza'     = 17 
+    $focoSizeMap = @{
+         'jogos'       = 20
+         'fluidez'     = 19
+         'windows'     = 19
+         'segurança'   = 18
+         'visual'      = 19
+         'privacidade' = 18
+         'internet'    = 18
     }
-    $focoTooltipMap = @{ 
-        'jogos'       = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência." 
-        'fluidez'     = "Melhora a responsividade e fluidez do Windows, geralmente não melhora o desempenho em jogos." 
-        'windows'     = "Ajustes para melhorar a sua experiência e facilitar o uso do sistema." 
-        'segurança'   = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável." 
-        'visual'      = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho." 
-        'privacidade' = "Desativa telemetrias, coleta de dados e semelhantes, aumentando a privacidade." 
-        'internet'    = "Ajustes para melhorar a internet, removendo limitações/gargalos artificiais." 
-        'limpeza'     = "Remove arquivos para liberar espaço em disco, podendo otimizar o sistema e corrigir problemas específicos." 
+    $focoTooltipMap = @{
+         'jogos'       = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência."
+         'fluidez'     = "Melhora a responsividade e fluidez do Windows, geralmente não melhora o desempenho em jogos."
+         'windows'     = "Ajustes para melhorar a sua experiência e facilitar o uso do sistema."
+         'segurança'   = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável."
+         'visual'      = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho."
+         'privacidade' = "Desativa telemetrias, coleta de dados e semelhantes, aumentando a privacidade."
+         'internet'    = "Ajustes para melhorar a internet, removendo limitações/gargalos artificiais."
     }
     
     $focoVal = ([string]$item.Foco).Trim().ToLower()
@@ -1816,7 +1813,7 @@ function New-OptCard {
         $icoFav = [System.Windows.Controls.TextBlock]::new()
         $icoFav.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
         $icoFav.Text = [char]0xe735;
-        $icoFav.FontSize = 12
+        $icoFav.FontSize = 14
         $icoFav.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FFD700')
         $icoFav.VerticalAlignment = 'Center'
         $icoFav.Margin = [System.Windows.Thickness]::new(0,0,7,0)
@@ -1824,7 +1821,8 @@ function New-OptCard {
     }
 
     $tbName = [System.Windows.Controls.TextBlock]::new()
-    $tbName.Text = $item.Name; $tbName.FontSize = 14;
+    $tbName.Text = $item.Name;
+    $tbName.FontSize = 14;
     $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
     $tbName.Foreground = $primaryText;
     $tbName.TextTrimming = 'CharacterEllipsis'
@@ -3096,7 +3094,7 @@ function Load-LimpezaItems {
                 $icoFav = [System.Windows.Controls.TextBlock]::new()
                 $icoFav.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
                 $icoFav.Text = [char]0xe735
-                $icoFav.FontSize = 12
+                $icoFav.FontSize = 14
                 $icoFav.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FFD700')
                 $icoFav.VerticalAlignment = 'Center'
                 $icoFav.Margin = [System.Windows.Thickness]::new(0,0,7,0)
@@ -3118,7 +3116,7 @@ function Load-LimpezaItems {
                 $icoFoco = [System.Windows.Controls.TextBlock]::new()
                 $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
                 $icoFoco.Text = [char]0xea99
-                $icoFoco.FontSize = 16
+                $icoFoco.FontSize = 18
                 $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
                 $icoFoco.VerticalAlignment = 'Center'
                 $icoFoco.HorizontalAlignment = 'Center'
