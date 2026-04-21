@@ -20,8 +20,8 @@
         "O Multi-Plane Overlay do compositor DWM ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_mpo.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_mpo.bat revert",
+    "Apply": ".\\comandos\\hw_gpu_mpo.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_mpo.bat revert",
     "Foco": "jogos",
     "Favorito": "sim"
   },
@@ -46,8 +46,8 @@
         "As Otimizações de Tela Cheia gerenciadas pelo DWM ficarão indisponíveis globalmente"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_fso.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_fso.bat revert",
+    "Apply": ".\\comandos\\hw_gpu_fso.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_fso.bat revert",
     "Foco": "jogos"
   },
   {
@@ -73,8 +73,8 @@
         "O serviço de exibição sem fio ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_miracast.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_miracast.bat revert"
+    "Apply": ".\\comandos\\hw_gpu_miracast.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_miracast.bat revert"
   },
   {
     "Id": "hardware.max-desempenho",
@@ -99,8 +99,8 @@
         "A redução automática de clocks em idle ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_max-desempenho.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_max-desempenho.bat revert",
+    "Apply": ".\\comandos\\hw_gpu_max-desempenho.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_max-desempenho.bat revert",
     "Foco": "jogos"
   },
   {
@@ -125,8 +125,8 @@
         "O Triple Buffering da AMD ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_buffer-triplo.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_buffer-triplo.bat revert",
+    "Apply": ".\\comandos\\hw_gpu_buffer-triplo.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_buffer-triplo.bat revert",
     "Foco": "jogos"
   },
   {
@@ -149,8 +149,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_formato-superficie.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_formato-superficie.bat revert",
+    "Apply": ".\\comandos\\hw_gpu_formato-superficie.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_formato-superficie.bat revert",
     "Foco": "jogos"
   },
   {
@@ -173,8 +173,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_shader-cache.bat alwayson",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_shader-cache.bat amdoptm",
+    "Apply": ".\\comandos\\hw_gpu_shader-cache.bat alwayson",
+    "Revert": ".\\comandos\\hw_gpu_shader-cache.bat amdoptm",
     "Foco": "jogos"
   },
   {
@@ -199,8 +199,8 @@
         "O VSync via driver AMD ficará indisponível globalmente"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_vsync.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_vsync.bat revert",
+    "Apply": ".\\comandos\\hw_gpu_vsync.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_vsync.bat revert",
     "Foco": "jogos"
   },
   {
@@ -228,25 +228,25 @@
         "Label": "AMD Otimizado",
         "Description": "Driver gerencia automaticamente para melhor equilíbrio.",
         "Param": "amdoptm",
-        "Command": ".\\comandos\\hardware\\hw_gpu_mosaicos.bat amdoptm"
+        "Command": ".\\comandos\\hw_gpu_mosaicos.bat amdoptm"
       },
       {
         "Label": "Desativado",
         "Description": "Tessellation desativada, sem subdivisão de geometria.",
         "Param": "off",
-        "Command": ".\\comandos\\hardware\\hw_gpu_mosaicos.bat off"
+        "Command": ".\\comandos\\hw_gpu_mosaicos.bat off"
       },
       {
         "Label": "16x",
         "Description": "Limita a 16x, boa relação entre desempenho e qualidade visual.",
         "Param": "16x",
-        "Command": ".\\comandos\\hardware\\hw_gpu_mosaicos.bat 16x"
+        "Command": ".\\comandos\\hw_gpu_mosaicos.bat 16x"
       },
       {
         "Label": "32x",
         "Description": "Limita a 32x, qualidade alta com impacto menor que ilimitado.",
         "Param": "32x",
-        "Command": ".\\comandos\\hardware\\hw_gpu_mosaicos.bat 32x"
+        "Command": ".\\comandos\\hw_gpu_mosaicos.bat 32x"
       }
     ],
     "Foco": "jogos"
@@ -273,8 +273,8 @@
         "A gravação retroativa de gameplay ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_replay-instantaneo.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_replay-instantaneo.bat revert",
+    "Apply": ".\\comandos\\hw_gpu_replay-instantaneo.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_replay-instantaneo.bat revert",
     "Foco": "jogos"
   },
   {
@@ -299,8 +299,8 @@
         "A atualização automática de drivers e software AMD ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_atualizacao-automatica.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_atualizacao-automatica.bat revert",
+    "Apply": ".\\comandos\\hw_gpu_atualizacao-automatica.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_atualizacao-automatica.bat revert",
     "Foco": "windows"
   },
   {
@@ -326,8 +326,8 @@
         "A gravação e streaming de gameplay via AMD ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_relive.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_relive.bat revert",
+    "Apply": ".\\comandos\\hw_gpu_relive.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_relive.bat revert",
     "Foco": "jogos"
   },
   {
@@ -353,8 +353,8 @@
         "O streaming de jogos para dispositivos móveis via AMD ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_amd-link.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_amd-link.bat revert"
+    "Apply": ".\\comandos\\hw_gpu_amd-link.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_amd-link.bat revert"
   },
   {
     "Id": "hardware.supressao-ruidos",
@@ -378,8 +378,8 @@
         "A supressão de ruídos de microfone via AMD ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_supressao-ruidos.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_supressao-ruidos.bat revert"
+    "Apply": ".\\comandos\\hw_gpu_supressao-ruidos.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_supressao-ruidos.bat revert"
   },
   {
     "Id": "hardware.crash-defender",
@@ -404,8 +404,8 @@
         "A coleta automática de dados de crash ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_gpu_crash-defender.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_gpu_crash-defender.bat revert",
+    "Apply": ".\\comandos\\hw_gpu_crash-defender.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_crash-defender.bat revert",
     "Foco": "windows"
   },
   {
@@ -429,8 +429,8 @@
         "O estacionamento automático de núcleos ociosos ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_cpu_estacionamento-nucleos.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_cpu_estacionamento-nucleos.bat revert",
+    "Apply": ".\\comandos\\hw_cpu_estacionamento-nucleos.bat apply",
+    "Revert": ".\\comandos\\hw_cpu_estacionamento-nucleos.bat revert",
     "Foco": "jogos",
     "Favorito": "sim"
   },
@@ -455,8 +455,8 @@
         "A limitação de frequência de CPU para processos em segundo plano ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_cpu_power-throttling.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_cpu_power-throttling.bat revert",
+    "Apply": ".\\comandos\\hw_cpu_power-throttling.bat apply",
+    "Revert": ".\\comandos\\hw_cpu_power-throttling.bat revert",
     "Foco": "jogos"
   },
   {
@@ -481,8 +481,8 @@
         "A conectividade de rede durante a suspensão ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_cpu_modern-standby.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_cpu_modern-standby.bat revert",
+    "Apply": ".\\comandos\\hw_cpu_modern-standby.bat apply",
+    "Revert": ".\\comandos\\hw_cpu_modern-standby.bat revert",
     "Foco": "windows"
   },
   {
@@ -507,8 +507,8 @@
         "A economia de energia por redução de clock ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_cpu_max-desempenho.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_cpu_max-desempenho.bat revert",
+    "Apply": ".\\comandos\\hw_cpu_max-desempenho.bat apply",
+    "Revert": ".\\comandos\\hw_cpu_max-desempenho.bat revert",
     "Foco": "jogos"
   },
   {
@@ -532,8 +532,8 @@
         "A compressão de páginas de memória ociosas ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_ram_compressao-memoria.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_ram_compressao-memoria.bat revert",
+    "Apply": ".\\comandos\\hw_ram_compressao-memoria.bat apply",
+    "Revert": ".\\comandos\\hw_ram_compressao-memoria.bat revert",
     "Foco": "windows"
   },
   {
@@ -558,8 +558,8 @@
         "As tarefas de verificação de memória em segundo plano ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_ram_diagnostico-memoria.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_ram_diagnostico-memoria.bat revert",
+    "Apply": ".\\comandos\\hw_ram_diagnostico-memoria.bat apply",
+    "Revert": ".\\comandos\\hw_ram_diagnostico-memoria.bat revert",
     "Foco": "windows"
   },
   {
@@ -583,8 +583,8 @@
         "A paginação de código do kernel e drivers para o disco ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_ram_paginacao-kernel.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_ram_paginacao-kernel.bat revert",
+    "Apply": ".\\comandos\\hw_ram_paginacao-kernel.bat apply",
+    "Revert": ".\\comandos\\hw_ram_paginacao-kernel.bat revert",
     "Foco": "windows"
   },
   {
@@ -608,8 +608,8 @@
         "A mesclagem de páginas de memória com conteúdo idêntico ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_ram_page-combining.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_ram_page-combining.bat revert",
+    "Apply": ".\\comandos\\hw_ram_page-combining.bat apply",
+    "Revert": ".\\comandos\\hw_ram_page-combining.bat revert",
     "Foco": "windows"
   },
   {
@@ -633,8 +633,8 @@
         "A hibernação parcial do kernel durante o desligamento ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_ram_inicializacao-rapida.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_ram_inicializacao-rapida.bat revert",
+    "Apply": ".\\comandos\\hw_ram_inicializacao-rapida.bat apply",
+    "Revert": ".\\comandos\\hw_ram_inicializacao-rapida.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -659,8 +659,8 @@
         "A aceleração automática do ponteiro (Enhanced Pointer Precision) ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_perifericos_mouse-escala.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_perifericos_mouse-escala.bat revert",
+    "Apply": ".\\comandos\\hw_perifericos_mouse-escala.bat apply",
+    "Revert": ".\\comandos\\hw_perifericos_mouse-escala.bat revert",
     "Foco": "jogos",
     "Favorito": "sim"
   },
@@ -683,8 +683,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\hardware\\hw_perifericos_repeticao-teclado.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_perifericos_repeticao-teclado.bat revert",
+    "Apply": ".\\comandos\\hw_perifericos_repeticao-teclado.bat apply",
+    "Revert": ".\\comandos\\hw_perifericos_repeticao-teclado.bat revert",
     "Foco": "windows"
   },
   {
@@ -706,8 +706,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\hardware\\hw_perifericos_energia-usb.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_perifericos_energia-usb.bat revert",
+    "Apply": ".\\comandos\\hw_perifericos_energia-usb.bat apply",
+    "Revert": ".\\comandos\\hw_perifericos_energia-usb.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -732,8 +732,8 @@
         "O timeout de operações de I/O para detecção de falhas de disco ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_storage_disk-timeout.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_storage_disk-timeout.bat revert",
+    "Apply": ".\\comandos\\hw_storage_disk-timeout.bat apply",
+    "Revert": ".\\comandos\\hw_storage_disk-timeout.bat revert",
     "Foco": "windows"
   },
   {
@@ -755,8 +755,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\hardware\\hw_storage_io-latency-cap.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_storage_io-latency-cap.bat revert",
+    "Apply": ".\\comandos\\hw_storage_io-latency-cap.bat apply",
+    "Revert": ".\\comandos\\hw_storage_io-latency-cap.bat revert",
     "Foco": "windows"
   },
   {
@@ -781,8 +781,8 @@
         "As transições de power state do NVMe para economia de energia ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_storage_nvme-power-state.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_storage_nvme-power-state.bat revert",
+    "Apply": ".\\comandos\\hw_storage_nvme-power-state.bat apply",
+    "Revert": ".\\comandos\\hw_storage_nvme-power-state.bat revert",
     "Foco": "windows"
   },
   {
@@ -807,8 +807,8 @@
         "O registro de data e hora do último acesso a arquivos e pastas ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\hardware\\hw_storage_otimizar-ntfs.bat apply",
-    "Revert": ".\\comandos\\hardware\\hw_storage_otimizar-ntfs.bat revert",
+    "Apply": ".\\comandos\\hw_storage_otimizar-ntfs.bat apply",
+    "Revert": ".\\comandos\\hw_storage_otimizar-ntfs.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   }
