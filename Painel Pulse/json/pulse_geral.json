@@ -22,7 +22,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_device-setup-manager.bat apply",
     "Revert": ".\\comandos\\geral_geral_device-setup-manager.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.apps-segundo-plano",
@@ -48,7 +48,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_apps-segundo-plano.bat apply",
     "Revert": ".\\comandos\\geral_geral_apps-segundo-plano.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.services-pipe-timeout",
@@ -71,7 +71,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_services-pipe-timeout.bat apply",
     "Revert": ".\\comandos\\geral_geral_services-pipe-timeout.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.manutencao-automatica",
@@ -96,7 +96,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_manutencao-automatica.bat apply",
     "Revert": ".\\comandos\\geral_geral_manutencao-automatica.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.plano-energia",
@@ -121,7 +121,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_plano-energia.bat apply",
     "Revert": ".\\comandos\\geral_geral_plano-energia.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -146,7 +146,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_sleep-timeout.bat apply",
     "Revert": ".\\comandos\\geral_geral_sleep-timeout.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.hibernacao",
@@ -173,7 +173,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_hibernacao.bat apply",
     "Revert": ".\\comandos\\geral_geral_hibernacao.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.economia-energia",
@@ -199,7 +199,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_economia-energia.bat apply",
     "Revert": ".\\comandos\\geral_geral_economia-energia.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.estimativa-energia",
@@ -225,7 +225,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_estimativa-energia.bat apply",
     "Revert": ".\\comandos\\geral_geral_estimativa-energia.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.atraso-windows",
@@ -248,7 +248,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_atrasos-windows.bat apply",
     "Revert": ".\\comandos\\geral_geral_atrasos-windows.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -272,7 +272,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_apps-travados.bat apply",
     "Revert": ".\\comandos\\geral_geral_apps-travados.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -326,7 +326,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_prefetch-superfetch.bat apply",
     "Revert": ".\\comandos\\geral_geral_prefetch-superfetch.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -352,7 +352,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_recursos-experimentais.bat apply",
     "Revert": ".\\comandos\\geral_geral_recursos-experimentais.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -378,7 +378,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_instalacao-automatica.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_instalacao-automatica.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -403,7 +403,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_mover-copiar-para.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_mover-copiar-para.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.preenchimento-automatico",
@@ -428,7 +428,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_preenchimento-automatico.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_preenchimento-automatico.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.aeroshake",
@@ -453,7 +453,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_aeroshake.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_aeroshake.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.acesso-rapido",
@@ -478,7 +478,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_acesso-rapido.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_acesso-rapido.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.finalizar-tarefa",
@@ -501,7 +501,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_finalizar-tarefa.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_finalizar-tarefa.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -549,7 +549,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_area-transferencia.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_area-transferencia.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.assistente-foco",
@@ -573,7 +573,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_assistente-foco.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_assistente-foco.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.central-acoes",
@@ -598,7 +598,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_central-acoes.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_central-acoes.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.foto-classico",
@@ -623,7 +623,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_foto-classico.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_foto-classico.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.desfoque-bloqueio",
@@ -672,7 +672,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_notificacoes.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_notificacoes.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.indexacao-pesquisa",
@@ -697,7 +697,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_indexacao-pesquisa.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_indexacao-pesquisa.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.dicas-sugestoes",
@@ -723,7 +723,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_dicas-sugestoes.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_dicas-sugestoes.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -749,7 +749,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_teclas-acessibilidade.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_teclas-acessibilidade.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -773,7 +773,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_numLock.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_numLock.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.itens-ocultos",
@@ -796,7 +796,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_itens-ocultos.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_itens-ocultos.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.icone-atalho",
@@ -843,7 +843,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_extensoes-arquivos.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_extensoes-arquivos.bat revert",
-    "Foco": "windows",
+    "Foco": "fluidez",
     "Favorito": "sim"
   },
   {
@@ -1001,7 +1001,7 @@
     },
     "Apply": ".\\comandos\\geral_privacidade_ndu.bat apply",
     "Revert": ".\\comandos\\geral_privacidade_ndu.bat revert",
-    "Foco": "windows"
+    "Foco": "fluidez"
   },
   {
     "Id": "geral.localizar-dispositivo",
