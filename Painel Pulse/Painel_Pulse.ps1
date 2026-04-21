@@ -1754,17 +1754,44 @@ function New-OptCard {
     [System.Windows.Controls.Grid]::SetColumn($leftPanel, 0)
     $null = $grid.Children.Add($leftPanel)
 
-    # Lógica de seleção do ícone de Foco
-    $focoMap = @{ 'jogos'=0xe7fc; 'fluidez'=0xec4a; 'windows'=0xe8a9; 'segurança'=0xe730; 'visual'=0xf4a5; 'privacidade'=0xed1a; 'internet'=0xe774; 'limpeza'=0xea99 }
-    $focoSizeMap = @{ 'jogos'=17; 'fluidez'=16; 'windows'=16; 'segurança'=15; 'visual'=16; 'privacidade'=15; 'internet'=15; 'limpeza'=16 }
-    $focoTooltipMap = @{ 'jogos'="Prioriza recursos para o ambiente de jogo..."; 'fluidez'="Melhora a responsividade..."; 'windows'="Ajustes para melhorar a sua experiência..."; 'segurança'="Desativa recursos de segurança..."; 'visual'="Ajusta animações e efeitos..."; 'privacidade'="Desativa telemetrias..."; 'internet'="Ajustes para melhorar a internet..."; 'limpeza'="Remove arquivos para liberar espaço..." }
+    # Mapeamento dos ícones e informação do tooltip
+    $focoIconMap = @{
+        'jogos'       = 0xe7fc
+        'fluidez'     = 0xec4a
+        'windows'     = 0xe8a9
+        'segurança'   = 0xe730
+        'visual'      = 0xf4a5
+        'privacidade' = 0xed1a
+        'internet'    = 0xe774
+        'limpeza'     = 0xea99
+    }
+    $focoIconSizeMap = @{
+        'jogos'       = 18
+        'fluidez'     = 17
+        'windows'     = 17
+        'segurança'   = 16
+        'visual'      = 17
+        'privacidade' = 16
+        'internet'    = 16
+        'limpeza'     = 17
+    }
+    $focoTooltipMap = @{
+        'jogos'       = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência."
+        'fluidez'     = "Melhora a responsividade e fluidez do Windows, geralmente não melhora o desempenho em jogos."
+        'windows'     = "Ajustes para melhorar a sua experiência e facilitar o uso do sistema."
+        'segurança'   = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável."
+        'visual'      = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho."
+        'privacidade' = "Desativa telemetrias, coleta de dados e semelhantes, aumentando a privacidade."
+        'internet'    = "Ajustes para melhorar a internet, removendo limitações/gargalos artificiais."
+        'limpeza'     = "Remove arquivos para liberar espaço em disco, podendo otimizar o sistema e corrigir problemas específicos."
+    }
     
     $focoVal = ([string]$item.Foco).Trim().ToLower()
     if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
         $icoFoco = [System.Windows.Controls.TextBlock]::new()
         $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-        $icoFoco.Text = [char]$focoMap[$focoVal]
-        $icoFoco.FontSize = $focoSizeMap[$focoVal]
+        $icoFoco.Text = [char]$focoIconMap[$focoVal]
+        $icoFoco.FontSize = $focoIconSizeMap[$focoVal]
         $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
         $icoFoco.VerticalAlignment = 'Center'
         $icoFoco.HorizontalAlignment = 'Center'
