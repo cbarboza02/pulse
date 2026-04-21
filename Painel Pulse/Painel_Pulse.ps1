@@ -1815,15 +1815,19 @@ function New-OptCard {
     if (([string]$item.Favorito).Trim().ToLower() -eq 'sim') {
         $icoFav = [System.Windows.Controls.TextBlock]::new()
         $icoFav.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-        $icoFav.Text = [char]0xe735; $icoFav.FontSize = 12
+        $icoFav.Text = [char]0xe735;
+        $icoFav.FontSize = 12
         $icoFav.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FFD700')
+        $icoFav.VerticalAlignment = 'Bottom'
         $icoFav.Margin = [System.Windows.Thickness]::new(0,0,7,0)
         $null = $nameRow.Children.Add($icoFav)
     }
 
     $tbName = [System.Windows.Controls.TextBlock]::new()
-    $tbName.Text = $item.Name; $tbName.FontSize = 14; $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
-    $tbName.Foreground = $primaryText; $tbName.TextTrimming = 'CharacterEllipsis'
+    $tbName.Text = $item.Name; $tbName.FontSize = 14;
+    $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
+    $tbName.Foreground = $primaryText;
+    $tbName.TextTrimming = 'CharacterEllipsis'
     $null = $nameRow.Children.Add($tbName)
     $null = $grid.Children.Add($nameRow)
 
@@ -3094,7 +3098,7 @@ function Load-LimpezaItems {
                 $icoFav.Text = [char]0xe735
                 $icoFav.FontSize = 12
                 $icoFav.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FFD700')
-                $icoFav.VerticalAlignment = 'Center'
+                $icoFav.VerticalAlignment = 'Bottom'
                 $icoFav.Margin = [System.Windows.Thickness]::new(0,0,7,0)
                 $null = $nameRow.Children.Add($icoFav)
             }
