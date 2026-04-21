@@ -1763,6 +1763,9 @@ function New-OptCard {
          'visual'      = 0xf4a5
          'privacidade' = 0xed1a
          'internet'    = 0xe774
+         'restaurar'   = 0xe777
+         'reparar'     = 0xe90f
+         'outros'      = 0xea86
     }
     $focoSizeMap = @{
          'jogos'       = 20
@@ -1772,15 +1775,9 @@ function New-OptCard {
          'visual'      = 19
          'privacidade' = 18
          'internet'    = 18
-    }
-    $focoTooltipMap = @{
-         'jogos'       = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência."
-         'fluidez'     = "Melhora a responsividade e fluidez do Windows, geralmente não melhora o desempenho em jogos."
-         'windows'     = "Ajustes para melhorar a sua experiência e facilitar o uso do sistema."
-         'segurança'   = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável."
-         'visual'      = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho."
-         'privacidade' = "Desativa telemetrias, coleta de dados e semelhantes, aumentando a privacidade."
-         'internet'    = "Ajustes para melhorar a internet, removendo limitações/gargalos artificiais."
+         'restaurar'   = 19
+         'reparar'     = 19
+         'outros'      = 19
     }
     
     $focoVal = ([string]$item.Foco).Trim().ToLower()
@@ -1793,12 +1790,6 @@ function New-OptCard {
         $icoFoco.VerticalAlignment = 'Center'
         $icoFoco.HorizontalAlignment = 'Center'
         $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
-        
-        # Tooltip do Foco
-        $ttFoco = [System.Windows.Controls.ToolTip]::new()
-        $ttFoco.Content = $focoTooltipMap[$focoVal]
-        $icoFoco.ToolTip = $ttFoco
-        $null = $leftPanel.Children.Add($icoFoco)
     }
 
     # --- COLUNA 1: TEXTOS (Nome e Descrição) ---
@@ -1834,6 +1825,37 @@ function New-OptCard {
     $tbDesc.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#6F7581')
     $tbDesc.TextTrimming = 'CharacterEllipsis'
     $tbDesc.Margin = [System.Windows.Thickness]::new(0,6,0,0)
+
+    if (-not [string]::IsNullOrWhiteSpace($item.TooltipText)) {
+        $tt = [System.Windows.Controls.ToolTip]::new()
+        $tt.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
+        $tt.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#F4F4F4')
+        $tt.BorderBrush = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#242436')
+        $tt.BorderThickness = [System.Windows.Thickness]::new(1)
+        $tt.Padding = [System.Windows.Thickness]::new(14)
+        $tt.Placement = [System.Windows.Controls.Primitives.PlacementMode]::Bottom
+
+        $ttText = [System.Windows.Controls.TextBlock]::new()
+        $ttText.Text = $item.TooltipText
+        $ttText.TextWrapping = 'Wrap'
+        $ttText.MaxWidth = 450
+        $ttText.FontSize = 11.5
+        
+        $tt.Content = $ttText
+        $tt.IsHitTestVisible = $false
+        
+        [System.Windows.Controls.ToolTipService]::SetInitialShowDelay($tbDesc, 1000)
+        [System.Windows.Controls.ToolTipService]::SetShowDuration($tbDesc, 60000)
+        
+        $tbDesc.ToolTip = $tt
+        
+        $tbDesc.Add_MouseLeave({
+            if ($this.ToolTip -is [System.Windows.Controls.ToolTip]) {
+                $this.ToolTip.IsOpen = $false
+            }
+        })
+    }
+
     [System.Windows.Controls.Grid]::SetRow($tbDesc, 1)
     [System.Windows.Controls.Grid]::SetColumn($tbDesc, 1)
     $null = $grid.Children.Add($tbDesc)
@@ -3121,33 +3143,6 @@ function Load-LimpezaItems {
                 $icoFoco.VerticalAlignment = 'Center'
                 $icoFoco.HorizontalAlignment = 'Center'
                 $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
-
-                $ttFoco = [System.Windows.Controls.ToolTip]::new() # Dica de Ferramenta
-                $ttFoco.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
-                $ttFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#F4F4F4')
-                $ttFoco.BorderBrush = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#242436')
-                $ttFoco.BorderThickness = [System.Windows.Thickness]::new(1)
-                $ttFoco.Padding = [System.Windows.Thickness]::new(12,8,12,8)
-                $ttFoco.Placement = [System.Windows.Controls.Primitives.PlacementMode]::Bottom
-                $ttFoco.IsHitTestVisible = $false
-
-                $ttFocoText = [System.Windows.Controls.TextBlock]::new()
-                $ttFocoText.Text = "Remove arquivos para liberar espaço em disco, podendo otimizar o sistema e corrigir problemas específicos."
-                $ttFocoText.TextWrapping = 'Wrap'
-                $ttFocoText.MaxWidth = 320
-                $ttFocoText.FontSize = 11.5
-                $ttFoco.Content = $ttFocoText
-
-                [System.Windows.Controls.ToolTipService]::SetInitialShowDelay($icoFoco, 400)
-                [System.Windows.Controls.ToolTipService]::SetShowDuration($icoFoco, 60000)
-                $icoFoco.ToolTip = $ttFoco
-
-                $icoFoco.Add_MouseLeave({
-                    if ($this.ToolTip -is [System.Windows.Controls.ToolTip]) {
-                        $this.ToolTip.IsOpen = $false
-                    }
-                })
-
                 $null = $leftPanel.Children.Add($icoFoco)
             }
             
