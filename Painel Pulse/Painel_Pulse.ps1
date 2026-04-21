@@ -1772,7 +1772,7 @@ function New-OptCard {
     $tbName.FontSize = 14
     $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
     $tbName.Foreground = $primaryText
-    $tbName.VerticalAlignment = 'Bottom'
+    $tbName.VerticalAlignment = 'Center'
     $tbName.TextTrimming = 'CharacterEllipsis'
     $null = $nameRow.Children.Add($tbName)
 
@@ -1814,7 +1814,7 @@ function New-OptCard {
         $icoFoco.Text = [char]$focoMap[$focoVal]
         $icoFoco.FontSize = $focoSizeMap[$focoVal]
         $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
-        $icoFoco.VerticalAlignment = 'Bottom'
+        $icoFoco.VerticalAlignment = 'Center'
         $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
         $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
 
