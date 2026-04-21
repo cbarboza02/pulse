@@ -27,7 +27,7 @@
   },
   {
     "Id": "hardware.recursos-desnecessarios",
-    "TabKey": "",
+    "TabKey": "hw_gpu",
     "pulsemode": "sim",
     "Name": "Desativar Recursos Desnecessários da AMD",
     "Description": "Desativa recursos e funcionalidade desnecessárias da AMD, reduzindo processos, serviços e uso de recursos em segundo plano.",
