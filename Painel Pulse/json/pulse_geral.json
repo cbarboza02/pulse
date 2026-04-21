@@ -20,8 +20,8 @@
         "A busca e instalação automática de drivers online ao conectar dispositivos ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_device-setup-manager.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_device-setup-manager.bat revert",
+    "Apply": ".\\comandos\\geral_geral_device-setup-manager.bat apply",
+    "Revert": ".\\comandos\\geral_geral_device-setup-manager.bat revert",
     "Foco": "windows"
   },
   {
@@ -46,8 +46,8 @@
         "Notificações de apps que dependem de background ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_apps-segundo-plano.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_apps-segundo-plano.bat revert",
+    "Apply": ".\\comandos\\geral_geral_apps-segundo-plano.bat apply",
+    "Revert": ".\\comandos\\geral_geral_apps-segundo-plano.bat revert",
     "Foco": "windows"
   },
   {
@@ -69,8 +69,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_services-pipe-timeout.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_services-pipe-timeout.bat revert",
+    "Apply": ".\\comandos\\geral_geral_services-pipe-timeout.bat apply",
+    "Revert": ".\\comandos\\geral_geral_services-pipe-timeout.bat revert",
     "Foco": "windows"
   },
   {
@@ -94,8 +94,8 @@
         "A Manutenção Automática do Windows e suas tarefas agendadas ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_manutencao-automatica.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_manutencao-automatica.bat revert",
+    "Apply": ".\\comandos\\geral_geral_manutencao-automatica.bat apply",
+    "Revert": ".\\comandos\\geral_geral_manutencao-automatica.bat revert",
     "Foco": "windows"
   },
   {
@@ -120,8 +120,8 @@
         "A GameBar (Win+G) ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_servicos-xbox.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_servicos-xbox.bat revert",
+    "Apply": ".\\comandos\\geral_geral_servicos-xbox.bat apply",
+    "Revert": ".\\comandos\\geral_geral_servicos-xbox.bat revert",
     "Foco": "jogos",
     "Favorito": "sim"
   },
@@ -147,8 +147,8 @@
         "Atualizações de builds de pré-visualização não serão recebidas"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_windows-insider.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_windows-insider.bat revert",
+    "Apply": ".\\comandos\\geral_geral_windows-insider.bat apply",
+    "Revert": ".\\comandos\\geral_geral_windows-insider.bat revert",
     "Foco": "windows"
   },
   {
@@ -172,8 +172,8 @@
         "Os planos de economia de energia serão substituídos pelo plano de desempenho máximo"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_plano-energia.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_plano-energia.bat revert",
+    "Apply": ".\\comandos\\geral_geral_plano-energia.bat apply",
+    "Revert": ".\\comandos\\geral_geral_plano-energia.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -197,8 +197,8 @@
         "O sistema não entrará mais em modo sleep automaticamente por inatividade"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_sleep-timeout.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_sleep-timeout.bat revert",
+    "Apply": ".\\comandos\\geral_geral_sleep-timeout.bat apply",
+    "Revert": ".\\comandos\\geral_geral_sleep-timeout.bat revert",
     "Foco": "windows"
   },
   {
@@ -222,8 +222,8 @@
         "A coleta de dados de estudo de energia em inatividade ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_sleepy-study.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_sleepy-study.bat revert",
+    "Apply": ".\\comandos\\geral_geral_sleepy-study.bat apply",
+    "Revert": ".\\comandos\\geral_geral_sleepy-study.bat revert",
     "Foco": "windows"
   },
   {
@@ -247,8 +247,8 @@
         "O modo de suspensão híbrida ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_suspender-hibrido.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_suspender-hibrido.bat revert",
+    "Apply": ".\\comandos\\geral_geral_suspender-hibrido.bat apply",
+    "Revert": ".\\comandos\\geral_geral_suspender-hibrido.bat revert",
     "Foco": "windows"
   },
   {
@@ -273,8 +273,8 @@
         "A opção 'Hibernar' será removida do menu de energia"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_hibernacao.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_hibernacao.bat revert",
+    "Apply": ".\\comandos\\geral_geral_hibernacao.bat apply",
+    "Revert": ".\\comandos\\geral_geral_hibernacao.bat revert",
     "Foco": "windows"
   },
   {
@@ -299,8 +299,8 @@
         "Adaptadores de rede não serão mais desligados automaticamente por inatividade"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_economia-energia.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_economia-energia.bat revert",
+    "Apply": ".\\comandos\\geral_geral_economia-energia.bat apply",
+    "Revert": ".\\comandos\\geral_geral_economia-energia.bat revert",
     "Foco": "windows"
   },
   {
@@ -325,8 +325,8 @@
         "Relatórios de energia do Windows ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_estimativa-energia.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_estimativa-energia.bat revert",
+    "Apply": ".\\comandos\\geral_geral_estimativa-energia.bat apply",
+    "Revert": ".\\comandos\\geral_geral_estimativa-energia.bat revert",
     "Foco": "windows"
   },
   {
@@ -350,8 +350,8 @@
         "O modo de timer dinâmico do kernel ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_dynamic-tick.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_dynamic-tick.bat revert",
+    "Apply": ".\\comandos\\geral_geral_dynamic-tick.bat apply",
+    "Revert": ".\\comandos\\geral_geral_dynamic-tick.bat revert",
     "Foco": "jogos",
     "Favorito": "sim"
   },
@@ -374,8 +374,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_atrasos-windows.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_atrasos-windows.bat revert",
+    "Apply": ".\\comandos\\geral_geral_atrasos-windows.bat apply",
+    "Revert": ".\\comandos\\geral_geral_atrasos-windows.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -398,8 +398,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_apps-travados.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_apps-travados.bat revert",
+    "Apply": ".\\comandos\\geral_geral_apps-travados.bat apply",
+    "Revert": ".\\comandos\\geral_geral_apps-travados.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -425,8 +425,8 @@
         "Efeitos de transparência e sombras serão desativados"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_efeitos-visuais.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_efeitos-visuais.bat revert",
+    "Apply": ".\\comandos\\geral_geral_efeitos-visuais.bat apply",
+    "Revert": ".\\comandos\\geral_geral_efeitos-visuais.bat revert",
     "Foco": "visual"
   },
   {
@@ -450,8 +450,8 @@
         "O recurso de Adesivos da área de trabalho ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_adesivos.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_adesivos.bat revert",
+    "Apply": ".\\comandos\\geral_geral_adesivos.bat apply",
+    "Revert": ".\\comandos\\geral_geral_adesivos.bat revert",
     "Foco": "visual"
   },
   {
@@ -475,8 +475,8 @@
         "O ícone e atalho do Chat/Teams na barra de tarefas ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_chat.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_chat.bat revert",
+    "Apply": ".\\comandos\\geral_geral_chat.bat apply",
+    "Revert": ".\\comandos\\geral_geral_chat.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -503,8 +503,8 @@
         "Pesquisa por voz integrada ao Windows ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_copilot-cortana.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_copilot-cortana.bat revert",
+    "Apply": ".\\comandos\\geral_geral_copilot-cortana.bat apply",
+    "Revert": ".\\comandos\\geral_geral_copilot-cortana.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -530,8 +530,8 @@
         "O ícone de Widgets na barra de tarefas será removido"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_widgets.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_widgets.bat revert",
+    "Apply": ".\\comandos\\geral_geral_widgets.bat apply",
+    "Revert": ".\\comandos\\geral_geral_widgets.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -558,8 +558,8 @@
         "A integração do OneDrive no Explorador de Arquivos ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_onedrive.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_onedrive.bat revert",
+    "Apply": ".\\comandos\\geral_geral_onedrive.bat apply",
+    "Revert": ".\\comandos\\geral_geral_onedrive.bat revert",
     "Foco": "windows"
   },
   {
@@ -584,8 +584,8 @@
         "O pré-carregamento preditivo de aplicativos ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_prefetch-superfetch.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_prefetch-superfetch.bat revert",
+    "Apply": ".\\comandos\\geral_geral_prefetch-superfetch.bat apply",
+    "Revert": ".\\comandos\\geral_geral_prefetch-superfetch.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -610,8 +610,8 @@
         "Recursos experimentais em fase de teste ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_geral_recursos-experimentais.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_geral_recursos-experimentais.bat revert",
+    "Apply": ".\\comandos\\geral_geral_recursos-experimentais.bat apply",
+    "Revert": ".\\comandos\\geral_geral_recursos-experimentais.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -636,8 +636,8 @@
         "A instalação automática de apps sugeridos e patrocinados ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_instalacao-automatica.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_instalacao-automatica.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_instalacao-automatica.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_instalacao-automatica.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -660,8 +660,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_mover-copiar-para.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_mover-copiar-para.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_mover-copiar-para.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_mover-copiar-para.bat revert",
     "Foco": "windows"
   },
   {
@@ -685,8 +685,8 @@
         "O preenchimento automático na barra de endereço do Explorer ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_preenchimento-automatico.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_preenchimento-automatico.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_preenchimento-automatico.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_preenchimento-automatico.bat revert",
     "Foco": "windows"
   },
   {
@@ -710,8 +710,8 @@
         "O gesto AeroShake para minimizar janelas ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_aeroshake.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_aeroshake.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_aeroshake.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_aeroshake.bat revert",
     "Foco": "windows"
   },
   {
@@ -735,8 +735,8 @@
         "O histórico de arquivos e pastas recentes no Acesso Rápido ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_acesso-rapido.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_acesso-rapido.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_acesso-rapido.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_acesso-rapido.bat revert",
     "Foco": "windows"
   },
   {
@@ -758,8 +758,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_finalizar-tarefa.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_finalizar-tarefa.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_finalizar-tarefa.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_finalizar-tarefa.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -781,8 +781,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_barra-tarefas.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_barra-tarefas.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_barra-tarefas.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_barra-tarefas.bat revert",
     "Foco": "visual"
   },
   {
@@ -806,8 +806,8 @@
         "A sincronização da área de transferência entre dispositivos ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_area-transferencia.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_area-transferencia.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_area-transferencia.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_area-transferencia.bat revert",
     "Foco": "windows"
   },
   {
@@ -830,8 +830,8 @@
         "O Assistente de Foco ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_assistente-foco.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_assistente-foco.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_assistente-foco.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_assistente-foco.bat revert",
     "Foco": "windows"
   },
   {
@@ -855,8 +855,8 @@
         "As ações rápidas (Wi-Fi, Bluetooth, brilho etc.) no painel ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_central-acoes.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_central-acoes.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_central-acoes.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_central-acoes.bat revert",
     "Foco": "windows"
   },
   {
@@ -880,8 +880,8 @@
         "O aplicativo Fotos moderno deixará de ser o programa padrão para imagens"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_foto-classico.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_foto-classico.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_foto-classico.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_foto-classico.bat revert",
     "Foco": "windows"
   },
   {
@@ -904,8 +904,8 @@
         "O efeito de desfoque Acrylic na tela de bloqueio e login ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_desfoque-bloqueio.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_desfoque-bloqueio.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_desfoque-bloqueio.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_desfoque-bloqueio.bat revert",
     "Foco": "visual"
   },
   {
@@ -929,8 +929,8 @@
         "Banners e alertas do sistema ficará indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_notificacoes.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_notificacoes.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_notificacoes.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_notificacoes.bat revert",
     "Foco": "windows"
   },
   {
@@ -954,8 +954,8 @@
         "Resultados de pesquisa rápidos no menu Iniciar podem ser afetados"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_indexacao-pesquisa.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_indexacao-pesquisa.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_indexacao-pesquisa.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_indexacao-pesquisa.bat revert",
     "Foco": "windows"
   },
   {
@@ -980,8 +980,8 @@
         "Conteúdo de boas-vindas e tutoriais automáticos ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_dicas-sugestoes.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_dicas-sugestoes.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_dicas-sugestoes.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_dicas-sugestoes.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -1006,8 +1006,8 @@
         "Os atalhos de teclado para StickyKeys, FilterKeys e ToggleKeys ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_teclas-acessibilidade.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_teclas-acessibilidade.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_teclas-acessibilidade.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_teclas-acessibilidade.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -1030,8 +1030,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_numLock.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_numLock.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_numLock.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_numLock.bat revert",
     "Foco": "windows"
   },
   {
@@ -1053,8 +1053,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_itens-ocultos.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_itens-ocultos.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_itens-ocultos.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_itens-ocultos.bat revert",
     "Foco": "windows"
   },
   {
@@ -1076,8 +1076,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_icone-atalho.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_icone-atalho.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_icone-atalho.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_icone-atalho.bat revert",
     "Foco": "visual"
   },
   {
@@ -1099,8 +1099,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_extensoes-arquivos.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_extensoes-arquivos.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_extensoes-arquivos.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_extensoes-arquivos.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -1123,8 +1123,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_segundos-relogio.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_segundos-relogio.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_segundos-relogio.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_segundos-relogio.bat revert",
     "Foco": "visual"
   },
   {
@@ -1146,8 +1146,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\geral\\geral_experiencia_menu-contexto-classico.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_experiencia_menu-contexto-classico.bat revert",
+    "Apply": ".\\comandos\\geral_experiencia_menu-contexto-classico.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_menu-contexto-classico.bat revert",
     "Foco": "visual"
   },
   {
@@ -1174,8 +1174,8 @@
         "O reconhecimento de fala online e a Cortana ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_privacidade_telemetrias-coleta-dados.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_privacidade_telemetrias-coleta-dados.bat revert"
+    "Apply": ".\\comandos\\geral_privacidade_telemetrias-coleta-dados.bat apply",
+    "Revert": ".\\comandos\\geral_privacidade_telemetrias-coleta-dados.bat revert"
   },
   {
     "Id": "geral.anuncios-sugestoes",
@@ -1201,8 +1201,8 @@
         "Os Widgets e feed de notícias da barra de tarefas ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_privacidade_anuncios-sugestoes.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_privacidade_anuncios-sugestoes.bat revert",
+    "Apply": ".\\comandos\\geral_privacidade_anuncios-sugestoes.bat apply",
+    "Revert": ".\\comandos\\geral_privacidade_anuncios-sugestoes.bat revert",
     "Favorito": "sim"
   },
   {
@@ -1228,8 +1228,8 @@
         "A telemetria e o Programa de Experiência do Usuário AMD ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_privacidade_privacidade-amd.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_privacidade_privacidade-amd.bat revert"
+    "Apply": ".\\comandos\\geral_privacidade_privacidade-amd.bat apply",
+    "Revert": ".\\comandos\\geral_privacidade_privacidade-amd.bat revert"
   },
   {
     "Id": "geral.ndu",
@@ -1254,8 +1254,8 @@
         "Relatórios de consumo de dados por app em Configurações ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_privacidade_ndu.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_privacidade_ndu.bat revert",
+    "Apply": ".\\comandos\\geral_privacidade_ndu.bat apply",
+    "Revert": ".\\comandos\\geral_privacidade_ndu.bat revert",
     "Foco": "windows"
   },
   {
@@ -1281,8 +1281,8 @@
         "A Cortana e a pesquisa por voz ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_privacidade_pesquisa-windows.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_privacidade_pesquisa-windows.bat revert",
+    "Apply": ".\\comandos\\geral_privacidade_pesquisa-windows.bat apply",
+    "Revert": ".\\comandos\\geral_privacidade_pesquisa-windows.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -1309,8 +1309,8 @@
         "O rastreamento remoto de localização do PC ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_privacidade_localizar-dispositivo.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_privacidade_localizar-dispositivo.bat revert"
+    "Apply": ".\\comandos\\geral_privacidade_localizar-dispositivo.bat apply",
+    "Revert": ".\\comandos\\geral_privacidade_localizar-dispositivo.bat revert"
   },
   {
     "Id": "geral.sensores",
@@ -1335,8 +1335,8 @@
         "A rotação automática de tela em dispositivos com giroscópio ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_privacidade_sensores.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_privacidade_sensores.bat revert"
+    "Apply": ".\\comandos\\geral_privacidade_sensores.bat apply",
+    "Revert": ".\\comandos\\geral_privacidade_sensores.bat revert"
   },
   {
     "Id": "geral.sincronizacao",
@@ -1359,8 +1359,8 @@
         "A sincronização de configurações entre dispositivos via conta Microsoft ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_privacidade_sincronizacao.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_privacidade_sincronizacao.bat revert"
+    "Apply": ".\\comandos\\geral_privacidade_sincronizacao.bat apply",
+    "Revert": ".\\comandos\\geral_privacidade_sincronizacao.bat revert"
   },
   {
     "Id": "geral.linha-do-tempo",
@@ -1384,7 +1384,7 @@
         "A sincronização de atividades entre dispositivos ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\geral\\geral_privacidade_linha-do-tempo.bat apply",
-    "Revert": ".\\comandos\\geral\\geral_privacidade_linha-do-tempo.bat revert"
+    "Apply": ".\\comandos\\geral_privacidade_linha-do-tempo.bat apply",
+    "Revert": ".\\comandos\\geral_privacidade_linha-do-tempo.bat revert"
   }
 ]
