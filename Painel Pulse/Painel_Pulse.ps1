@@ -1772,7 +1772,7 @@ function New-OptCard {
     $tbName.FontSize = 14
     $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
     $tbName.Foreground = $primaryText
-    $tbName.VerticalAlignment = 'Center'
+    $tbName.VerticalAlignment = 'Bottom'
     $tbName.TextTrimming = 'CharacterEllipsis'
     $null = $nameRow.Children.Add($tbName)
 
@@ -1784,7 +1784,7 @@ function New-OptCard {
         'segurança'   = 0xe730
         'visual'      = 0xf4a5
         'privacidade' = 0xed1a
-        'internet'    = 0xe774
+        'internet'    = 0xe839
         'limpeza'     = 0xea99
     }
     $focoSizeMap = @{
@@ -1794,7 +1794,7 @@ function New-OptCard {
         'segurança'   = 15
         'visual'      = 16
         'privacidade' = 15
-        'internet'    = 15
+        'internet'    = 14
         'limpeza'     = 16
     }
     $focoTooltipMap = @{
@@ -1814,7 +1814,7 @@ function New-OptCard {
         $icoFoco.Text = [char]$focoMap[$focoVal]
         $icoFoco.FontSize = $focoSizeMap[$focoVal]
         $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
-        $icoFoco.VerticalAlignment = 'Center'
+        $icoFoco.VerticalAlignment = 'Bottom'
         $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
         $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
 
