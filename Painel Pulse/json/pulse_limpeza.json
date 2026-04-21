@@ -3,6 +3,8 @@
     "Id": "limpeza.arquivos-temporarios",
     "TabKey": "limpeza",
     "limpeza": "1, 2",
+    "Foco": "limpeza",
+    "Favorito": "sim",
     "Name": "Limpar Arquivos Temporários",
     "Description": "Remove arquivos temporários do sistema, navegadores, usuário e aplicativos, liberando espaço em disco e eliminando dados obsoletos acumulados.",
     "Tooltip": {
@@ -25,6 +27,8 @@
     "Id": "limpeza.cache-miniaturas",
     "TabKey": "limpeza",
     "limpeza": "1, 2",
+    "Foco": "limpeza",
+    "Favorito": "sim",
     "Name": "Limpar Cache de Miniaturas, Ícones e Fontes",
     "Description": "Remove os bancos de dados de cache de miniaturas de imagens, cache de ícones do Explorer e cache do serviço de fontes do Windows.",
     "Tooltip": {
@@ -47,6 +51,8 @@
     "Id": "limpeza.cache-windows-update",
     "TabKey": "limpeza",
     "limpeza": "2",
+    "Foco": "limpeza",
+    "Favorito": "sim",
     "Name": "Limpar Cache do Windows Update e Otimização de Entrega",
     "Description": "Remove os arquivos de instalação baixados pelo Windows Update e os dados em cache do serviço de Otimização de Entrega (peer-to-peer de atualizações).",
     "Tooltip": {
@@ -69,6 +75,7 @@
     "Id": "limpeza.prefetch",
     "TabKey": "limpeza",
     "limpeza": "1, 2",
+    "Foco": "limpeza",
     "Name": "Limpar Prefetch e Superfetch",
     "Description": "Remove os arquivos de pré-carregamento (.pf) e o banco de dados do Superfetch (SysMain), que armazenam padrões de uso para antecipar o carregamento de aplicações.",
     "Tooltip": {
@@ -91,6 +98,8 @@
     "Id": "limpeza.logs-erros",
     "TabKey": "limpeza",
     "limpeza": "2",
+    "Foco": "limpeza",
+    "Favorito": "sim",
     "Name": "Limpar Logs e Relatórios de Erros",
     "Description": "Remove logs do Visualizador de Eventos, relatórios de erros do WER, arquivos de minidump de travamentos e logs de diagnóstico acumulados pelo sistema.",
     "Tooltip": {
@@ -113,6 +122,7 @@
     "Id": "limpeza.historico-atividades",
     "TabKey": "limpeza",
     "limpeza": "1, 2",
+    "Foco": "limpeza",
     "Name": "Limpar Histórico de Atividades",
     "Description": "Limpa o Histórico de Atividades do Windows (Timeline), que registra aplicativos usados, documentos abertos e atividades da conta Microsoft.",
     "Tooltip": {
@@ -134,6 +144,8 @@
     "Id": "limpeza.cache-store",
     "TabKey": "limpeza",
     "limpeza": "2",
+    "Foco": "limpeza",
+    "Favorito": "sim",
     "Name": "Limpar Cache da Microsoft Store",
     "Description": "Reseta o cache da Microsoft Store via WSReset e remove manualmente arquivos temporários de pacotes, instalações e downloads pendentes da Store.",
     "Tooltip": {
@@ -156,6 +168,7 @@
     "Id": "limpeza.historico-explorer",
     "TabKey": "limpeza",
     "limpeza": "1, 2",
+    "Foco": "limpeza",
     "Name": "Limpar Histórico do Explorador de Arquivos",
     "Description": "Remove o histórico de arquivos e pastas recentes, atalhos do Acesso Rápido, histórico de digitação na barra de endereços e histórico de pesquisa do Explorer.",
     "Tooltip": {
@@ -178,6 +191,7 @@
     "Id": "limpeza.cache-directx",
     "TabKey": "limpeza",
     "limpeza": "",
+    "Foco": "limpeza",
     "Name": "Limpar Cache do DirectX",
     "Description": "Remove o cache de shaders compilados do DirectX (D3DSCache), além dos caches de shader de GPU de fabricantes como NVIDIA, AMD e Intel.",
     "Tooltip": {
@@ -200,6 +214,7 @@
     "Id": "limpeza.windows-old",
     "TabKey": "limpeza",
     "limpeza": "2",
+    "Foco": "limpeza",
     "Name": "Limpar Instalações Anteriores do Windows",
     "Description": "Remove a pasta Windows.old gerada após atualização de versão do Windows, que contém os arquivos do sistema operacional anterior e pode ocupar vários gigabytes.",
     "Tooltip": {
@@ -224,6 +239,7 @@
     "Id": "limpeza.lixeira",
     "TabKey": "limpeza",
     "limpeza": "",
+    "Foco": "limpeza",
     "Name": "Esvaziar Lixeira",
     "Description": "Esvazia permanentemente a lixeira de todos os drives do sistema, removendo todos os arquivos marcados para exclusão que ainda ocupam espaço em disco.",
     "Tooltip": {
