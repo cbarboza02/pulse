@@ -18,8 +18,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\limpeza\\limpeza_arquivos-temporarios.bat apply",
-    "Revert": ".\\comandos\\limpeza\\limpeza_arquivos-temporarios.bat revert"
+    "Apply": ".\\comandos\\limpeza_arquivos-temporarios.bat apply",
+    "Revert": ".\\comandos\\limpeza_arquivos-temporarios.bat revert"
   },
   {
     "Id": "limpeza.cache-miniaturas",
@@ -40,8 +40,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\limpeza\\limpeza_cache-miniaturas.bat apply",
-    "Revert": ".\\comandos\\limpeza\\limpeza_cache-miniaturas.bat revert"
+    "Apply": ".\\comandos\\limpeza_cache-miniaturas.bat apply",
+    "Revert": ".\\comandos\\limpeza_cache-miniaturas.bat revert"
   },
   {
     "Id": "limpeza.cache-windows-update",
@@ -62,8 +62,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\limpeza\\limpeza_cache-windows-update.bat apply",
-    "Revert": ".\\comandos\\limpeza\\limpeza_cache-windows-update.bat revert"
+    "Apply": ".\\comandos\\limpeza_cache-windows-update.bat apply",
+    "Revert": ".\\comandos\\limpeza_cache-windows-update.bat revert"
   },
   {
     "Id": "limpeza.prefetch",
@@ -84,8 +84,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\limpeza\\limpeza_prefetch.bat apply",
-    "Revert": ".\\comandos\\limpeza\\limpeza_prefetch.bat revert"
+    "Apply": ".\\comandos\\limpeza_prefetch.bat apply",
+    "Revert": ".\\comandos\\limpeza_prefetch.bat revert"
   },
   {
     "Id": "limpeza.logs-erros",
@@ -106,8 +106,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\limpeza\\limpeza_logs-erros.bat apply",
-    "Revert": ".\\comandos\\limpeza\\limpeza_logs-erros.bat revert"
+    "Apply": ".\\comandos\\limpeza_logs-erros.bat apply",
+    "Revert": ".\\comandos\\limpeza_logs-erros.bat revert"
   },
   {
     "Id": "limpeza.historico-atividades",
@@ -127,8 +127,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\limpeza\\limpeza_historico-atividades.bat apply",
-    "Revert": ".\\comandos\\limpeza\\limpeza_historico-atividades.bat revert"
+    "Apply": ".\\comandos\\limpeza_historico-atividades.bat apply",
+    "Revert": ".\\comandos\\limpeza_historico-atividades.bat revert"
   },
   {
     "Id": "limpeza.cache-store",
@@ -149,8 +149,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\limpeza\\limpeza_cache-store.bat apply",
-    "Revert": ".\\comandos\\limpeza\\limpeza_cache-store.bat revert"
+    "Apply": ".\\comandos\\limpeza_cache-store.bat apply",
+    "Revert": ".\\comandos\\limpeza_cache-store.bat revert"
   },
   {
     "Id": "limpeza.historico-explorer",
@@ -171,8 +171,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\limpeza\\limpeza_historico-explorer.bat apply",
-    "Revert": ".\\comandos\\limpeza\\limpeza_historico-explorer.bat revert"
+    "Apply": ".\\comandos\\limpeza_historico-explorer.bat apply",
+    "Revert": ".\\comandos\\limpeza_historico-explorer.bat revert"
   },
   {
     "Id": "limpeza.cache-directx",
@@ -193,8 +193,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\limpeza\\limpeza_cache-directx.bat apply",
-    "Revert": ".\\comandos\\limpeza\\limpeza_cache-directx.bat revert"
+    "Apply": ".\\comandos\\limpeza_cache-directx.bat apply",
+    "Revert": ".\\comandos\\limpeza_cache-directx.bat revert"
   },
   {
     "Id": "limpeza.windows-old",
@@ -217,8 +217,8 @@
         "A reversão para a instalação anterior do Windows ficará permanentemente indisponível"
       ]
     },
-    "Apply": ".\\comandos\\limpeza\\limpeza_windows-old.bat apply",
-    "Revert": ".\\comandos\\limpeza\\limpeza_windows-old.bat revert"
+    "Apply": ".\\comandos\\limpeza_windows-old.bat apply",
+    "Revert": ".\\comandos\\limpeza_windows-old.bat revert"
   },
   {
     "Id": "limpeza.lixeira",
@@ -239,7 +239,7 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\limpeza\\limpeza_lixeira.bat apply",
-    "Revert": ".\\comandos\\limpeza\\limpeza_lixeira.bat revert"
+    "Apply": ".\\comandos\\limpeza_lixeira.bat apply",
+    "Revert": ".\\comandos\\limpeza_lixeira.bat revert"
   }
 ]
