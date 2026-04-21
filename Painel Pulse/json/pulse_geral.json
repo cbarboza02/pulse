@@ -898,6 +898,7 @@
     "Id": "geral.telemetrias-coleta-dados",
     "TabKey": "geral_priv",
     "pulsemode": "sim",
+    "Favorito": "sim",
     "Foco": "privacidade",
     "Name": "Desativar Telemetrias e Coleta de Dados",
     "Description": "Desativa de forma abrangente telemetrias, diagnósticos e serviços de coleta de dados do Windows, incluindo DiagTrack, WerSvc, Centro de Feedback, Cortana e bloqueio de domínios de telemetria via hosts file.",
