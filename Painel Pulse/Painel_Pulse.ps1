@@ -3970,14 +3970,9 @@ Update-MasterPulseToggleState
 $window.Add_Closing({
     Write-PulseLog "Painel Pulse encerrado. Iniciando limpeza de arquivos temporários."
     $global:PulseQueueTimer.Stop()
-    
-    # Remove a pasta inteira do temp em background para não travar o fechamento
+
     $dirToDelete = $script:BaseDir
-    Start-Job -ScriptBlock {
-        param($d)
-        Start-Sleep -Seconds 2  # Aguarda o PS1 encerrar completamente
-        Remove-Item -Path $d -Recurse -Force -ErrorAction SilentlyContinue
-    } -ArgumentList $dirToDelete | Out-Null
+    Start-Process powershell -ArgumentList "-WindowStyle Hidden -Command `"Start-Sleep -Seconds 3; Remove-Item -Path '$dirToDelete' -Recurse -Force -ErrorAction SilentlyContinue`"" -WindowStyle Hidden
 })
 
 $window.ShowDialog() | Out-Null
