@@ -99,32 +99,6 @@
     "Foco": "windows"
   },
   {
-    "Id": "geral.windows-insider",
-    "TabKey": "geral_geral",
-    "pulsemode": "sim",
-    "Name": "Desativar Windows Insider",
-    "Description": "Desativa o programa Windows Insider, impedindo builds experimentais e coleta de dados associada ao programa.",
-    "Tooltip": {
-      "Pros": [
-        "Elimina coleta de dados e telemetria do programa Insider",
-        "Evita instalação de builds instáveis e experimentais",
-        "Reduz notificações e prompts relacionados ao Insider"
-      ],
-      "Cons": [
-        "Não será mais possível participar do programa Windows Insider",
-        "Acesso antecipado a novos recursos do Windows será perdido",
-        "Pode exigir reinstalação do Windows para sair de builds Insider"
-      ],
-      "Unavailable": [
-        "O programa Windows Insider ficará indisponível",
-        "Atualizações de builds de pré-visualização não serão recebidas"
-      ]
-    },
-    "Apply": ".\\comandos\\geral_geral_windows-insider.bat apply",
-    "Revert": ".\\comandos\\geral_geral_windows-insider.bat revert",
-    "Foco": "windows"
-  },
-  {
     "Id": "geral.plano-energia",
     "TabKey": "geral_geral",
     "pulsemode": "sim",
@@ -172,56 +146,6 @@
     },
     "Apply": ".\\comandos\\geral_geral_sleep-timeout.bat apply",
     "Revert": ".\\comandos\\geral_geral_sleep-timeout.bat revert",
-    "Foco": "windows"
-  },
-  {
-    "Id": "geral.sleepy-study",
-    "TabKey": "geral_geral",
-    "pulsemode": "sim",
-    "Name": "Desativar Sleepy Study",
-    "Description": "Desativa o Sleepy Study, recurso que coleta dados de uso do sistema durante períodos de inatividade.",
-    "Tooltip": {
-      "Pros": [
-        "Elimina coleta de dados em segundo plano durante inatividade",
-        "Reduz atividade de disco e CPU desnecessária",
-        "Melhora a privacidade do usuário"
-      ],
-      "Cons": [
-        "Dados de diagnóstico de energia não serão mais coletados",
-        "Pode impactar relatórios de diagnóstico de bateria",
-        "Recurso pouco conhecido, raramente necessário para a maioria dos usuários"
-      ],
-      "Unavailable": [
-        "A coleta de dados de estudo de energia em inatividade ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\geral_geral_sleepy-study.bat apply",
-    "Revert": ".\\comandos\\geral_geral_sleepy-study.bat revert",
-    "Foco": "windows"
-  },
-  {
-    "Id": "geral.suspender-hibrido",
-    "TabKey": "geral_geral",
-    "pulsemode": "sim",
-    "Name": "Desativar Suspender Híbrido",
-    "Description": "Desativa o modo de suspensão híbrida, que combina sleep e hibernação, priorizando velocidade de retorno.",
-    "Tooltip": {
-      "Pros": [
-        "Retorno do modo sleep mais rápido sem overhead do híbrido",
-        "Libera espaço em disco usado pelo arquivo de hibernação parcial",
-        "Reduz gravações desnecessárias no disco durante suspensão"
-      ],
-      "Cons": [
-        "Em caso de queda de energia durante o sleep, dados em RAM serão perdidos",
-        "Sem fallback para hibernação em caso de bateria crítica (notebooks)",
-        "Menor segurança de dados em situações de falha elétrica"
-      ],
-      "Unavailable": [
-        "O modo de suspensão híbrida ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\geral_geral_suspender-hibrido.bat apply",
-    "Revert": ".\\comandos\\geral_geral_suspender-hibrido.bat revert",
     "Foco": "windows"
   },
   {
@@ -375,139 +299,6 @@
     "Apply": ".\\comandos\\geral_geral_efeitos-visuais.bat apply",
     "Revert": ".\\comandos\\geral_geral_efeitos-visuais.bat revert",
     "Foco": "visual"
-  },
-  {
-    "Id": "geral.adesivos",
-    "TabKey": "geral_geral",
-    "pulsemode": "sim",
-    "Name": "Desativar Adesivos",
-    "Description": "Desativa o recurso de Adesivos da área de trabalho do Windows 11, removendo o widget de stickers.",
-    "Tooltip": {
-      "Pros": [
-        "Elimina processo em segundo plano relacionado aos adesivos",
-        "Reduz distrações visuais na área de trabalho",
-        "Libera recursos mínimos de sistema"
-      ],
-      "Cons": [
-        "Não será mais possível usar stickers decorativos na área de trabalho",
-        "Personalização visual da área de trabalho será limitada",
-        "Recurso exclusivo do Windows 11 ficará indisponível"
-      ],
-      "Unavailable": [
-        "O recurso de Adesivos da área de trabalho ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\geral_geral_adesivos.bat apply",
-    "Revert": ".\\comandos\\geral_geral_adesivos.bat revert",
-    "Foco": "visual"
-  },
-  {
-    "Id": "geral.chat",
-    "TabKey": "geral_geral",
-    "pulsemode": "sim",
-    "Name": "Desativar Chat",
-    "Description": "Desativa o ícone e o aplicativo Chat (Microsoft Teams) integrado à barra de tarefas do Windows 11.",
-    "Tooltip": {
-      "Pros": [
-        "Remove o ícone do Chat da barra de tarefas",
-        "Elimina processos em segundo plano do Teams integrado",
-        "Libera memória RAM usada pelo aplicativo"
-      ],
-      "Cons": [
-        "O acesso rápido ao Microsoft Teams pela barra de tarefas será removido",
-        "Notificações integradas do Teams na barra de tarefas serão perdidas",
-        "Requer reativação manual para voltar a usar o atalho"
-      ],
-      "Unavailable": [
-        "O ícone e atalho do Chat/Teams na barra de tarefas ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\geral_geral_chat.bat apply",
-    "Revert": ".\\comandos\\geral_geral_chat.bat revert",
-    "Foco": "windows",
-    "Favorito": "sim"
-  },
-  {
-    "Id": "geral.copilot-cortana",
-    "TabKey": "geral_geral",
-    "pulsemode": "sim",
-    "Name": "Desativar Copilot e Cortana",
-    "Description": "Desativa os assistentes de IA Copilot e Cortana, removendo seus processos, ícones e coleta de dados.",
-    "Tooltip": {
-      "Pros": [
-        "Elimina processos persistentes do Copilot e Cortana em segundo plano",
-        "Reduz coleta de dados e telemetria dos assistentes de IA",
-        "Libera memória RAM e recursos de CPU utilizados pelos assistentes"
-      ],
-      "Cons": [
-        "Assistente de IA integrado ao Windows ficará indisponível",
-        "Pesquisa por voz e comandos naturais não funcionarão",
-        "Integração com Microsoft 365 via assistente será perdida"
-      ],
-      "Unavailable": [
-        "O Copilot ficará indisponível",
-        "A Cortana ficará indisponível",
-        "Pesquisa por voz integrada ao Windows ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\geral_geral_copilot-cortana.bat apply",
-    "Revert": ".\\comandos\\geral_geral_copilot-cortana.bat revert",
-    "Foco": "windows",
-    "Favorito": "sim"
-  },
-  {
-    "Id": "geral.widgets",
-    "TabKey": "geral_geral",
-    "pulsemode": "sim",
-    "Name": "Desativar Widgets",
-    "Description": "Desativa o painel de Widgets do Windows 11, eliminando o processo em segundo plano e o ícone na barra de tarefas.",
-    "Tooltip": {
-      "Pros": [
-        "Remove o processo do painel de Widgets em segundo plano",
-        "Elimina tráfego de rede gerado pelo carregamento de feeds de notícias",
-        "Libera memória RAM e reduz uso de CPU"
-      ],
-      "Cons": [
-        "Acesso rápido a clima, notícias e informações do painel de Widgets será perdido",
-        "O ícone de Widgets será removido da barra de tarefas",
-        "Widgets personalizados não estarão mais acessíveis"
-      ],
-      "Unavailable": [
-        "O painel de Widgets ficará indisponível",
-        "O ícone de Widgets na barra de tarefas será removido"
-      ]
-    },
-    "Apply": ".\\comandos\\geral_geral_widgets.bat apply",
-    "Revert": ".\\comandos\\geral_geral_widgets.bat revert",
-    "Foco": "windows",
-    "Favorito": "sim"
-  },
-  {
-    "Id": "geral.onedrive",
-    "TabKey": "geral_geral",
-    "pulsemode": "sim",
-    "Name": "Desativar OneDrive",
-    "Description": "Desativa o OneDrive, impedindo sua inicialização automática, sincronização e integração com o Explorer.",
-    "Tooltip": {
-      "Pros": [
-        "Elimina o processo do OneDrive em segundo plano",
-        "Reduz tráfego de rede causado pela sincronização automática",
-        "Libera recursos de CPU e RAM utilizados pelo cliente OneDrive"
-      ],
-      "Cons": [
-        "Sincronização automática de arquivos com a nuvem será interrompida",
-        "Backup automático de pastas como Documentos e Imagens será desativado",
-        "Integração do OneDrive no Explorador de Arquivos será removida"
-      ],
-      "Unavailable": [
-        "O OneDrive ficará indisponível",
-        "A sincronização de arquivos com a nuvem ficará indisponível",
-        "A integração do OneDrive no Explorador de Arquivos ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\geral_geral_onedrive.bat apply",
-    "Revert": ".\\comandos\\geral_geral_onedrive.bat revert",
-    "Foco": "windows"
   },
   {
     "Id": "geral.prefetch-superfetch",
@@ -1206,34 +997,6 @@
     "Foco": "windows"
   },
   {
-    "Id": "geral.pesquisa-windows",
-    "TabKey": "geral_priv",
-    "pulsemode": "sim",
-    "Foco": "privacidade",
-    "Name": "Otimizar Pesquisa do Windows",
-    "Description": "Desativa a pesquisa na web integrada ao Windows, removendo resultados Bing, integração com Cortana e pesquisa na nuvem da barra de pesquisa, limitando a busca a arquivos locais.",
-    "Tooltip": {
-      "Pros": [
-        "Elimina resultados Bing e conteúdo da web na barra de pesquisa do Windows",
-        "Impede o envio de termos de pesquisa à Microsoft via Cortana e Bing",
-        "Pesquisa mais rápida e focada em arquivos locais sem overhead de consultas online"
-      ],
-      "Cons": [
-        "Resultados de pesquisa na web não aparecerão mais no menu Iniciar",
-        "Cortana e pesquisa por voz integrada ficarão indisponíveis",
-        "A pesquisa na nuvem e histórico de dispositivos serão desativados"
-      ],
-      "Unavailable": [
-        "A pesquisa na web e resultados Bing integrados ao Windows ficarão indisponíveis",
-        "A Cortana e a pesquisa por voz ficarão indisponíveis"
-      ]
-    },
-    "Apply": ".\\comandos\\geral_privacidade_pesquisa-windows.bat apply",
-    "Revert": ".\\comandos\\geral_privacidade_pesquisa-windows.bat revert",
-    "Foco": "windows",
-    "Favorito": "sim"
-  },
-  {
     "Id": "geral.localizar-dispositivo",
     "TabKey": "geral_priv",
     "pulsemode": "sim",
@@ -1284,54 +1047,5 @@
     },
     "Apply": ".\\comandos\\geral_privacidade_sensores.bat apply",
     "Revert": ".\\comandos\\geral_privacidade_sensores.bat revert"
-  },
-  {
-    "Id": "geral.sincronizacao",
-    "TabKey": "geral_priv",
-    "pulsemode": "sim",
-    "Name": "Desativar Sincronização",
-    "Description": "Desativa a sincronização de configurações do Windows entre dispositivos via conta Microsoft.",
-    "Tooltip": {
-      "Pros": [
-        "Impede envio de configurações e preferências à nuvem Microsoft",
-        "Aumenta a privacidade ao manter dados de configuração locais",
-        "Reduz tráfego de rede em segundo plano causado pela sincronização"
-      ],
-      "Cons": [
-        "Configurações, temas e senhas não serão sincronizados entre dispositivos",
-        "Em troca de dispositivo, configurações precisarão ser refeitas manualmente",
-        "Preferências de acessibilidade e idioma não serão transferidas automaticamente"
-      ],
-      "Unavailable": [
-        "A sincronização de configurações entre dispositivos via conta Microsoft ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\geral_privacidade_sincronizacao.bat apply",
-    "Revert": ".\\comandos\\geral_privacidade_sincronizacao.bat revert"
-  },
-  {
-    "Id": "geral.linha-do-tempo",
-    "TabKey": "geral_priv",
-    "pulsemode": "sim",
-    "Name": "Desativar Linha do Tempo",
-    "Description": "Desativa a Linha do Tempo do Windows, que registra e sincroniza o histórico de atividades com a Microsoft.",
-    "Tooltip": {
-      "Pros": [
-        "Impede registro e envio do histórico de atividades à Microsoft",
-        "Elimina rastreamento de documentos, sites e apps acessados",
-        "Melhora a privacidade ao desativar o log de atividades do sistema"
-      ],
-      "Cons": [
-        "Histórico de atividades para retomar tarefas não estará disponível",
-        "Integração com Microsoft 365 via linha do tempo será desativada",
-        "Continuação de tarefas entre dispositivos ficará indisponível"
-      ],
-      "Unavailable": [
-        "A Linha do Tempo e o histórico de atividades ficarão indisponíveis",
-        "A sincronização de atividades entre dispositivos ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\geral_privacidade_linha-do-tempo.bat apply",
-    "Revert": ".\\comandos\\geral_privacidade_linha-do-tempo.bat revert"
   }
 ]
