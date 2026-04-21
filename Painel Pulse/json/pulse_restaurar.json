@@ -5,8 +5,8 @@
     "pulsemode": "",
     "Name": "Restaurar AeroShake",
     "Description": "Restaura o AeroShake ao padrão do Windows 11, reativando o gesto de sacudir a janela para minimizar as demais.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_aeroshake.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_aeroshake.bat padrao"
+    "Apply": ".\\comandos\\restaurar_aeroshake.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_aeroshake.bat padrao"
   },
   {
     "Id": "restaurar.configuracoes-inicio",
@@ -14,8 +14,8 @@
     "pulsemode": "",
     "Name": "Restaurar Página 'Início' nas Configurações",
     "Description": "Restaura a exibição da página 'Início' no aplicativo Configurações do Windows 11, que foi ocultada pela otimização da ISO.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_configuracoes-inicio.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_configuracoes-inicio.bat padrao"
+    "Apply": ".\\comandos\\restaurar_configuracoes-inicio.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_configuracoes-inicio.bat padrao"
   },
   {
     "Id": "restaurar.explorer-inicio-acesso-rapido",
@@ -23,8 +23,8 @@
     "pulsemode": "",
     "Name": "Restaurar Início e Acesso Rápido no Explorador",
     "Description": "Restaura a página Início e o Acesso Rápido no Explorador de Arquivos, reexibindo Arquivos Recentes, Pastas Frequentes, Bibliotecas e a seção Recomendados do Menu Iniciar.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_explorer-inicio-acesso-rapido.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_explorer-inicio-acesso-rapido.bat padrao"
+    "Apply": ".\\comandos\\restaurar_explorer-inicio-acesso-rapido.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_explorer-inicio-acesso-rapido.bat padrao"
   },
   {
     "Id": "restaurar.widgets",
@@ -32,8 +32,8 @@
     "pulsemode": "",
     "Name": "Restaurar Widgets",
     "Description": "Restaura o botão e o painel de Widgets na barra de tarefas do Windows 11, reativando o feed de notícias e interesses.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_widgets.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_widgets.bat padrao"
+    "Apply": ".\\comandos\\restaurar_widgets.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_widgets.bat padrao"
   },
   {
     "Id": "restaurar.assistente-de-foco",
@@ -41,8 +41,8 @@
     "pulsemode": "",
     "Name": "Restaurar Assistente de Foco",
     "Description": "Restaura o Assistente de Foco (Focus Assist) ao padrão do Windows 11, reativando as regras automáticas e permitindo configuração de sessões de foco.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_assistente-de-foco.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_assistente-de-foco.bat padrao"
+    "Apply": ".\\comandos\\restaurar_assistente-de-foco.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_assistente-de-foco.bat padrao"
   },
   {
     "Id": "restaurar.visualizador-de-fotos",
@@ -50,8 +50,8 @@
     "pulsemode": "",
     "Name": "Restaurar Visualizador de Fotos do Windows 11",
     "Description": "Remove o Visualizador de Fotos Clássico como opção e restaura o aplicativo Fotos do Windows 11 como visualizador padrão de imagens.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_visualizador-de-fotos.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_visualizador-de-fotos.bat padrao"
+    "Apply": ".\\comandos\\restaurar_visualizador-de-fotos.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_visualizador-de-fotos.bat padrao"
   },
   {
     "Id": "restaurar.som-de-inicializacao",
@@ -59,8 +59,8 @@
     "pulsemode": "",
     "Name": "Restaurar Som de Inicialização",
     "Description": "Restaura o som de inicialização do Windows 11, reativando o áudio tocado durante o boot e o login.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_som-de-inicializacao.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_som-de-inicializacao.bat padrao"
+    "Apply": ".\\comandos\\restaurar_som-de-inicializacao.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_som-de-inicializacao.bat padrao"
   },
   {
     "Id": "restaurar.game-bar",
@@ -68,8 +68,8 @@
     "pulsemode": "",
     "Name": "Restaurar Game Bar",
     "Description": "Restaura a Game Bar e o GameDVR ao padrão do Windows 11, reativando a captura de tela, gravação, o overlay de jogo e os serviços Xbox.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_game-bar.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_game-bar.bat padrao"
+    "Apply": ".\\comandos\\restaurar_game-bar.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_game-bar.bat padrao"
   },
   {
     "Id": "restaurar.jump-lists",
@@ -77,8 +77,8 @@
     "pulsemode": "",
     "Name": "Restaurar Jump Lists",
     "Description": "Restaura as Jump Lists ao padrão do Windows 11, reativando o rastreamento de programas e documentos recentes acessíveis pelo clique direito na barra de tarefas.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_jump-lists.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_jump-lists.bat padrao"
+    "Apply": ".\\comandos\\restaurar_jump-lists.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_jump-lists.bat padrao"
   },
   {
     "Id": "restaurar.virtualizacao-hyper-v",
@@ -86,8 +86,8 @@
     "pulsemode": "",
     "Name": "Restaurar Virtualização e Hyper-V",
     "Description": "Restaura o Hyper-V e os serviços de virtualização ao padrão do Windows 11. Requer reinicialização para ter efeito completo.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_virtualizacao-hyper-v.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_virtualizacao-hyper-v.bat padrao"
+    "Apply": ".\\comandos\\restaurar_virtualizacao-hyper-v.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_virtualizacao-hyper-v.bat padrao"
   },
   {
     "Id": "restaurar.impressao",
@@ -95,8 +95,8 @@
     "pulsemode": "",
     "Name": "Restaurar Impressão",
     "Description": "Restaura os serviços de impressão ao padrão do Windows 11, reativando o Spooler de Impressão, notificações de impressora e suporte a scanners.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_impressao.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_impressao.bat padrao"
+    "Apply": ".\\comandos\\restaurar_impressao.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_impressao.bat padrao"
   },
   {
     "Id": "restaurar.bluetooth",
@@ -104,8 +104,8 @@
     "pulsemode": "",
     "Name": "Restaurar Bluetooth",
     "Description": "Tenta corrigir problemas com o Bluetooth, garantindo que os serviços, permissões e políticas necessários estejam configurados corretamente. O Bluetooth não é desativado diretamente pelas otimizações, mas algumas configurações de privacidade podem afetá-lo.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_bluetooth.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_bluetooth.bat padrao"
+    "Apply": ".\\comandos\\restaurar_bluetooth.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_bluetooth.bat padrao"
   },
   {
     "Id": "restaurar.microsoft-store",
@@ -113,7 +113,7 @@
     "pulsemode": "",
     "Name": "Restaurar Microsoft Store",
     "Description": "Tenta corrigir problemas com a Microsoft Store, removendo políticas restritivas, garantindo que os serviços necessários estejam ativos e resetando o cache da Store. As otimizações da ISO desativam atualizações automáticas de apps e algumas políticas de conteúdo que podem afetar o funcionamento da Store.",
-    "Apply": ".\\comandos\\restaurar\\restaurar_microsoft-store.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_microsoft-store.bat padrao"
+    "Apply": ".\\comandos\\restaurar_microsoft-store.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_microsoft-store.bat padrao"
   }
 ]
