@@ -20,8 +20,8 @@
         "O Aero Peek e as miniaturas animadas da barra de tarefas ficarão indisponíveis"
       ]
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_dwm.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_dwm.bat revert",
+    "Apply": ".\\comandos\\pulsemode_dwm.bat apply",
+    "Revert": ".\\comandos\\pulsemode_dwm.bat revert",
     "Foco": "jogos",
     "Favorito": "sim"
   },
@@ -44,8 +44,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_usb-msi.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_usb-msi.bat revert",
+    "Apply": ".\\comandos\\pulsemode_usb-msi.bat apply",
+    "Revert": ".\\comandos\\pulsemode_usb-msi.bat revert",
     "Foco": "jogos"
   },
   {
@@ -67,8 +67,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_gpu-msi.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_gpu-msi.bat revert",
+    "Apply": ".\\comandos\\pulsemode_gpu-msi.bat apply",
+    "Revert": ".\\comandos\\pulsemode_gpu-msi.bat revert",
     "Foco": "jogos",
     "Favorito": "sim"
   },
@@ -93,8 +93,8 @@
         "O monitoramento de DPCs demorados pelo kernel ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_interrupt.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_interrupt.bat revert",
+    "Apply": ".\\comandos\\pulsemode_interrupt.bat apply",
+    "Revert": ".\\comandos\\pulsemode_interrupt.bat revert",
     "Foco": "jogos"
   },
   {
@@ -121,28 +121,28 @@
         "Label": "Padrão",
         "Description": "Padrão do Windows: 100 entradas por fila.",
         "Param": "padrao",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_queue-size.bat padrao"
+        "Command": ".\\comandos\\pulsemode_queue-size.bat padrao"
       },
       {
         "Label": "Equilibrado - 50",
         "Description": "50 entradas por fila, redução de buffer sem impacto na estabilidade.",
         "Param": "equilibrado",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_queue-size.bat equilibrado"
+        "Command": ".\\comandos\\pulsemode_queue-size.bat equilibrado"
       },
       {
         "Label": "Gaming - 25",
         "Description": "25 entradas por fila, buffer reduzido para menor latência de input.",
         "Param": "gaming",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_queue-size.bat gaming"
+        "Command": ".\\comandos\\pulsemode_queue-size.bat gaming"
       },
       {
         "Label": "Competitivo - 16",
         "Description": "16 entradas por fila, mínimo estável para menor latência.",
         "Param": "competitivo",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_queue-size.bat competitivo"
+        "Command": ".\\comandos\\pulsemode_queue-size.bat competitivo"
       }
     ],
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_queue-size.bat padrao",
+    "Revert": ".\\comandos\\pulsemode_queue-size.bat padrao",
     "Foco": "jogos"
   },
   {
@@ -169,28 +169,28 @@
         "Label": "Padrão",
         "Description": "Gerenciado automaticamente pelo sistema.",
         "Param": "padrao",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_iopagelimit.bat padrao"
+        "Command": ".\\comandos\\pulsemode_iopagelimit.bat padrao"
       },
       {
         "Label": "Gaming - 128 MB",
         "Description": "Reserva 128 MB de RAM, equilibrando latência e disponibilidade.",
         "Param": "gaming",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_iopagelimit.bat gaming"
+        "Command": ".\\comandos\\pulsemode_iopagelimit.bat gaming"
       },
       {
         "Label": "Competitivo - 256 MB",
         "Description": "Reserva 256 MB de RAM, menor latência para sistemas com 16+ GB.",
         "Param": "competitivo",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_iopagelimit.bat competitivo"
+        "Command": ".\\comandos\\pulsemode_iopagelimit.bat competitivo"
       },
       {
         "Label": "Ultra - 512 MB",
         "Description": "Reserva 512 MB de RAM, melhor em sistemas com 32+ GB de RAM.",
         "Param": "ultra",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_iopagelimit.bat ultra"
+        "Command": ".\\comandos\\pulsemode_iopagelimit.bat ultra"
       }
     ],
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_iopagelimit.bat padrao",
+    "Revert": ".\\comandos\\pulsemode_iopagelimit.bat padrao",
     "Foco": "jogos"
   },
   {
@@ -214,8 +214,8 @@
         "O agrupamento de interrupções de timer para economia de energia ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_timer-coalescing.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_timer-coalescing.bat revert",
+    "Apply": ".\\comandos\\pulsemode_timer-coalescing.bat apply",
+    "Revert": ".\\comandos\\pulsemode_timer-coalescing.bat revert",
     "Foco": "jogos",
     "Favorito": "sim"
   },
@@ -244,22 +244,22 @@
         "Label": "Padrão - Automático",
         "Description": "O driver decide dinamicamente para maior estabilidade.",
         "Param": "auto",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_amd-flip-queue-size.bat auto"
+        "Command": ".\\comandos\\pulsemode_amd-flip-queue-size.bat auto"
       },
       {
         "Label": "Equilibrado - 2",
         "Description": "Pré-renderiza até 2 quadros, equilibrando fluidez e tempo de resposta.",
         "Param": "equilibrado",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_amd-flip-queue-size.bat equilibrado"
+        "Command": ".\\comandos\\pulsemode_amd-flip-queue-size.bat equilibrado"
       },
       {
         "Label": "Competitivo - 1",
         "Description": "Pré-renderiza 1 quadro, focando na menor latência de input possível.",
         "Param": "competitivo",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_amd-flip-queue-size.bat competitivo"
+        "Command": ".\\comandos\\pulsemode_amd-flip-queue-size.bat competitivo"
       }
     ],
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_amd-flip-queue-size.bat auto",
+    "Revert": ".\\comandos\\pulsemode_amd-flip-queue-size.bat auto",
     "Foco": "jogos"
   },
   {
@@ -286,28 +286,28 @@
         "Label": "Padrão",
         "Description": "Restaura as configurações de agendamento ao padrão do Windows.",
         "Param": "padrao",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_prioridade-agendamento-cpu.bat padrao"
+        "Command": ".\\comandos\\pulsemode_prioridade-agendamento-cpu.bat padrao"
       },
       {
         "Label": "Equilibrado",
         "Description": "Prioridade equilibrada, mantendo estabilidade para multitarefas.",
         "Param": "equilibrado",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_prioridade-agendamento-cpu.bat equilibrado"
+        "Command": ".\\comandos\\pulsemode_prioridade-agendamento-cpu.bat equilibrado"
       },
       {
         "Label": "Gaming",
         "Description": "Alta prioridade com ajustes focados em jogos AAA e FPS alto.",
         "Param": "gaming",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_prioridade-agendamento-cpu.bat gaming"
+        "Command": ".\\comandos\\pulsemode_prioridade-agendamento-cpu.bat gaming"
       },
       {
         "Label": "Competitivo",
         "Description": "Máxima prioridade MMCSS com foco em redução de latência.",
         "Param": "competitivo",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_prioridade-agendamento-cpu.bat competitivo"
+        "Command": ".\\comandos\\pulsemode_prioridade-agendamento-cpu.bat competitivo"
       }
     ],
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_prioridade-agendamento-cpu.bat padrao",
+    "Revert": ".\\comandos\\pulsemode_prioridade-agendamento-cpu.bat padrao",
     "Foco": "jogos"
   },
   {
@@ -331,8 +331,8 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_modo-jogo.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_modo-jogo.bat revert"
+    "Apply": ".\\comandos\\pulsemode_modo-jogo.bat apply",
+    "Revert": ".\\comandos\\pulsemode_modo-jogo.bat revert"
   },
   {
     "Id": "pulsemode.cfg",
@@ -356,8 +356,8 @@
         "A proteção de fluxo de controle (CFG) contra exploração de memória ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_cfg.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_cfg.bat revert"
+    "Apply": ".\\comandos\\pulsemode_cfg.bat apply",
+    "Revert": ".\\comandos\\pulsemode_cfg.bat revert"
   },
   {
     "Id": "pulsemode.synthetic-timers",
@@ -381,8 +381,8 @@
         "O tick dinâmico do kernel ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_synthetic-timers.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_synthetic-timers.bat revert",
+    "Apply": ".\\comandos\\pulsemode_synthetic-timers.bat apply",
+    "Revert": ".\\comandos\\pulsemode_synthetic-timers.bat revert",
     "Foco": "jogos"
   },
   {
@@ -407,8 +407,8 @@
         "O compartilhamento P2P de atualizações via Delivery Optimization ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_windows-update.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_windows-update.bat revert",
+    "Apply": ".\\comandos\\pulsemode_windows-update.bat apply",
+    "Revert": ".\\comandos\\pulsemode_windows-update.bat revert",
     "Foco": "windows",
     "Favorito": "sim"
   },
@@ -438,22 +438,22 @@
         "Label": "Padrão",
         "Description": "Restaura o comportamento padrão do Windows.",
         "Param": "padrao",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_svchostsplit.bat padrao"
+        "Command": ".\\comandos\\pulsemode_svchostsplit.bat padrao"
       },
       {
         "Label": "Máximo",
         "Description": "Reduz ao máximo a quantidade de processos em segundo plano.",
         "Param": "maximo",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_svchostsplit.bat maximo"
+        "Command": ".\\comandos\\pulsemode_svchostsplit.bat maximo"
       },
       {
         "Label": "Automático",
         "Description": "Threshold igual à RAM instalada, evitando separação desnecessária.",
         "Param": "automatico",
-        "Command": ".\\comandos\\pulsemode\\pulsemode_svchostsplit.bat automatico"
+        "Command": ".\\comandos\\pulsemode_svchostsplit.bat automatico"
       }
     ],
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_svchostsplit.bat padrao"
+    "Revert": ".\\comandos\\pulsemode_svchostsplit.bat padrao"
   },
   {
     "Id": "pulsemode.spectre-meltdown",
@@ -477,8 +477,8 @@
         "A proteção contra ataques Meltdown ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_spectre-meltdown.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_spectre-meltdown.bat revert",
+    "Apply": ".\\comandos\\pulsemode_spectre-meltdown.bat apply",
+    "Revert": ".\\comandos\\pulsemode_spectre-meltdown.bat revert",
     "Foco": "segurança"
   },
   {
@@ -503,8 +503,8 @@
         "A integridade de código protegida por hypervisor (HVCI) ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_vbs.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_vbs.bat revert",
+    "Apply": ".\\comandos\\pulsemode_vbs.bat apply",
+    "Revert": ".\\comandos\\pulsemode_vbs.bat revert",
     "Foco": "segurança"
   },
   {
@@ -528,8 +528,8 @@
         "O gerenciamento de energia do barramento PCIe ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_latency-tolerance.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_latency-tolerance.bat revert",
+    "Apply": ".\\comandos\\pulsemode_latency-tolerance.bat apply",
+    "Revert": ".\\comandos\\pulsemode_latency-tolerance.bat revert",
     "Foco": "jogos"
   },
   {
@@ -553,8 +553,8 @@
         "A detecção e correção automática de falhas de heap pelo FTH ficará indisponível"
       ]
     },
-    "Apply": ".\\comandos\\pulsemode\\pulsemode_fth.bat apply",
-    "Revert": ".\\comandos\\pulsemode\\pulsemode_fth.bat revert",
+    "Apply": ".\\comandos\\pulsemode_fth.bat apply",
+    "Revert": ".\\comandos\\pulsemode_fth.bat revert",
     "Foco": "windows"
   }
 ]
