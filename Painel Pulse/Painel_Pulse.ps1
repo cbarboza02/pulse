@@ -1778,6 +1778,8 @@ function New-OptCard {
         'segurança'   = 0xe730
         'visual'      = 0xf4a5
         'privacidade' = 0xed1a
+        'internet'    = 0xe774
+        'limpeza'     = 0xea99
     }
     $focoSizeMap = @{
         'jogos'       = 17
@@ -1786,14 +1788,18 @@ function New-OptCard {
         'segurança'   = 15
         'visual'      = 16
         'privacidade' = 15
+        'internet'    = 16
+        'limpeza'     = 16
     }
     $focoTooltipMap = @{
         'jogos'       = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência."
-        'fluidez'     = "Melhorar a responsividade e fluidez do Windows sem necessariamente aumentar o desempenho em jogos."
-        'windows'     = ""
+        'fluidez'     = "Melhora a responsividade e fluidez do Windows, geralmente não melhora o desempenho em jogos."
+        'windows'     = "Ajustes para melhorar a sua experiência e facilitar o uso do sistema."
         'segurança'   = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável."
         'visual'      = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho."
-        'privacidade' = "Desativa telemetrias e coleta de dados e semelhantes, aumentando a privacidade."
+        'privacidade' = "Desativa telemetrias, coleta de dados e semelhantes, aumentando a privacidade."
+        'internet'    = "Ajustes para melhorar a internet, removendo limitações/gargalos artificiais."
+        'limpeza'     = "Remove arquivos para liberar espaço em disco, podendo otimizar o sistema e corrigir problemas específicos."
     }
     $focoVal = ([string]$item.Foco).Trim().ToLower()
     if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
