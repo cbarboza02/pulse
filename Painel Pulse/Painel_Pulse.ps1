@@ -1771,25 +1771,55 @@ function New-OptCard {
     $null = $nameRow.Children.Add($tbName)
 
     # Ícone de Foco (ao lado do nome, cor de texto secundário)
-    $focoMap = @{
-        'jogos'       = 0xe7fc
-        'segurança'   = 0xe730
-        'visual'      = 0xf4a5
-        'windows'     = 0xec4a
-        'privacidade' = 0xed1a
-    }
+    $focoMap = @{
+        'jogos'       = 0xe7fc
+        'segurança'   = 0xe730
+        'visual'      = 0xf4a5
+        'fluidez'     = 0xec4a
+        'privacidade' = 0xed1a
+        'windows'     = {
+            $grid = [System.Windows.Controls.Grid]::new()
+            $grid.VerticalAlignment = 'Center'
+            
+            # Ícone 1 (Original)
+            $i1 = [System.Windows.Controls.TextBlock]::new()
+            $i1.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+            $i1.Text = [char]0xecaa
+            $i1.FontSize = 14
+            $i1.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
+            
+            # Ícone 2 (Invertido/Girado 180°)
+            $i2 = [System.Windows.Controls.TextBlock]::new()
+            $i2.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+            $i2.Text = [char]0xecaa
+            $i2.FontSize = 14
+            $i2.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
+            
+            # Aplicando a rotação de 180 graus para criar o efeito espelhado
+            $transform = [System.Windows.Media.RotateTransform]::new(180)
+            $i2.RenderTransform = $transform
+            $i2.RenderTransformOrigin = "0.5,0.5" # Gira em torno do centro do ícone
+            $i2.Margin = [System.Windows.Thickness]::new(-4,0,0,0) # Ajuste fino de sobreposição
+    
+            $null = $grid.Children.Add($i1)
+            $null = $grid.Children.Add($i2)
+            return $grid
+        }
+    }
     $focoSizeMap = @{
-        'jogos'     = 17
-        'segurança' = 15
-        'visual'    = 16
-        'windows'   = 16
-        'privacidade' = 15
+        'jogos'        = 17
+        'fluidez'      = 16
+        'segurança'    = 15
+        'visual'       = 16
+        'windows'      = 16
+        'privacidade'  = 15
     }
     $focoTooltipMap = @{
-        'jogos'     = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência."
-        'segurança' = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável."
-        'visual'    = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho."
-        'windows'   = "Melhorar a responsividade e fluidez do Windows sem necessariamente aumentar o desempenho em jogos."
+        'jogos'       = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência."
+        'fluidez'     = "Melhorar a responsividade e fluidez do Windows sem necessariamente aumentar o desempenho em jogos."
+        'segurança'   = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável."
+        'visual'      = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho."
+        'windows'     = ""
         'privacidade' = "Desativa telemetrias e coleta de dados e semelhantes, aumentando a privacidade."
     }
     $focoVal = ([string]$item.Foco).Trim().ToLower()
