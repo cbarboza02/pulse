@@ -3124,26 +3124,86 @@ function Load-LimpezaItems {
             $grid.RowDefinitions.Add($r0)
             $grid.RowDefinitions.Add($r1)
             
+            # --- Linha do Nome (Painel Empilhado) com Ícones de Foco/Favorito ---
+            $nameRow = [System.Windows.Controls.StackPanel]::new()
+            $nameRow.Orientation = 'Horizontal'
+            $nameRow.VerticalAlignment = 'Center'
+            $nameRow.Margin = [System.Windows.Thickness]::new(0,0,14,0)
+            [System.Windows.Controls.Grid]::SetRow($nameRow, 0)
+
+            # Ícone de Favorito (amarelo, estrela)
+            $favVal = ([string]$item.Favorito).Trim().ToLower()
+            if ($favVal -eq 'sim') {
+                $icoFav = [System.Windows.Controls.TextBlock]::new()
+                $icoFav.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+                $icoFav.Text = [char]0xe735
+                $icoFav.FontSize = 12
+                $icoFav.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FFD700')
+                $icoFav.VerticalAlignment = 'Center'
+                $icoFav.Margin = [System.Windows.Thickness]::new(0,0,7,0)
+                $null = $nameRow.Children.Add($icoFav)
+            }
+
             $tbName = [System.Windows.Controls.TextBlock]::new()
-            $tbName.Text = $item.Name;
-            $tbName.FontSize = 14;
+            $tbName.Text = $item.Name
+            $tbName.FontSize = 14
             $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
             $tbName.Foreground = $window.Resources['PanelPrimaryText']
-            $tbName.VerticalAlignment = 'Center';
+            $tbName.VerticalAlignment = 'Center'
             $tbName.TextTrimming = 'CharacterEllipsis'
-            $tbName.Margin = [System.Windows.Thickness]::new(0,0,14,0)
-            [System.Windows.Controls.Grid]::SetRow($tbName, 0)
+            $null = $nameRow.Children.Add($tbName)
+
+            # Ícone de Foco (Específico para Limpeza)
+            $focoVal = ([string]$item.Foco).Trim().ToLower()
+            if ($focoVal -eq 'limpeza') {
+                $icoFoco = [System.Windows.Controls.TextBlock]::new()
+                $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+                $icoFoco.Text = [char]0xea99
+                $icoFoco.FontSize = 16
+                $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
+                $icoFoco.VerticalAlignment = 'Center'
+                $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
+                $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
+
+                $ttFoco = [System.Windows.Controls.ToolTip]::new()
+                $ttFoco.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
+                $ttFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#F4F4F4')
+                $ttFoco.BorderBrush = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#242436')
+                $ttFoco.BorderThickness = [System.Windows.Thickness]::new(1)
+                $ttFoco.Padding = [System.Windows.Thickness]::new(12,8,12,8)
+                $ttFoco.Placement = [System.Windows.Controls.Primitives.PlacementMode]::Bottom
+                $ttFoco.IsHitTestVisible = $false
+
+                $ttFocoText = [System.Windows.Controls.TextBlock]::new()
+                $ttFocoText.Text = "Remove arquivos para liberar espaço em disco, podendo otimizar o sistema e corrigir problemas específicos."
+                $ttFocoText.TextWrapping = 'Wrap'
+                $ttFocoText.MaxWidth = 320
+                $ttFocoText.FontSize = 11.5
+                $ttFoco.Content = $ttFocoText
+
+                [System.Windows.Controls.ToolTipService]::SetInitialShowDelay($icoFoco, 400)
+                [System.Windows.Controls.ToolTipService]::SetShowDuration($icoFoco, 60000)
+                $icoFoco.ToolTip = $ttFoco
+
+                $icoFoco.Add_MouseLeave({
+                    if ($this.ToolTip -is [System.Windows.Controls.ToolTip]) {
+                        $this.ToolTip.IsOpen = $false
+                    }
+                })
+
+                $null = $nameRow.Children.Add($icoFoco)
+            }
             
             $tbDesc = [System.Windows.Controls.TextBlock]::new()
-            $tbDesc.Text = $item.Description;
+            $tbDesc.Text = $item.Description
             $tbDesc.FontSize = 12
             $tbDesc.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#6F7581')
-            $tbDesc.VerticalAlignment = 'Center';
+            $tbDesc.VerticalAlignment = 'Center'
             $tbDesc.TextTrimming = 'CharacterEllipsis'
             $tbDesc.Margin = [System.Windows.Thickness]::new(0,6,14,0)
             [System.Windows.Controls.Grid]::SetRow($tbDesc, 1)
 
-            $null = $grid.Children.Add($tbName)
+            $null = $grid.Children.Add($nameRow)
             $null = $grid.Children.Add($tbDesc)
             
             $tb.Content = $grid
