@@ -1734,11 +1734,16 @@ function New-OptCard {
 
     $grid = [System.Windows.Controls.Grid]::new()
     $grid.VerticalAlignment = 'Center'
-    $r0 = [System.Windows.Controls.RowDefinition]::new(); $r0.Height = 'Auto'
-    $r1 = [System.Windows.Controls.RowDefinition]::new(); $r1.Height = 'Auto'
-    $grid.RowDefinitions.Add($r0); $grid.RowDefinitions.Add($r1)
-    $c0 = [System.Windows.Controls.ColumnDefinition]::new(); $c0.Width = '*'
-    $c1 = [System.Windows.Controls.ColumnDefinition]::new(); $c1.Width = 'Auto'
+    $r0 = [System.Windows.Controls.RowDefinition]::new();
+    $r0.Height = 'Auto'
+    $r1 = [System.Windows.Controls.RowDefinition]::new();
+    $r1.Height = 'Auto'
+    $grid.RowDefinitions.Add($r0);
+    $grid.RowDefinitions.Add($r1)
+    $c0 = [System.Windows.Controls.ColumnDefinition]::new();
+    $c0.Width = '*'
+    $c1 = [System.Windows.Controls.ColumnDefinition]::new();
+    $c1.Width = 'Auto'
     $grid.ColumnDefinitions.Add($c0); $grid.ColumnDefinitions.Add($c1)
 
     # --- Linha do Nome com Ícones de Foco/Favorito ---
@@ -1763,7 +1768,8 @@ function New-OptCard {
     }
 
     $tbName = [System.Windows.Controls.TextBlock]::new()
-    $tbName.Text = $item.Name; $tbName.FontSize = 14
+    $tbName.Text = $item.Name;
+    $tbName.FontSize = 14
     $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
     $tbName.Foreground = $primaryText
     $tbName.VerticalAlignment = 'Center'
@@ -3111,22 +3117,29 @@ function Load-LimpezaItems {
             $grid = [System.Windows.Controls.Grid]::new()
             $grid.VerticalAlignment = 'Center'
             
-            $r0 = [System.Windows.Controls.RowDefinition]::new(); $r0.Height = 'Auto'
-            $r1 = [System.Windows.Controls.RowDefinition]::new(); $r1.Height = 'Auto'
+            $r0 = [System.Windows.Controls.RowDefinition]::new();
+            $r0.Height = 'Auto'
+            $r1 = [System.Windows.Controls.RowDefinition]::new();
+            $r1.Height = 'Auto'
             $grid.RowDefinitions.Add($r0)
             $grid.RowDefinitions.Add($r1)
             
             $tbName = [System.Windows.Controls.TextBlock]::new()
-            $tbName.Text = $item.Name; $tbName.FontSize = 14; $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
+            $tbName.Text = $item.Name;
+            $tbName.FontSize = 14;
+            $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
             $tbName.Foreground = $window.Resources['PanelPrimaryText']
-            $tbName.VerticalAlignment = 'Center'; $tbName.TextTrimming = 'CharacterEllipsis'
+            $tbName.VerticalAlignment = 'Center';
+            $tbName.TextTrimming = 'CharacterEllipsis'
             $tbName.Margin = [System.Windows.Thickness]::new(0,0,14,0)
             [System.Windows.Controls.Grid]::SetRow($tbName, 0)
             
             $tbDesc = [System.Windows.Controls.TextBlock]::new()
-            $tbDesc.Text = $item.Description; $tbDesc.FontSize = 12
+            $tbDesc.Text = $item.Description;
+            $tbDesc.FontSize = 12
             $tbDesc.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#6F7581')
-            $tbDesc.VerticalAlignment = 'Center'; $tbDesc.TextTrimming = 'CharacterEllipsis'
+            $tbDesc.VerticalAlignment = 'Center';
+            $tbDesc.TextTrimming = 'CharacterEllipsis'
             $tbDesc.Margin = [System.Windows.Thickness]::new(0,6,14,0)
             [System.Windows.Controls.Grid]::SetRow($tbDesc, 1)
 
