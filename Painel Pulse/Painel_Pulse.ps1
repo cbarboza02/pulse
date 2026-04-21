@@ -1794,7 +1794,7 @@ function New-OptCard {
         'segurança'   = 15
         'visual'      = 16
         'privacidade' = 15
-        'internet'    = 14
+        'internet'    = 15
         'limpeza'     = 16
     }
     $focoTooltipMap = @{
