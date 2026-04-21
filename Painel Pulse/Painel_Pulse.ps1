@@ -1813,8 +1813,9 @@ function New-OptCard {
             $overlayIco = [System.Windows.Controls.TextBlock]::new()
             $overlayIco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
             $overlayIco.Text = [char]0xf13b
-            $overlayIco.FontSize = 12
-            $overlayIco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FF4B4B') 
+            $overlayIco.FontSize = 15
+            $overlayIco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FF4B4B')
+            $overlayIco.Margin = [System.Windows.Thickness]::new(2,0,0,0)
             $null = $icoFoco.Children.Add($overlayIco)
         } 
         else {
