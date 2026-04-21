@@ -370,24 +370,37 @@ $global:PulseQueueTimer.Start()
 
 function Get-PulseBat {
     param([string]$BatAbsPath)
-    
-    # Calcula o caminho relativo ao BaseDir para montar a URL
-    $relPath = $BatAbsPath.Substring($script:BaseDir.Length).TrimStart('\', '/')
-    $urlPath = $relPath -replace '\\', '/'
-    $url = "$script:RepoBaseUrl/$urlPath"
-    
-    # Cria a pasta de destino se não existir
-    $destDir = Split-Path $BatAbsPath
+
+    $fileName = Split-Path $BatAbsPath -Leaf
+
+    # Define a subpasta no repositório pelo prefixo do arquivo
+    $subFolder = switch -Regex ($fileName) {
+        '^geral_'     { 'geral'     }
+        '^hw_'        { 'hardware'  }
+        '^limpeza_'   { 'limpeza'   }
+        '^internet_'  { 'internet'  }
+        '^restaurar_' { 'restaurar' }
+        '^pulsemode_' { 'pulsemode' }
+        default {
+            Write-PulseLog "ERRO: Prefixo não reconhecido para '$fileName'."
+            return $false
+        }
+    }
+
+    $url = "$script:RepoBaseUrl/comandos/$subFolder/$fileName"
+
+    # Garante que a pasta 'comandos' existe localmente
+    $destDir = Join-Path $script:BaseDir "comandos"
     if (-not (Test-Path $destDir)) {
         New-Item -ItemType Directory -Path $destDir -Force | Out-Null
     }
-    
+
     try {
         Invoke-WebRequest -Uri $url -OutFile $BatAbsPath -UseBasicParsing -ErrorAction Stop
-        Write-PulseLog "Baixado: $urlPath"
+        Write-PulseLog "Baixado: comandos/$subFolder/$fileName"
         return $true
     } catch {
-        Write-PulseLog "ERRO ao baixar $urlPath`: $($_.Exception.Message)"
+        Write-PulseLog "ERRO ao baixar '$fileName': $($_.Exception.Message)"
         return $false
     }
 }
@@ -1975,12 +1988,6 @@ function New-OptCard {
         }
 
         if (-not [string]::IsNullOrWhiteSpace($bat)) {
-            if (-not (Test-Path $bat)) {
-                [System.Windows.MessageBox]::Show("Arquivo não encontrado:`n$bat", "Painel Pulse – Erro", 'OK', 'Error') | Out-Null
-                $toggle.IsChecked = -not $toggle.IsChecked
-                if ($toggle.IsChecked -eq $false) { $btnEdit.Visibility = 'Collapsed' }
-                return
-            }
             $action = if ($toggle.IsChecked -eq $true) { "Aplicar" } else { "Reverter" }
             Add-PulseJob -BatPath $bat -Param $param -OptName $item.Name -Action $action
         }
