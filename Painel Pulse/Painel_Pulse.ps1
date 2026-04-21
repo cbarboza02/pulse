@@ -1755,7 +1755,7 @@ function New-OptCard {
     $null = $grid.Children.Add($leftPanel)
 
     # Mapeamento dos ícones e informação do tooltip
-    $focoIconMap = @{
+    $focoMap = @{
         'jogos'       = 0xe7fc
         'fluidez'     = 0xec4a
         'windows'     = 0xe8a9
@@ -1765,7 +1765,7 @@ function New-OptCard {
         'internet'    = 0xe774
         'limpeza'     = 0xea99
     }
-    $focoIconSizeMap = @{
+    $focoSizeMap = @{
         'jogos'       = 18
         'fluidez'     = 17
         'windows'     = 17
@@ -1790,8 +1790,8 @@ function New-OptCard {
     if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
         $icoFoco = [System.Windows.Controls.TextBlock]::new()
         $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-        $icoFoco.Text = [char]$focoIconMap[$focoVal]
-        $icoFoco.FontSize = $focoIconSizeMap[$focoVal]
+        $icoFoco.Text = [char]$focoMap[$focoVal]
+        $icoFoco.FontSize = $focoSizeMap[$focoVal]
         $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
         $icoFoco.VerticalAlignment = 'Center'
         $icoFoco.HorizontalAlignment = 'Center'
@@ -1818,7 +1818,7 @@ function New-OptCard {
         $icoFav.Text = [char]0xe735;
         $icoFav.FontSize = 12
         $icoFav.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FFD700')
-        $icoFav.VerticalAlignment = 'Bottom'
+        $icoFav.VerticalAlignment = 'Center'
         $icoFav.Margin = [System.Windows.Thickness]::new(0,0,7,0)
         $null = $nameRow.Children.Add($icoFav)
     }
@@ -3098,7 +3098,7 @@ function Load-LimpezaItems {
                 $icoFav.Text = [char]0xe735
                 $icoFav.FontSize = 12
                 $icoFav.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FFD700')
-                $icoFav.VerticalAlignment = 'Bottom'
+                $icoFav.VerticalAlignment = 'Center'
                 $icoFav.Margin = [System.Windows.Thickness]::new(0,0,7,0)
                 $null = $nameRow.Children.Add($icoFav)
             }
