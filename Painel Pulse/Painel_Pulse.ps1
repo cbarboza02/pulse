@@ -1756,28 +1756,28 @@ function New-OptCard {
 
     # Mapeamento dos ícones e informação do tooltip
     $focoMap = @{
-          'jogos'       = 0xe7fc
-          'fluidez'     = 0xec4a
-          'windows'     = 0xe8a9
-          'segurança'   = 0xe730
-          'visual'      = 0xf4a5
-          'privacidade' = 0xed1a
-          'internet'    = 0xe774
-          'restaurar'   = 0xe777
-          'reparar'     = 0xe90f
-          'outros'      = 0xea86
+        'jogos'       = 0xe7fc
+        'fluidez'     = 0xec4a
+        'windows'     = 0xe8a9
+        'segurança'   = 0xe730
+        'visual'      = 0xf4a5
+        'privacidade' = 0xed1a
+        'internet'    = 0xe774
+        'restaurar'   = 0xe777
+        'reparar'     = 0xe90f
+        'outros'      = 0xea86
     }
     $focoSizeMap = @{
-          'jogos'       = 20
-          'fluidez'     = 19
-          'windows'     = 19
-          'segurança'   = 18
-          'visual'      = 19
-          'privacidade' = 18
-          'internet'    = 18
-          'restaurar'   = 19
-          'reparar'     = 19
-          'outros'      = 19
+        'jogos'       = 20
+        'fluidez'     = 19
+        'windows'     = 19
+        'segurança'   = 18
+        'visual'      = 19
+        'privacidade' = 18
+        'internet'    = 18
+        'restaurar'   = 19
+        'reparar'     = 19
+        'outros'      = 19
     }
     
     $focoVal = ([string]$item.Foco).Trim().ToLower()
@@ -1825,6 +1825,9 @@ function New-OptCard {
     $tbDesc.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#6F7581')
     $tbDesc.TextTrimming = 'CharacterEllipsis'
     $tbDesc.Margin = [System.Windows.Thickness]::new(0,6,0,0)
+    [System.Windows.Controls.Grid]::SetRow($tbDesc, 1)
+    [System.Windows.Controls.Grid]::SetColumn($tbDesc, 1)
+    $null = $grid.Children.Add($tbDesc)
 
     if (-not [string]::IsNullOrWhiteSpace($item.TooltipText)) {
         $tt = [System.Windows.Controls.ToolTip]::new()
@@ -1855,10 +1858,6 @@ function New-OptCard {
             }
         })
     }
-
-    [System.Windows.Controls.Grid]::SetRow($tbDesc, 1)
-    [System.Windows.Controls.Grid]::SetColumn($tbDesc, 1)
-    $null = $grid.Children.Add($tbDesc)
 
     # --- COLUNA 2: PAINEL DIREITO (Edit e Toggle) ---
     $rightPanel = [System.Windows.Controls.StackPanel]::new()
