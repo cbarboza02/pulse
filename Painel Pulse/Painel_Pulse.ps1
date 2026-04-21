@@ -1771,91 +1771,66 @@ function New-OptCard {
     $null = $nameRow.Children.Add($tbName)
 
     # Ícone de Foco (ao lado do nome, cor de texto secundário)
-    $focoMap = @{
-        'jogos'       = 0xe7fc
-        'segurança'   = 0xea18
-        'visual'      = 0xf4a5
-        'windows'     = 0xec4a
-        'privacidade' = 0xed1a
-    }
-    $focoSizeMap = @{
-        'jogos'     = 17
-        'segurança' = 15
-        'visual'    = 16
-        'windows'   = 16
-        'privacidade' = 15
-    }
-    $focoTooltipMap = @{
-        'jogos'     = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência."
-        'segurança' = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável."
-        'visual'    = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho."
-        'windows'   = "Melhorar a responsividade e fluidez do Windows sem necessariamente aumentar o desempenho em jogos."
-        'privacidade' = "Desativa telemetrias e coleta de dados e semelhantes, aumentando a privacidade."
-    }
-    $focoVal = ([string]$item.Foco).Trim().ToLower()
+    $focoMap = @{
+        'jogos'       = 0xe7fc
+        'segurança'   = 0xe730
+        'visual'      = 0xf4a5
+        'windows'     = 0xec4a
+        'privacidade' = 0xed1a
+    }
+    $focoSizeMap = @{
+        'jogos'     = 17
+        'segurança' = 15
+        'visual'    = 16
+        'windows'   = 16
+        'privacidade' = 15
+    }
+    $focoTooltipMap = @{
+        'jogos'     = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência."
+        'segurança' = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável."
+        'visual'    = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho."
+        'windows'   = "Melhorar a responsividade e fluidez do Windows sem necessariamente aumentar o desempenho em jogos."
+        'privacidade' = "Desativa telemetrias e coleta de dados e semelhantes, aumentando a privacidade."
+    }
+    $focoVal = ([string]$item.Foco).Trim().ToLower()
+    if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
+        $icoFoco = [System.Windows.Controls.TextBlock]::new()
+        $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+        $icoFoco.Text = [char]$focoMap[$focoVal]
+        $icoFoco.FontSize = $focoSizeMap[$focoVal]
+        $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
+        $icoFoco.VerticalAlignment = 'Center'
+        $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
+        $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
 
-    if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
-        if ($focoVal -eq 'segurança') {
-            $icoFoco = [System.Windows.Controls.Grid]::new()
-            $icoFoco.VerticalAlignment = 'Center'
-            $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
-            $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
-            
-            $baseIco = [System.Windows.Controls.TextBlock]::new()
-            $baseIco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-            $baseIco.Text = [char]$focoMap[$focoVal]
-            $baseIco.FontSize = 15
-            $baseIco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
-            $null = $icoFoco.Children.Add($baseIco)
-            
-            $overlayIco = [System.Windows.Controls.TextBlock]::new()
-            $overlayIco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-            $overlayIco.Text = [char]0xf13b
-            $overlayIco.FontSize = 18
-            $overlayIco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FF4B4B')
-            $overlayIco.Margin = [System.Windows.Thickness]::new(5,0,0,0)
-            $null = $icoFoco.Children.Add($overlayIco)
-        } 
-        else {
-            # Lógica padrão para os outros ícones
-            $icoFoco = [System.Windows.Controls.TextBlock]::new()
-            $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-            $icoFoco.Text = [char]$focoMap[$focoVal]
-            $icoFoco.FontSize = $focoSizeMap[$focoVal]
-            $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
-            $icoFoco.VerticalAlignment = 'Center'
-            $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
-            $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
-        }
+        $ttFoco = [System.Windows.Controls.ToolTip]::new()
+        $ttFoco.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
+        $ttFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#F4F4F4')
+        $ttFoco.BorderBrush = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#242436')
+        $ttFoco.BorderThickness = [System.Windows.Thickness]::new(1)
+        $ttFoco.Padding = [System.Windows.Thickness]::new(12,8,12,8)
+        $ttFoco.Placement = [System.Windows.Controls.Primitives.PlacementMode]::Bottom
+        $ttFoco.IsHitTestVisible = $false
 
-        $ttFoco = [System.Windows.Controls.ToolTip]::new()
-        $ttFoco.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
-        $ttFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#F4F4F4')
-        $ttFoco.BorderBrush = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#242436')
-        $ttFoco.BorderThickness = [System.Windows.Thickness]::new(1)
-        $ttFoco.Padding = [System.Windows.Thickness]::new(12,8,12,8)
-        $ttFoco.Placement = [System.Windows.Controls.Primitives.PlacementMode]::Bottom
-        $ttFoco.IsHitTestVisible = $false
+        $ttFocoText = [System.Windows.Controls.TextBlock]::new()
+        $ttFocoText.Text = $focoTooltipMap[$focoVal]
+        $ttFocoText.TextWrapping = 'Wrap'
+        $ttFocoText.MaxWidth = 320
+        $ttFocoText.FontSize = 11.5
+        $ttFoco.Content = $ttFocoText
 
-        $ttFocoText = [System.Windows.Controls.TextBlock]::new()
-        $ttFocoText.Text = $focoTooltipMap[$focoVal]
-        $ttFocoText.TextWrapping = 'Wrap'
-        $ttFocoText.MaxWidth = 320
-        $ttFocoText.FontSize = 11.5
-        $ttFoco.Content = $ttFocoText
+        [System.Windows.Controls.ToolTipService]::SetInitialShowDelay($icoFoco, 400)
+        [System.Windows.Controls.ToolTipService]::SetShowDuration($icoFoco, 60000)
+        $icoFoco.ToolTip = $ttFoco
 
-        [System.Windows.Controls.ToolTipService]::SetInitialShowDelay($icoFoco, 400)
-        [System.Windows.Controls.ToolTipService]::SetShowDuration($icoFoco, 60000)
-        $icoFoco.ToolTip = $ttFoco
+        $icoFoco.Add_MouseLeave({
+            if ($this.ToolTip -is [System.Windows.Controls.ToolTip]) {
+                $this.ToolTip.IsOpen = $false
+            }
+        })
 
-        $icoFoco.Add_MouseLeave({
-            if ($this.ToolTip -is [System.Windows.Controls.ToolTip]) {
-                $this.ToolTip.IsOpen = $false
-            }
-        })
-
-        $null = $nameRow.Children.Add($icoFoco)
-    }
+        $null = $nameRow.Children.Add($icoFoco)
+    }
 
     $tbDesc = [System.Windows.Controls.TextBlock]::new()
     $tbDesc.Text = $item.Description; $tbDesc.FontSize = 12
