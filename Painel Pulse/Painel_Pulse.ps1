@@ -1823,15 +1823,26 @@ function New-OptCard {
         'privacidade' = "Desativa telemetrias e coleta de dados e semelhantes, aumentando a privacidade."
     }
     $focoVal = ([string]$item.Foco).Trim().ToLower()
-    if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
-        $icoFoco = [System.Windows.Controls.TextBlock]::new()
-        $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-        $icoFoco.Text = [char]$focoMap[$focoVal]
-        $icoFoco.FontSize = $focoSizeMap[$focoVal]
-        $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
-        $icoFoco.VerticalAlignment = 'Center'
-        $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
-        $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
+
+    if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
+        $mapEntry = $focoMap[$focoVal]
+    
+        if ($mapEntry -is [scriptblock]) {
+            # Executa o bloco de código para criar um novo ícone composto
+            $icoFoco = &$mapEntry
+        } else {
+            # Cria o TextBlock padrão para ícones simples
+            $icoFoco = [System.Windows.Controls.TextBlock]::new()
+            $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+            $icoFoco.Text = [char]$mapEntry
+            $icoFoco.FontSize = $focoSizeMap[$focoVal]
+            $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
+        }
+    
+        # Configurações comuns (Margin, Cursor, ToolTip)
+        $icoFoco.VerticalAlignment = 'Center'
+        $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
+        $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
 
         $ttFoco = [System.Windows.Controls.ToolTip]::new()
         $ttFoco.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
