@@ -26,6 +26,35 @@
     "Favorito": "sim"
   },
   {
+    "Id": "hardware.recursos-desnecessarios",
+    "TabKey": "",
+    "pulsemode": "sim",
+    "Name": "Desativar Recursos Desnecessários da AMD",
+    "Description": "Desativa recursos e funcionalidade desnecessárias da AMD, reduzindo processos, serviços e uso de recursos em segundo plano.",
+    "Tooltip": {
+      "Pros": [
+        "Reduz quantidade de processos e serviços em segundo plano.",
+        "Diminui o uso de recursos em segundo plano.",
+        "Pode melhorar o desempenho e reduzir stuttering em jogos."
+      ],
+      "Cons": [
+        "Alguns recursos da AMD ficarão indisponíveis.",
+        "Alguns recursos podem não funcionar corretamente após desativados, mesmo ativando-os novamente."
+      ],
+      "Unavailable": [
+        "AMD Miracast ficará indisponível",
+        "AMD Relive ficará indisponível",
+        "AMD Link ficará indisponível",
+        "Replay Instantâneo AMD ficará indisponível",
+        "Supressão de Ruídos AMD ficará indisponível"
+      ]
+    },
+    "Apply": ".\\comandos\\hw_gpu_recursos-desnecessarios.bat apply",
+    "Revert": ".\\comandos\\hw_gpu_recursos-desnecessarios.bat revert",
+    "Foco": "outros",
+    "Favorito": "sim"
+  },
+  {
     "Id": "hardware.fso",
     "TabKey": "hw_gpu",
     "pulsemode": "sim",
@@ -49,32 +78,6 @@
     "Apply": ".\\comandos\\hw_gpu_fso.bat apply",
     "Revert": ".\\comandos\\hw_gpu_fso.bat revert",
     "Foco": "jogos"
-  },
-  {
-    "Id": "hardware.miracast",
-    "TabKey": "hw_gpu",
-    "pulsemode": "",
-    "gpu": "AMD",
-    "Name": "Desativar Miracast",
-    "Description": "Desativa o Miracast (projeção sem fio), eliminando o serviço de exibição wireless em segundo plano.",
-    "Tooltip": {
-      "Pros": [
-        "Elimina o processo de projeção sem fio em segundo plano",
-        "Reduz uso de rede e CPU pelo serviço de Miracast",
-        "Melhora privacidade ao desativar transmissão de tela sem fio"
-      ],
-      "Cons": [
-        "Não será possível projetar a tela para TVs ou monitores via Miracast",
-        "Funcionalidade de espelhamento de tela sem fio ficará indisponível",
-        "Requer reativação manual para uso em apresentações wireless"
-      ],
-      "Unavailable": [
-        "A projeção de tela via Miracast ficará indisponível",
-        "O serviço de exibição sem fio ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\hw_gpu_miracast.bat apply",
-    "Revert": ".\\comandos\\hw_gpu_miracast.bat revert"
   },
   {
     "Id": "hardware.max-desempenho",
@@ -252,32 +255,6 @@
     "Foco": "jogos"
   },
   {
-    "Id": "hardware.replay-instantaneo",
-    "TabKey": "hw_gpu",
-    "gpu": "AMD",
-    "Name": "Desativar Replay Instantâneo AMD",
-    "Description": "Desativa o AMD Instant Replay, que grava continuamente os últimos minutos de gameplay em segundo plano.",
-    "Tooltip": {
-      "Pros": [
-        "Elimina gravação contínua em segundo plano que consome VRAM e CPU",
-        "Reduz uso de disco causado pelo buffer de vídeo constante",
-        "Melhora desempenho geral ao remover overhead de captura de vídeo"
-      ],
-      "Cons": [
-        "Não será possível salvar clipes retroativamente após um momento épico no jogo",
-        "Funcionalidade de captura de momentos passados ficará indisponível",
-        "Necessário iniciar gravação manualmente para capturar gameplay"
-      ],
-      "Unavailable": [
-        "O AMD Instant Replay ficará indisponível",
-        "A gravação retroativa de gameplay ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\hw_gpu_replay-instantaneo.bat apply",
-    "Revert": ".\\comandos\\hw_gpu_replay-instantaneo.bat revert",
-    "Foco": "jogos"
-  },
-  {
     "Id": "hardware.atualizacao-automatica",
     "TabKey": "hw_gpu",
     "pulsemode": "sim",
@@ -304,88 +281,11 @@
     "Foco": "fluidez"
   },
   {
-    "Id": "hardware.relive",
-    "TabKey": "hw_gpu",
-    "pulsemode": "sim",
-    "gpu": "AMD",
-    "Name": "Desativar AMD ReLive",
-    "Description": "Desativa o AMD ReLive, sistema de gravação e streaming de gameplay, eliminando seu overhead de VRAM, CPU e disco.",
-    "Tooltip": {
-      "Pros": [
-        "Libera VRAM e RAM utilizados pelo sistema de gravação ReLive",
-        "Elimina overhead de CPU e GPU pela captura de vídeo em segundo plano",
-        "Reduz escritas no disco causadas pelo buffer de captura"
-      ],
-      "Cons": [
-        "Não será possível gravar ou transmitir gameplay via AMD ReLive",
-        "Instant Replay e gravação retroativa ficam indisponíveis",
-        "Necessário usar softwares alternativos como OBS para gravação"
-      ],
-      "Unavailable": [
-        "O AMD ReLive ficará indisponível",
-        "A gravação e streaming de gameplay via AMD ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\hw_gpu_relive.bat apply",
-    "Revert": ".\\comandos\\hw_gpu_relive.bat revert",
-    "Foco": "jogos"
-  },
-  {
-    "Id": "hardware.amd-link",
-    "TabKey": "hw_gpu",
-    "pulsemode": "sim",
-    "gpu": "AMD",
-    "Name": "Desativar AMD Link",
-    "Description": "Desativa o AMD Link, que mantém um servidor de streaming ativo em segundo plano para transmissão de jogos para dispositivos móveis.",
-    "Tooltip": {
-      "Pros": [
-        "Elimina servidor de streaming em segundo plano do AMD Link",
-        "Reduz uso de rede, CPU e memória pelo serviço de streaming",
-        "Melhora privacidade ao desativar servidor de acesso remoto"
-      ],
-      "Cons": [
-        "Não será possível jogar remotamente via AMD Link em dispositivos móveis",
-        "Funcionalidade de streaming de jogos para smartphone/tablet ficará indisponível",
-        "Necessário usar alternativas como Steam Remote Play ou Parsec"
-      ],
-      "Unavailable": [
-        "O AMD Link ficará indisponível",
-        "O streaming de jogos para dispositivos móveis via AMD ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\hw_gpu_amd-link.bat apply",
-    "Revert": ".\\comandos\\hw_gpu_amd-link.bat revert"
-  },
-  {
-    "Id": "hardware.supressao-ruidos",
-    "TabKey": "hw_gpu",
-    "pulsemode": "sim",
-    "gpu": "AMD",
-    "Name": "Desativar Supressão de Ruídos AMD",
-    "Description": "Desativa o AMD Noise Suppression, que processa áudio do microfone via GPU/driver para filtrar ruídos de fundo.",
-    "Tooltip": {
-      "Pros": [
-        "Libera ciclos de GPU utilizados pelo processamento de áudio",
-        "Elimina latência adicional introduzida pelo pipeline de supressão",
-        "Reduz interferência entre processamento de áudio e renderização"
-      ],
-      "Cons": [
-        "Microfone ficará sem o filtro de ruído de fundo da AMD",
-        "Qualidade de voz em chamadas pode ser afetada em ambientes ruidosos",
-        "Necessário usar alternativas como NVIDIA RTX Voice ou Krisp"
-      ],
-      "Unavailable": [
-        "A supressão de ruídos de microfone via AMD ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\hw_gpu_supressao-ruidos.bat apply",
-    "Revert": ".\\comandos\\hw_gpu_supressao-ruidos.bat revert"
-  },
-  {
     "Id": "hardware.crash-defender",
     "TabKey": "hw_gpu",
     "pulsemode": "sim",
     "gpu": "AMD",
+    "Favorito": "sim",
     "Name": "Desativar AMD Crash Defender",
     "Description": "Desativa o AMD Crash Defender, serviço que monitora o sistema continuamente para coletar e enviar relatórios de crash.",
     "Tooltip": {
