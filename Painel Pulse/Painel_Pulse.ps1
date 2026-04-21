@@ -1800,22 +1800,20 @@ function New-OptCard {
             $icoFoco.VerticalAlignment = 'Center'
             $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
             $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
-    
-            # 1. Ícone de Base: Escudo (Shield) - ea18
+            
             $baseIco = [System.Windows.Controls.TextBlock]::new()
             $baseIco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
             $baseIco.Text = [char]$focoMap[$focoVal]
             $baseIco.FontSize = 15
             $baseIco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
             $null = $icoFoco.Children.Add($baseIco)
-    
-            # 2. Ícone de Sobreposição: Exclamação (StatusTriangleExclamation) - f13b
+            
             $overlayIco = [System.Windows.Controls.TextBlock]::new()
             $overlayIco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
             $overlayIco.Text = [char]0xf13b
-            $overlayIco.FontSize = 15
+            $overlayIco.FontSize = 18
             $overlayIco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FF4B4B')
-            $overlayIco.Margin = [System.Windows.Thickness]::new(2,0,0,0)
+            $overlayIco.Margin = [System.Windows.Thickness]::new(5,0,0,0)
             $null = $icoFoco.Children.Add($overlayIco)
         } 
         else {
