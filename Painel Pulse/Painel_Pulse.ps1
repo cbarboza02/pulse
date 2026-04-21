@@ -1771,78 +1771,40 @@ function New-OptCard {
     $null = $nameRow.Children.Add($tbName)
 
     # Ícone de Foco (ao lado do nome, cor de texto secundário)
-    $focoMap = @{
-        'jogos'       = 0xe7fc
-        'segurança'   = 0xe730
-        'visual'      = 0xf4a5
+    $focoMap = @{
+        'jogos'       = 0xe7fc
         'fluidez'     = 0xec4a
-        'privacidade' = 0xed1a
-        'windows'     = {
-            $grid = [System.Windows.Controls.Grid]::new()
-            $grid.VerticalAlignment = 'Center'
-            
-            # Ícone 1 (Original)
-            $i1 = [System.Windows.Controls.TextBlock]::new()
-            $i1.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-            $i1.Text = [char]0xecaa
-            $i1.FontSize = 14
-            $i1.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
-            
-            # Ícone 2 (Invertido/Girado 180°)
-            $i2 = [System.Windows.Controls.TextBlock]::new()
-            $i2.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-            $i2.Text = [char]0xecaa
-            $i2.FontSize = 14
-            $i2.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
-            
-            # Aplicando a rotação de 180 graus para criar o efeito espelhado
-            $transform = [System.Windows.Media.RotateTransform]::new(180)
-            $i2.RenderTransform = $transform
-            $i2.RenderTransformOrigin = "0.5,0.5" # Gira em torno do centro do ícone
-            $i2.Margin = [System.Windows.Thickness]::new(-4,0,0,0) # Ajuste fino de sobreposição
-    
-            $null = $grid.Children.Add($i1)
-            $null = $grid.Children.Add($i2)
-            return $grid
-        }
-    }
+        'windows'     = 0xec4a
+        'segurança'   = 0xe730
+        'visual'      = 0xf4a5
+        'privacidade' = 0xed1a
+    }
     $focoSizeMap = @{
-        'jogos'        = 17
-        'fluidez'      = 16
-        'segurança'    = 15
-        'visual'       = 16
-        'windows'      = 16
-        'privacidade'  = 15
+        'jogos'       = 17
+        'fluidez'     = 16
+        'windows'     = 16
+        'segurança'   = 15
+        'visual'      = 16
+        'privacidade' = 15
     }
     $focoTooltipMap = @{
         'jogos'       = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência."
         'fluidez'     = "Melhorar a responsividade e fluidez do Windows sem necessariamente aumentar o desempenho em jogos."
+        'windows'     = ""
         'segurança'   = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável."
         'visual'      = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho."
-        'windows'     = ""
         'privacidade' = "Desativa telemetrias e coleta de dados e semelhantes, aumentando a privacidade."
     }
     $focoVal = ([string]$item.Foco).Trim().ToLower()
-
-    if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
-        $mapEntry = $focoMap[$focoVal]
-    
-        if ($mapEntry -is [scriptblock]) {
-            # Executa o bloco de código para criar um novo ícone composto
-            $icoFoco = &$mapEntry
-        } else {
-            # Cria o TextBlock padrão para ícones simples
-            $icoFoco = [System.Windows.Controls.TextBlock]::new()
-            $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-            $icoFoco.Text = [char]$mapEntry
-            $icoFoco.FontSize = $focoSizeMap[$focoVal]
-            $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
-        }
-    
-        # Configurações comuns (Margin, Cursor, ToolTip)
-        $icoFoco.VerticalAlignment = 'Center'
-        $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
-        $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
+    if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
+        $icoFoco = [System.Windows.Controls.TextBlock]::new()
+        $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+        $icoFoco.Text = [char]$focoMap[$focoVal]
+        $icoFoco.FontSize = $focoSizeMap[$focoVal]
+        $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
+        $icoFoco.VerticalAlignment = 'Center'
+        $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
+        $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
 
         $ttFoco = [System.Windows.Controls.ToolTip]::new()
         $ttFoco.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
