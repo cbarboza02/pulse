@@ -1788,7 +1788,7 @@ function New-OptCard {
         'segurança'   = 15
         'visual'      = 16
         'privacidade' = 15
-        'internet'    = 16
+        'internet'    = 15
         'limpeza'     = 16
     }
     $focoTooltipMap = @{
@@ -3110,18 +3110,112 @@ function Load-LimpezaItems {
             
             $grid = [System.Windows.Controls.Grid]::new()
             $grid.VerticalAlignment = 'Center'
-            
             $r0 = [System.Windows.Controls.RowDefinition]::new(); $r0.Height = 'Auto'
             $r1 = [System.Windows.Controls.RowDefinition]::new(); $r1.Height = 'Auto'
-            $grid.RowDefinitions.Add($r0)
-            $grid.RowDefinitions.Add($r1)
-            
+            $grid.RowDefinitions.Add($r0); $grid.RowDefinitions.Add($r1)
+            $c0 = [System.Windows.Controls.ColumnDefinition]::new(); $c0.Width = '*'
+            $c1 = [System.Windows.Controls.ColumnDefinition]::new(); $c1.Width = 'Auto'
+            $grid.ColumnDefinitions.Add($c0); $grid.ColumnDefinitions.Add($c1)
+        
+            # --- Linha do Nome com Ícones de Foco/Favorito ---
+            $nameRow = [System.Windows.Controls.StackPanel]::new()
+            $nameRow.Orientation = 'Horizontal'
+            $nameRow.VerticalAlignment = 'Center'
+            $nameRow.Margin = [System.Windows.Thickness]::new(0,0,14,0)
+            [System.Windows.Controls.Grid]::SetRow($nameRow, 0)
+            [System.Windows.Controls.Grid]::SetColumn($nameRow, 0)
+        
+            # Ícone de Favorito (amarelo, estrela)
+            $favVal = ([string]$item.Favorito).Trim().ToLower()
+            if ($favVal -eq 'sim') {
+                $icoFav = [System.Windows.Controls.TextBlock]::new()
+                $icoFav.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+                $icoFav.Text = [char]0xe735
+                $icoFav.FontSize = 12
+                $icoFav.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FFD700')
+                $icoFav.VerticalAlignment = 'Center'
+                $icoFav.Margin = [System.Windows.Thickness]::new(0,0,7,0)
+                $null = $nameRow.Children.Add($icoFav)
+            }
+        
             $tbName = [System.Windows.Controls.TextBlock]::new()
-            $tbName.Text = $item.Name; $tbName.FontSize = 14; $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
-            $tbName.Foreground = $window.Resources['PanelPrimaryText']
-            $tbName.VerticalAlignment = 'Center'; $tbName.TextTrimming = 'CharacterEllipsis'
-            $tbName.Margin = [System.Windows.Thickness]::new(0,0,14,0)
-            [System.Windows.Controls.Grid]::SetRow($tbName, 0)
+            $tbName.Text = $item.Name; $tbName.FontSize = 14
+            $tbName.FontWeight = [System.Windows.FontWeights]::SemiBold
+            $tbName.Foreground = $primaryText
+            $tbName.VerticalAlignment = 'Center'
+            $tbName.TextTrimming = 'CharacterEllipsis'
+            $null = $nameRow.Children.Add($tbName)
+        
+            # Ícone de Foco (ao lado do nome, cor de texto secundário)
+            $focoMap = @{
+                'jogos'       = 0xe7fc
+                'fluidez'     = 0xec4a
+                'windows'     = 0xec4a
+                'segurança'   = 0xe730
+                'visual'      = 0xf4a5
+                'privacidade' = 0xed1a
+                'internet'    = 0xe774
+                'limpeza'     = 0xea99
+            }
+            $focoSizeMap = @{
+                'jogos'       = 17
+                'fluidez'     = 16
+                'windows'     = 16
+                'segurança'   = 15
+                'visual'      = 16
+                'privacidade' = 15
+                'internet'    = 15
+                'limpeza'     = 16
+            }
+            $focoTooltipMap = @{
+                'jogos'       = "Prioriza recursos para o ambiente de jogo, melhorando o desempenho e reduzindo latência."
+                'fluidez'     = "Melhora a responsividade e fluidez do Windows, geralmente não melhora o desempenho em jogos."
+                'windows'     = "Ajustes para melhorar a sua experiência e facilitar o uso do sistema."
+                'segurança'   = "Desativa recursos de segurança do Windows, o sistema pode ficar vulnerável."
+                'visual'      = "Ajusta animações, efeitos e aparência do sistema. Geralmente não impacta o desempenho."
+                'privacidade' = "Desativa telemetrias, coleta de dados e semelhantes, aumentando a privacidade."
+                'internet'    = "Ajustes para melhorar a internet, removendo limitações/gargalos artificiais."
+                'limpeza'     = "Remove arquivos para liberar espaço em disco, podendo otimizar o sistema e corrigir problemas específicos."
+            }
+            $focoVal = ([string]$item.Foco).Trim().ToLower()
+            if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
+                $icoFoco = [System.Windows.Controls.TextBlock]::new()
+                $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+                $icoFoco.Text = [char]$focoMap[$focoVal]
+                $icoFoco.FontSize = $focoSizeMap[$focoVal]
+                $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
+                $icoFoco.VerticalAlignment = 'Center'
+                $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
+                $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
+        
+                $ttFoco = [System.Windows.Controls.ToolTip]::new()
+                $ttFoco.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
+                $ttFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#F4F4F4')
+                $ttFoco.BorderBrush = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#242436')
+                $ttFoco.BorderThickness = [System.Windows.Thickness]::new(1)
+                $ttFoco.Padding = [System.Windows.Thickness]::new(12,8,12,8)
+                $ttFoco.Placement = [System.Windows.Controls.Primitives.PlacementMode]::Bottom
+                $ttFoco.IsHitTestVisible = $false
+        
+                $ttFocoText = [System.Windows.Controls.TextBlock]::new()
+                $ttFocoText.Text = $focoTooltipMap[$focoVal]
+                $ttFocoText.TextWrapping = 'Wrap'
+                $ttFocoText.MaxWidth = 320
+                $ttFocoText.FontSize = 11.5
+                $ttFoco.Content = $ttFocoText
+        
+                [System.Windows.Controls.ToolTipService]::SetInitialShowDelay($icoFoco, 400)
+                [System.Windows.Controls.ToolTipService]::SetShowDuration($icoFoco, 60000)
+                $icoFoco.ToolTip = $ttFoco
+        
+                $icoFoco.Add_MouseLeave({
+                    if ($this.ToolTip -is [System.Windows.Controls.ToolTip]) {
+                        $this.ToolTip.IsOpen = $false
+                    }
+                })
+        
+                $null = $nameRow.Children.Add($icoFoco)
+            }
             
             $tbDesc = [System.Windows.Controls.TextBlock]::new()
             $tbDesc.Text = $item.Description; $tbDesc.FontSize = 12
