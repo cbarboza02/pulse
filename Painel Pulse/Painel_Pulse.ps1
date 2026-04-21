@@ -1793,15 +1793,46 @@ function New-OptCard {
         'privacidade' = "Desativa telemetrias e coleta de dados e semelhantes, aumentando a privacidade."
     }
     $focoVal = ([string]$item.Foco).Trim().ToLower()
+
     if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
-        $icoFoco = [System.Windows.Controls.TextBlock]::new()
-        $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
-        $icoFoco.Text = [char]$focoMap[$focoVal]
-        $icoFoco.FontSize = $focoSizeMap[$focoVal]
-        $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
-        $icoFoco.VerticalAlignment = 'Center'
-        $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
-        $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
+        if ($focoVal -eq 'segurança') {
+            $icoFoco = [System.Windows.Controls.Grid]::new()
+            $icoFoco.VerticalAlignment = 'Center'
+            $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
+            $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
+    
+            # 1. Ícone de Base: Escudo (Shield) - ea18
+            $baseIco = [System.Windows.Controls.TextBlock]::new()
+            $baseIco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+            $baseIco.Text = [char]$focoMap[$focoVal]
+            $baseIco.FontSize = 15
+            $baseIco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
+            $null = $icoFoco.Children.Add($baseIco)
+    
+            # 2. Ícone de Sobreposição: Exclamação (StatusTriangleExclamation) - f13b
+            $overlayIco = [System.Windows.Controls.TextBlock]::new()
+            $overlayIco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+            $overlayIco.Text = [char]0xf13b
+            $overlayIco.FontSize = 9
+            $overlayIco.FontWeight = 'Bold'
+            # Cor de destaque (ex: um tom de alerta ou o mesmo padrão)
+            $overlayIco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#FF4B4B') 
+            $overlayIco.HorizontalAlignment = 'Right'
+            $overlayIco.VerticalAlignment = 'Bottom'
+            $overlayIco.Margin = [System.Windows.Thickness]::new(0,0,-2,-2)
+            $null = $icoFoco.Children.Add($overlayIco)
+        } 
+        else {
+            # Lógica padrão para os outros ícones
+            $icoFoco = [System.Windows.Controls.TextBlock]::new()
+            $icoFoco.FontFamily = [System.Windows.Media.FontFamily]::new("Segoe Fluent Icons")
+            $icoFoco.Text = [char]$focoMap[$focoVal]
+            $icoFoco.FontSize = $focoSizeMap[$focoVal]
+            $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
+            $icoFoco.VerticalAlignment = 'Center'
+            $icoFoco.Margin = [System.Windows.Thickness]::new(7,0,0,0)
+            $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
+        }
 
         $ttFoco = [System.Windows.Controls.ToolTip]::new()
         $ttFoco.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
