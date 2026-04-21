@@ -1756,28 +1756,28 @@ function New-OptCard {
 
     # Mapeamento dos ícones e informação do tooltip
     $focoMap = @{ 
-        'jogos'       = 0xe7fc; 
-        'fluidez'     = 0xec4a; 
-        'windows'     = 0xe8a9; 
-        'segurança'   = 0xe730; 
-        'visual'      = 0xf4a5; 
-        'privacidade' = 0xed1a; 
-        'internet'    = 0xe774; 
-        'restaurar'   = 0xe777; 
-        'reparar'     = 0xe90f; 
-        'outros'      = 0xea86; 
+        'jogos'       = 0xe7fc 
+        'fluidez'     = 0xec4a 
+        'windows'     = 0xe8a9 
+        'segurança'   = 0xe730 
+        'visual'      = 0xf4a5 
+        'privacidade' = 0xed1a 
+        'internet'    = 0xe774 
+        'restaurar'   = 0xe777 
+        'reparar'     = 0xe90f 
+        'outros'      = 0xea86 
     }
     $focoSizeMap = @{ 
-        'jogos'       = 20; 
-        'fluidez'     = 19; 
-        'windows'     = 19; 
-        'segurança'   = 18; 
-        'visual'      = 19; 
-        'privacidade' = 18; 
-        'internet'    = 18; 
-        'restaurar'   = 19; 
-        'reparar'     = 19; 
-        'outros'      = 19; 
+        'jogos'       = 20 
+        'fluidez'     = 19 
+        'windows'     = 19 
+        'segurança'   = 18 
+        'visual'      = 19 
+        'privacidade' = 18 
+        'internet'    = 18 
+        'restaurar'   = 19 
+        'reparar'     = 19 
+        'outros'      = 19 
     }
     
     $focoVal = ([string]$item.Foco).Trim().ToLower()
@@ -1827,36 +1827,6 @@ function New-OptCard {
     [System.Windows.Controls.Grid]::SetRow($tbDesc, 1)
     [System.Windows.Controls.Grid]::SetColumn($tbDesc, 1)
     $null = $grid.Children.Add($tbDesc)
-
-    if (-not [string]::IsNullOrWhiteSpace($item.TooltipText)) {
-        $tt = [System.Windows.Controls.ToolTip]::new()
-        $tt.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
-        $tt.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#F4F4F4')
-        $tt.BorderBrush = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#242436')
-        $tt.BorderThickness = [System.Windows.Thickness]::new(1)
-        $tt.Padding = [System.Windows.Thickness]::new(14)
-        $tt.Placement = [System.Windows.Controls.Primitives.PlacementMode]::Bottom
-
-        $ttText = [System.Windows.Controls.TextBlock]::new()
-        $ttText.Text = $item.TooltipText
-        $ttText.TextWrapping = 'Wrap'
-        $ttText.MaxWidth = 450
-        $ttText.FontSize = 11.5
-        
-        $tt.Content = $ttText
-        $tt.IsHitTestVisible = $false
-        
-        [System.Windows.Controls.ToolTipService]::SetInitialShowDelay($tbDesc, 1000)
-        [System.Windows.Controls.ToolTipService]::SetShowDuration($tbDesc, 60000)
-        
-        $tbDesc.ToolTip = $tt
-        
-        $tbDesc.Add_MouseLeave({
-            if ($this.ToolTip -is [System.Windows.Controls.ToolTip]) {
-                $this.ToolTip.IsOpen = $false
-            }
-        })
-    }
 
     # --- COLUNA 2: PAINEL DIREITO (Edit e Toggle) ---
     $rightPanel = [System.Windows.Controls.StackPanel]::new()
