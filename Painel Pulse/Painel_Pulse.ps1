@@ -8,15 +8,6 @@
   Otimizações carregadas dinamicamente a partir de arquivos .json.
 #>
 
-# Força um ID exclusivo para que o ícone da Barra de Tarefas (Taskbar) não seja o do PowerShell
-$appId = "Painel.Pulse"
-[void][Runtime.InteropServices.Marshal]::QueryInterface(
-    [System.Runtime.InteropServices.Marshal]::GetIUnknownForObject([System.Windows.Application]::Current), 
-    [ref][guid]"00000000-0000-0000-C000-000000000046", 
-    [ref][intptr]::Zero
-)
-[shell32.NativeMethods]::SetCurrentProcessExplicitAppUserModelID($appId)
-
 # ==========================================
 # TRAVA DE EXCLUSIVIDADE (PULSE OS)
 # ==========================================
