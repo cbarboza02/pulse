@@ -1758,13 +1758,12 @@ function New-OptCard {
     $focoMap = @{ 
          'jogos'       = 0xe7fc
          'fluidez'     = 0xec4a
-         'windows'     = 0xe8a9
+         'windows'     = 0xec49
          'segurança'   = 0xe730
          'visual'      = 0xf4a5
          'privacidade' = 0xed1a
          'internet'    = 0xe774
          'restaurar'   = 0xf156
-         'reparar'     = 0xe90f
          'outros'      = 0xea86
     }
     $focoSizeMap = @{ 
@@ -1775,8 +1774,7 @@ function New-OptCard {
          'visual'      = 19
          'privacidade' = 18
          'internet'    = 18
-         'restaurar'   = 18
-         'reparar'     = 19
+         'restaurar'   = 19
          'outros'      = 19
     }
     
