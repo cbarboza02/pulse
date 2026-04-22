@@ -47,7 +47,7 @@
   {
     "Id": "restaurar.microsoft-store",
     "TabKey": "restaurar",
-    "Foco": "reparar",
+    "Foco": "restaurar",
     "Favorito": "sim",
     "Name": "Restaurar Microsoft Store",
     "Description": "Remove políticas restritivas, reativa os serviços necessários e reseta o cache da Store, corrigindo problemas de carregamento ou instalação causados pelas otimizações da ISO.",
