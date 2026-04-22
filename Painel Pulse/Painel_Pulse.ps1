@@ -448,6 +448,7 @@ $xaml = @'
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Painel Pulse"
+        Icon=".\pulseicon.ico"
         Width="940" Height="750"
         MinWidth="940" MinHeight="750"
         MaxWidth="940" MaxHeight="750"
@@ -1008,7 +1009,7 @@ $xaml = @'
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button x:Name="BtnRestaurar" Grid.Row="0" Content="Restauração do Sistema" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,0,8"/>
+                    <Button x:Name="BtnRestaurar" Grid.Row="0" Content="Restaurar Sistema" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,0,8"/>
                     <Button x:Name="BtnAbrirLog" Grid.Row="1" Content="Abrir Log" Style="{StaticResource SecondaryButtonStyle}"/>
                 </Grid>
             </Grid>
