@@ -380,6 +380,7 @@ function Get-PulseBat {
         '^limpeza_'   { 'limpeza'   }
         '^internet_'  { 'internet'  }
         '^restaurar_' { 'restaurar' }
+        '^reparar_'   { 'reparar' }
         '^pulsemode_' { 'pulsemode' }
         default {
             Write-PulseLog "ERRO: Prefixo não reconhecido para '$fileName'."
@@ -438,6 +439,7 @@ $script:Opts_Internet    = Load-PageOptimizations -PageName 'internet'
 $script:Opts_Limpeza     = Load-PageOptimizations -PageName 'limpeza'
 $script:Opts_PulseMode   = Load-PageOptimizations -PageName 'pulsemode'
 $script:Opts_Restaurar   = Load-PageOptimizations -PageName 'restaurar'
+$script:Opts_Reparar     = Load-PageOptimizations -PageName 'reparar'
 
 # ==========================================
 # XAML (INTERFACE VISUAL)
@@ -1668,6 +1670,10 @@ $script:Scroll_Restaurar = $window.FindName('Scroll_Restaurar')
 $script:Items_Restaurar  = $window.FindName('Items_Restaurar')
 $script:Msg_Restaurar    = $window.FindName('Msg_Restaurar')
 
+$script:Scroll_Reparar   = $window.FindName('Scroll_Reparar')
+$script:Items_Reparar    = $window.FindName('Items_Reparar')
+$script:Msg_Reparar      = $window.FindName('Msg_Reparar')
+
 $script:Page_PulseMode     = $window.FindName('Page_PulseMode')
 $script:Scroll_PulseMode   = $window.FindName('Scroll_PulseMode')
 $script:Items_PulseMode    = $window.FindName('Items_PulseMode')
@@ -1676,24 +1682,24 @@ $script:Tabs_PulseMode     = $window.FindName('Tabs_PulseMode')
 $script:Tab_Pulse_Geral    = $window.FindName('Tab_Pulse_Geral')
 $script:Tab_Pulse_Hardware = $window.FindName('Tab_Pulse_Hardware')
 $script:Tab_Pulse_Internet = $window.FindName('Tab_Pulse_Internet')
-$script:PulseWarningBox = $window.FindName('PulseWarningBox')
+$script:PulseWarningBox    = $window.FindName('PulseWarningBox')
 
 $script:BtnExpandPulse     = $window.FindName('BtnExpandPulse')
 $script:PanelPulseExpanded = $window.FindName('PanelPulseExpanded')
 
-$script:TglPulseModeMaster = $window.FindName('TglPulseModeMaster')
-$script:LedPulseModeMaster = $window.FindName('LedPulseModeMaster')
-$script:TglPulseSubGeral   = $window.FindName('TglPulseSubGeral')
-$script:LedPulseSubGeral   = $window.FindName('LedPulseSubGeral')
+$script:TglPulseModeMaster  = $window.FindName('TglPulseModeMaster')
+$script:LedPulseModeMaster  = $window.FindName('LedPulseModeMaster')
+$script:TglPulseSubGeral    = $window.FindName('TglPulseSubGeral')
+$script:LedPulseSubGeral    = $window.FindName('LedPulseSubGeral')
 $script:TglPulseSubHardware = $window.FindName('TglPulseSubHardware')
 $script:LedPulseSubHardware = $window.FindName('LedPulseSubHardware')
 $script:TglPulseSubInternet = $window.FindName('TglPulseSubInternet')
 $script:LedPulseSubInternet = $window.FindName('LedPulseSubInternet')
 
-$script:Tabs_Geral       = $window.FindName('Tabs_Geral')
-$script:Scroll_Geral     = $window.FindName('Scroll_Geral')
-$script:Items_Geral      = $window.FindName('Items_Geral')
-$script:Msg_Geral        = $window.FindName('Msg_Geral')
+$script:Tabs_Geral           = $window.FindName('Tabs_Geral')
+$script:Scroll_Geral         = $window.FindName('Scroll_Geral')
+$script:Items_Geral          = $window.FindName('Items_Geral')
+$script:Msg_Geral            = $window.FindName('Msg_Geral')
 $script:TglPulseModeGeral    = $window.FindName('TglPulseModeGeral')
 $script:LedPulseModeGeral    = $window.FindName('LedPulseModeGeral')
 
@@ -1713,14 +1719,14 @@ $script:LedPulseModeInternet = $window.FindName('LedPulseModeInternet')
 $script:BtnLimpezaNenhuma     = $window.FindName('BtnLimpezaNenhuma')
 $script:BtnLimpezaRecomendada = $window.FindName('BtnLimpezaRecomendada')
 $script:BtnLimpezaTudo        = $window.FindName('BtnLimpezaTudo')
-$script:LimpezaGrid       = $window.FindName('LimpezaGrid')
-$script:BtnIniciarLimpeza = $window.FindName('BtnIniciarLimpeza')
+$script:LimpezaGrid           = $window.FindName('LimpezaGrid')
+$script:BtnIniciarLimpeza     = $window.FindName('BtnIniciarLimpeza')
 
-$script:BtnFazerBackup   = $window.FindName('BtnFazerBackup')
-$script:TxtSearchApp     = $window.FindName('TxtSearchApp')
-$script:BtnSearchApp     = $window.FindName('BtnSearchApp')
-$script:SelectedAppsPanel= $window.FindName('SelectedAppsPanel')
-$script:BtnInstallApps   = $window.FindName('BtnInstallApps')
+$script:BtnFazerBackup          = $window.FindName('BtnFazerBackup')
+$script:TxtSearchApp            = $window.FindName('TxtSearchApp')
+$script:BtnSearchApp            = $window.FindName('BtnSearchApp')
+$script:SelectedAppsPanel       = $window.FindName('SelectedAppsPanel')
+$script:BtnInstallApps          = $window.FindName('BtnInstallApps')
 $script:LblStartupActive        = $window.FindName('LblStartupActive')
 $script:BtnOpenStartupModal     = $window.FindName('BtnOpenStartupModal')
 $script:LblInstalledCount       = $window.FindName('LblInstalledCount')
@@ -3109,6 +3115,7 @@ function Update-HardwareItems {
 function Load-TablessPages {
     Set-ListOrEmpty -Panel $script:Items_Internet -Scroll $script:Scroll_Internet -MsgBlock $script:Msg_Internet -Items @($script:Opts_Internet)
     Set-ListOrEmpty -Panel $script:Items_Restaurar -Scroll $script:Scroll_Restaurar -MsgBlock $script:Msg_Restaurar -Items @($script:Opts_Restaurar)
+    Set-ListOrEmpty -Panel $script:Items_Reparar -Scroll $script:Scroll_Reparar -MsgBlock $script:Msg_Reparar -Items @($script:Opts_Reparar)
 }
 
 # --- Preenche os Toggle Cards da aba Limpeza ---
