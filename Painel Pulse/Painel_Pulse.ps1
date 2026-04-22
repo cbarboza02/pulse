@@ -1754,10 +1754,31 @@ function New-OptCard {
     [System.Windows.Controls.Grid]::SetColumn($leftPanel, 0)
     $null = $grid.Children.Add($leftPanel)
 
-    # Lógica de seleção do ícone de Foco
-    $focoMap = @{ 'jogos'=0xe7fc; 'fluidez'=0xec4a; 'windows'=0xe8a9; 'segurança'=0xe730; 'visual'=0xf4a5; 'privacidade'=0xed1a; 'internet'=0xe774; 'limpeza'=0xea99 }
-    $focoSizeMap = @{ 'jogos'=17; 'fluidez'=16; 'windows'=16; 'segurança'=15; 'visual'=16; 'privacidade'=15; 'internet'=15; 'limpeza'=16 }
-    $focoTooltipMap = @{ 'jogos'="Prioriza recursos para o ambiente de jogo..."; 'fluidez'="Melhora a responsividade..."; 'windows'="Ajustes para melhorar a sua experiência..."; 'segurança'="Desativa recursos de segurança..."; 'visual'="Ajusta animações e efeitos..."; 'privacidade'="Desativa telemetrias..."; 'internet'="Ajustes para melhorar a internet..."; 'limpeza'="Remove arquivos para liberar espaço..." }
+    # Mapeamento dos ícones e informação do tooltip
+    $focoMap = @{ 
+        'jogos'       = 0xe7fc 
+        'fluidez'     = 0xec4a 
+        'windows'     = 0xe8a9 
+        'segurança'   = 0xe730 
+        'visual'      = 0xf4a5 
+        'privacidade' = 0xed1a 
+        'internet'    = 0xe774 
+        'restaurar'   = 0xe777 
+        'reparar'     = 0xe90f 
+        'outros'      = 0xea86 
+    }
+    $focoSizeMap = @{ 
+        'jogos'       = 20 
+        'fluidez'     = 19 
+        'windows'     = 19 
+        'segurança'   = 18 
+        'visual'      = 19 
+        'privacidade' = 18 
+        'internet'    = 18 
+        'restaurar'   = 19 
+        'reparar'     = 19 
+        'outros'      = 19 
+    }
     
     $focoVal = ([string]$item.Foco).Trim().ToLower()
     if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
@@ -1768,12 +1789,6 @@ function New-OptCard {
         $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
         $icoFoco.VerticalAlignment = 'Center'
         $icoFoco.HorizontalAlignment = 'Center'
-        $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
-        
-        # Tooltip do Foco
-        $ttFoco = [System.Windows.Controls.ToolTip]::new()
-        $ttFoco.Content = $focoTooltipMap[$focoVal]
-        $icoFoco.ToolTip = $ttFoco
         $null = $leftPanel.Children.Add($icoFoco)
     }
 
