@@ -1805,12 +1805,12 @@ function New-OptCard {
     $focoMap = @{ 
         'jogos'       = 0xe7fc 
         'fluidez'     = 0xec4a 
-        'windows'     = 0xe8a9 
+        'windows'     = 0xec49 
         'segurança'   = 0xe730 
         'visual'      = 0xf4a5 
         'privacidade' = 0xed1a 
         'internet'    = 0xe774 
-        'restaurar'   = 0xe777 
+        'restaurar'   = 0xf156 
         'reparar'     = 0xe90f 
         'outros'      = 0xea86 
     }
