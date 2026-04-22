@@ -1033,7 +1033,7 @@
     "Id": "geral.sensores",
     "TabKey": "geral_priv",
     "pulsemode": "sim",
-    "Foco": "privacidade"
+    "Foco": "privacidade",
     "Name": "Desativar Sensores",
     "Description": "Desativa o acesso de aplicativos aos sensores do sistema, como acelerômetro, giroscópio e sensor de luz.",
     "Tooltip": {
