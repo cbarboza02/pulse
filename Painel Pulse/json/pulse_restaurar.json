@@ -45,29 +45,6 @@
     "Revert": ".\\comandos\\restaurar\\restaurar_virtualizacao-hyper-v.bat padrao"
   },
   {
-    "Id": "restaurar.microsoft-store",
-    "TabKey": "restaurar",
-    "Foco": "restaurar",
-    "Favorito": "sim",
-    "Name": "Restaurar Microsoft Store",
-    "Description": "Remove políticas restritivas, reativa os serviços necessários e reseta o cache da Store, corrigindo problemas de carregamento ou instalação causados pelas otimizações da ISO.",
-    "Tooltip": {
-      "Pros": [
-        "Resolve erros de carregamento, login e instalação de apps na Microsoft Store",
-        "Reativa serviços de licenciamento e autenticação necessários para a Store",
-        "Reseta o cache e re-registra o pacote da Store para o usuário atual"
-      ],
-      "Cons": [
-        "Reativa a atualização automática de apps da Store (pode ser reconfigurado depois)",
-        "Remove o bloqueio de 'Procure na Store' nas notificações de apps desconhecidos",
-        "A restauração não é garantida em todos os cenários de corrupção da Store"
-      ],
-      "Unavailable": []
-    },
-    "Apply": ".\\comandos\\restaurar\\restaurar_microsoft-store.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_microsoft-store.bat padrao"
-  },
-  {
     "Id": "restaurar.game-bar",
     "TabKey": "restaurar",
     "Foco": "restaurar",
