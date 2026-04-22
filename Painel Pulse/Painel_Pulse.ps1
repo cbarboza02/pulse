@@ -2058,9 +2058,6 @@ function New-OptCard {
 
     }.GetNewClosure())
 
-    $null = $grid.Children.Add($nameRow)
-    $null = $grid.Children.Add($tbDesc)
-    $null = $grid.Children.Add($rightPanel)
     $border.Child = $grid
 
     # AGORA SIM O SCRIPT SABE ONDE ENCONTRAR O ÍCONE (BtnEdit)
