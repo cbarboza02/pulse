@@ -930,26 +930,6 @@ $xaml = @'
                             <TextBlock Grid.Column="1" Text="Início" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
                         </Grid>
                     </ListBoxItem>
-                    <ListBoxItem Tag="restaurar">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" FontFamily="Segoe Fluent Icons" Text="&#xE777;" VerticalAlignment="Center" FontSize="16"/>
-                            <TextBlock Grid.Column="1" Text="Restaurar" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
-                        </Grid>
-                    </ListBoxItem>
-                    <ListBoxItem Tag="reparar">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" FontFamily="Segoe Fluent Icons" Text="&#xE90F;" VerticalAlignment="Center" FontSize="16"/>
-                            <TextBlock Grid.Column="1" Text="Reparar" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
-                        </Grid>
-                    </ListBoxItem>
                     <ListBoxItem Tag="pulsemode" Margin="0,0,0,25">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -990,7 +970,7 @@ $xaml = @'
                             <TextBlock Grid.Column="1" Text="Internet" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
                         </Grid>
                     </ListBoxItem>
-                    <ListBoxItem Tag="limpeza">
+                    <ListBoxItem Tag="limpeza" Margin="0,0,0,25">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="30"/>
@@ -998,6 +978,26 @@ $xaml = @'
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" FontFamily="Segoe Fluent Icons" Text="&#xEA99;" VerticalAlignment="Center" FontSize="16"/>
                             <TextBlock Grid.Column="1" Text="Limpeza" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
+                        </Grid>
+                    </ListBoxItem>
+                    <ListBoxItem Tag="restaurar">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontFamily="Segoe Fluent Icons" Text="&#xE777;" VerticalAlignment="Center" FontSize="16"/>
+                            <TextBlock Grid.Column="1" Text="Restaurar" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
+                        </Grid>
+                    </ListBoxItem>
+                    <ListBoxItem Tag="reparar">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontFamily="Segoe Fluent Icons" Text="&#xE90F;" VerticalAlignment="Center" FontSize="16"/>
+                            <TextBlock Grid.Column="1" Text="Reparar" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
                         </Grid>
                     </ListBoxItem>
                 </ListBox>
