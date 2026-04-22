@@ -3,7 +3,6 @@
     "Id": "reparar.microsoft-store",
     "TabKey": "reparar",
     "Foco": "reparar",
-    "Favorito": "sim",
     "Name": "Reparar Microsoft Store",
     "Description": "Remove políticas restritivas, reativa os serviços necessários e reseta o cache da Store, corrigindo problemas de carregamento ou instalação causados pelas otimizações da ISO.",
     "Tooltip": {
@@ -19,28 +18,27 @@
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\restaurar\\restaurar_microsoft-store.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_microsoft-store.bat padrao"
+    "Apply": ".\\comandos\\reparar\\reparar_microsoft-store.bat restaurar",
+    "Revert": ".\\comandos\\reparar\\reparar_microsoft-store.bat padrao"
   },
   {
-    "Id": "restaurar.bluetooth",
-    "TabKey": "restaurar",
-    "Foco": "restaurar",
-    "Name": "Restaurar Bluetooth",
+    "Id": "reparar.bluetooth",
+    "TabKey": "reparar",
+    "Foco": "reparar",
+    "Name": "Reparar Bluetooth",
     "Description": "Corrige permissões de acesso, reativa serviços e reescaneia dispositivos para resolver problemas de Bluetooth que possam ter sido causados pelas otimizações de privacidade da ISO.",
     "Tooltip": {
       "Pros": [
-        "Restaura permissões de acesso ao Bluetooth para aplicativos",
+        "Corrige permissões de acesso ao Bluetooth para aplicativos",
         "Reativa o RadioMgmtSvc e o serviço principal do Bluetooth",
         "Força reenumeração de dispositivos Bluetooth pareados"
       ],
       "Cons": [
-        "O Bluetooth não é diretamente desativado pela ISO; problemas podem ter outra causa",
         "A restauração pode não resolver problemas causados por driver corrompido"
       ],
       "Unavailable": []
     },
-    "Apply": ".\\comandos\\restaurar\\restaurar_bluetooth.bat restaurar",
-    "Revert": ".\\comandos\\restaurar\\restaurar_bluetooth.bat padrao"
+    "Apply": ".\\comandos\\reparar\\reparar_bluetooth.bat restaurar",
+    "Revert": ".\\comandos\\reparar\\reparar_bluetooth.bat padrao"
   }
 ]
