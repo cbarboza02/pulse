@@ -34,14 +34,36 @@ if (-not $isExclusive) {
 # ==========================================
 # CAMINHO BASE DO SCRIPT
 # ==========================================
-$script:BaseDir = if ($PSScriptRoot -and $PSScriptRoot -ne '') {
-    $PSScriptRoot
-} elseif ($MyInvocation.MyCommand.Path -and $MyInvocation.MyCommand.Path -ne '') {
-    Split-Path -Parent $MyInvocation.MyCommand.Path
-} elseif ($MyInvocation.MyCommand.Definition -and $MyInvocation.MyCommand.Definition -ne '') {
-    Split-Path -Parent $MyInvocation.MyCommand.Definition
-} else {
-    Join-Path $env:TEMP "Painel Pulse"
+$script:BaseDir = $null
+
+# PSScriptRoot: valida se e realmente um diretorio (em EXEs compilados pode vir como texto do script)
+if ($PSScriptRoot -and $PSScriptRoot.Length -lt 300 -and `
+    (Test-Path $PSScriptRoot -PathType Container -ErrorAction SilentlyContinue)) {
+    $script:BaseDir = $PSScriptRoot
+}
+
+# MyInvocation.MyCommand.Path
+if (-not $script:BaseDir) {
+    $cmdPath = $MyInvocation.MyCommand.Path
+    if ($cmdPath -and $cmdPath.Length -lt 300 -and `
+        (Test-Path $cmdPath -ErrorAction SilentlyContinue)) {
+        $script:BaseDir = Split-Path -Parent $cmdPath
+    }
+}
+
+# Fallback para EXE compilado com ps2exe: diretorio do processo atual
+if (-not $script:BaseDir) {
+    try {
+        $exePath = [System.Diagnostics.Process]::GetCurrentProcess().MainModule.FileName
+        if ($exePath -and (Test-Path $exePath -ErrorAction SilentlyContinue)) {
+            $script:BaseDir = Split-Path -Parent $exePath
+        }
+    } catch {}
+}
+
+# Fallback final via AppDomain
+if (-not $script:BaseDir) {
+    $script:BaseDir = [System.AppDomain]::CurrentDomain.BaseDirectory.TrimEnd('\')
 }
 
 $script:RepoBaseUrl = "https://raw.githubusercontent.com/cbarboza02/pulse/main/Painel%20Pulse"
