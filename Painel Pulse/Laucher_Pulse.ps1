@@ -78,7 +78,7 @@ $content = $content -replace '^#Requires.*\r?\n', ''
 $tempPath = Join-Path $env:TEMP "build_painel_pulse.ps1"
 [System.IO.File]::WriteAllText($tempPath, $content, [System.Text.UTF8Encoding]::new($true))
 
-Invoke-PS2EXE $TempPs1 $EXEPath -noConsole -title "Painel Pulse" -company "PulseOS" -iconFile $TempIcon
+Invoke-PS2EXE $TempPs1 $EXEPath -noConsole -title "Painel Pulse" -company "PulseOS" -iconFile $TempIcon *>&1 | Out-Null
 
 Remove-Item $tempPath -Force -ErrorAction SilentlyContinue
 
@@ -87,7 +87,6 @@ Remove-Item $tempPath -Force -ErrorAction SilentlyContinue
 Remove-Item $TempPs1 -Force -ErrorAction SilentlyContinue
     if (Test-Path $TempIcon) { 
         Remove-Item $TempIcon -Force -ErrorAction SilentlyContinue 
-        Write-Host "    [+] Arquivos temporários removidos." -ForegroundColor Gray
     }
 
 # BAIXA OS ARQUIVOS JSON
