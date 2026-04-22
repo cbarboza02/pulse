@@ -938,6 +938,16 @@ $xaml = @'
                             <TextBlock Grid.Column="1" Text="Restaurar" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
                         </Grid>
                     </ListBoxItem>
+                    <ListBoxItem Tag="reparar">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontFamily="Segoe Fluent Icons" Text="&#xE90F;" VerticalAlignment="Center" FontSize="16"/>
+                            <TextBlock Grid.Column="1" Text="Reparar" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
+                        </Grid>
+                    </ListBoxItem>
                     <ListBoxItem Tag="pulsemode" Margin="0,0,0,25">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -1164,6 +1174,36 @@ $xaml = @'
                         </ScrollViewer>
                         <TextBlock x:Name="Msg_Restaurar"
                                    Text="Nenhuma opção de restauração disponível no momento."
+                                   Style="{StaticResource EmptyMsgStyle}"/>
+                    </Grid>
+                </Grid>
+
+                <!-- ======== PÁGINA: REPARAR ======== -->
+                <Grid x:Name="Page_Reparar" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,16">
+                        <TextBlock Text="Reparar" FontSize="22" FontWeight="ExtraBold" Foreground="{StaticResource PanelPrimaryText}"/>
+                        <TextBlock Text="Repare recursos e funcionalidades." FontSize="13" Foreground="#6F7581" Margin="12,0,0,4" VerticalAlignment="Bottom"/>
+                    </StackPanel>
+                    <!--
+                    <Border Grid.Row="1" Background="#1A1111" BorderBrush="#3D2020" BorderThickness="1" CornerRadius="8" Padding="12,8" Margin="0,0,0,16">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe Fluent Icons" Text="&#xE7BA;" Foreground="#F52C42" FontSize="14" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBlock Text="Algumas foram desativadas na instalação do Windows, não há garantia de que voltará a funcionar corretamente." Foreground="#D68383" FontSize="12.5" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                        </StackPanel>
+                    </Border> -->
+
+                    <Grid Grid.Row="2">
+                        <ScrollViewer x:Name="Scroll_Reparar" VerticalScrollBarVisibility="Auto">
+                            <StackPanel x:Name="Items_Reparar" HorizontalAlignment="Stretch" Margin="0,0,0,0"/>
+                        </ScrollViewer>
+                        <TextBlock x:Name="Msg_Reparar"
+                                   Text="Nenhuma opção de reparação disponível no momento."
                                    Style="{StaticResource EmptyMsgStyle}"/>
                     </Grid>
                 </Grid>
@@ -1702,6 +1742,7 @@ if ($script:PulseState["Master_Internet"]) {
 
 $script:Page_Inicio      = $window.FindName('Page_Inicio')
 $script:Page_Restaurar   = $window.FindName('Page_Restaurar')
+$script:Page_Reparar     = $window.FindName('Page_Reparar')
 $script:Page_Geral       = $window.FindName('Page_Geral')
 $script:Page_Hardware    = $window.FindName('Page_Hardware')
 $script:Page_Internet    = $window.FindName('Page_Internet')
@@ -1754,28 +1795,30 @@ function New-OptCard {
     [System.Windows.Controls.Grid]::SetColumn($leftPanel, 0)
     $null = $grid.Children.Add($leftPanel)
 
-    # Mapeamento dos ícones e informação do tooltip
+    # Mapeamento dos ícones
     $focoMap = @{ 
-         'jogos'       = 0xe7fc
-         'fluidez'     = 0xec4a
-         'windows'     = 0xec49
-         'segurança'   = 0xe730
-         'visual'      = 0xf4a5
-         'privacidade' = 0xed1a
-         'internet'    = 0xe774
-         'restaurar'   = 0xf156
-         'outros'      = 0xea86
+        'jogos'       = 0xe7fc 
+        'fluidez'     = 0xec4a 
+        'windows'     = 0xe8a9 
+        'segurança'   = 0xe730 
+        'visual'      = 0xf4a5 
+        'privacidade' = 0xed1a 
+        'internet'    = 0xe774 
+        'restaurar'   = 0xe777 
+        'reparar'     = 0xe90f 
+        'outros'      = 0xea86 
     }
     $focoSizeMap = @{ 
-         'jogos'       = 20
-         'fluidez'     = 19
-         'windows'     = 19
-         'segurança'   = 18
-         'visual'      = 19
-         'privacidade' = 18
-         'internet'    = 18
-         'restaurar'   = 19
-         'outros'      = 19
+        'jogos'       = 20 
+        'fluidez'     = 19 
+        'windows'     = 19 
+        'segurança'   = 18 
+        'visual'      = 19 
+        'privacidade' = 18 
+        'internet'    = 18 
+        'restaurar'   = 19 
+        'reparar'     = 19 
+        'outros'      = 19 
     }
     
     $focoVal = ([string]$item.Foco).Trim().ToLower()
@@ -3795,6 +3838,7 @@ $script:NavMenu.Add_SelectionChanged({
 
     $script:Page_Inicio.Visibility      = 'Collapsed'
     $script:Page_Restaurar.Visibility   = 'Collapsed'
+    $script:Page_Reparar.Visibility     = 'Collapsed'
     $script:Page_Geral.Visibility       = 'Collapsed'
     $script:Page_Hardware.Visibility    = 'Collapsed'
     $script:Page_Internet.Visibility    = 'Collapsed'
@@ -3807,6 +3851,7 @@ $script:NavMenu.Add_SelectionChanged({
             'inicio'      { $script:Page_Inicio.Visibility      = 'Visible' }
             'pulsemode'   { $script:Page_PulseMode.Visibility   = 'Visible' }
             'restaurar'   { $script:Page_Restaurar.Visibility   = 'Visible' }
+            'reparar'     { $script:Page_Reparar.Visibility     = 'Visible' }
             'geral'       { $script:Page_Geral.Visibility       = 'Visible' }
             'hardware'    { $script:Page_Hardware.Visibility    = 'Visible' }
             'internet'    { $script:Page_Internet.Visibility    = 'Visible' }
