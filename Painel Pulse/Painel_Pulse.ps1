@@ -1754,31 +1754,10 @@ function New-OptCard {
     [System.Windows.Controls.Grid]::SetColumn($leftPanel, 0)
     $null = $grid.Children.Add($leftPanel)
 
-    # Mapeamento dos ícones e informação do tooltip
-    $focoMap = @{ 
-        'jogos'       = 0xe7fc 
-        'fluidez'     = 0xec4a 
-        'windows'     = 0xe8a9 
-        'segurança'   = 0xe730 
-        'visual'      = 0xf4a5 
-        'privacidade' = 0xed1a 
-        'internet'    = 0xe774 
-        'restaurar'   = 0xe777 
-        'reparar'     = 0xe90f 
-        'outros'      = 0xea86 
-    }
-    $focoSizeMap = @{ 
-        'jogos'       = 20 
-        'fluidez'     = 19 
-        'windows'     = 19 
-        'segurança'   = 18 
-        'visual'      = 19 
-        'privacidade' = 18 
-        'internet'    = 18 
-        'restaurar'   = 19 
-        'reparar'     = 19 
-        'outros'      = 19 
-    }
+    # Lógica de seleção do ícone de Foco
+    $focoMap = @{ 'jogos'=0xe7fc; 'fluidez'=0xec4a; 'windows'=0xe8a9; 'segurança'=0xe730; 'visual'=0xf4a5; 'privacidade'=0xed1a; 'internet'=0xe774; 'limpeza'=0xea99 }
+    $focoSizeMap = @{ 'jogos'=17; 'fluidez'=16; 'windows'=16; 'segurança'=15; 'visual'=16; 'privacidade'=15; 'internet'=15; 'limpeza'=16 }
+    $focoTooltipMap = @{ 'jogos'="Prioriza recursos para o ambiente de jogo..."; 'fluidez'="Melhora a responsividade..."; 'windows'="Ajustes para melhorar a sua experiência..."; 'segurança'="Desativa recursos de segurança..."; 'visual'="Ajusta animações e efeitos..."; 'privacidade'="Desativa telemetrias..."; 'internet'="Ajustes para melhorar a internet..."; 'limpeza'="Remove arquivos para liberar espaço..." }
     
     $focoVal = ([string]$item.Foco).Trim().ToLower()
     if (-not [string]::IsNullOrWhiteSpace($focoVal) -and $focoMap.ContainsKey($focoVal)) {
@@ -1789,6 +1768,13 @@ function New-OptCard {
         $icoFoco.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#9EA7B8')
         $icoFoco.VerticalAlignment = 'Center'
         $icoFoco.HorizontalAlignment = 'Center'
+        $icoFoco.Cursor = [System.Windows.Input.Cursors]::Help
+        
+        # Tooltip do Foco
+        $ttFoco = [System.Windows.Controls.ToolTip]::new()
+        $ttFoco.Content = $focoTooltipMap[$focoVal]
+        $icoFoco.ToolTip = $ttFoco
+        $null = $leftPanel.Children.Add($icoFoco)
     }
 
     # --- COLUNA 1: TEXTOS (Nome e Descrição) ---
@@ -1824,6 +1810,37 @@ function New-OptCard {
     $tbDesc.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#6F7581')
     $tbDesc.TextTrimming = 'CharacterEllipsis'
     $tbDesc.Margin = [System.Windows.Thickness]::new(0,6,0,0)
+
+    if (-not [string]::IsNullOrWhiteSpace($item.TooltipText)) {
+        $tt = [System.Windows.Controls.ToolTip]::new()
+        $tt.Background = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#191923')
+        $tt.Foreground = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#F4F4F4')
+        $tt.BorderBrush = [System.Windows.Media.SolidColorBrush][System.Windows.Media.ColorConverter]::ConvertFromString('#242436')
+        $tt.BorderThickness = [System.Windows.Thickness]::new(1)
+        $tt.Padding = [System.Windows.Thickness]::new(14)
+        $tt.Placement = [System.Windows.Controls.Primitives.PlacementMode]::Bottom
+
+        $ttText = [System.Windows.Controls.TextBlock]::new()
+        $ttText.Text = $item.TooltipText
+        $ttText.TextWrapping = 'Wrap'
+        $ttText.MaxWidth = 450
+        $ttText.FontSize = 11.5
+        
+        $tt.Content = $ttText
+        $tt.IsHitTestVisible = $false
+        
+        [System.Windows.Controls.ToolTipService]::SetInitialShowDelay($tbDesc, 1000)
+        [System.Windows.Controls.ToolTipService]::SetShowDuration($tbDesc, 60000)
+        
+        $tbDesc.ToolTip = $tt
+        
+        $tbDesc.Add_MouseLeave({
+            if ($this.ToolTip -is [System.Windows.Controls.ToolTip]) {
+                $this.ToolTip.IsOpen = $false
+            }
+        })
+    }
+    
     [System.Windows.Controls.Grid]::SetRow($tbDesc, 1)
     [System.Windows.Controls.Grid]::SetColumn($tbDesc, 1)
     $null = $grid.Children.Add($tbDesc)
