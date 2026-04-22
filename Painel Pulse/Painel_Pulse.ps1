@@ -448,7 +448,6 @@ $xaml = @'
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Painel Pulse"
-        Icon=".\pulseicon.ico"
         Width="940" Height="750"
         MinWidth="940" MinHeight="750"
         MaxWidth="940" MaxHeight="750"
