@@ -1662,6 +1662,13 @@ $xaml = @'
 $reader = New-Object System.Xml.XmlNodeReader ([xml]$xaml)
 $window = [Windows.Markup.XamlReader]::Load($reader)
 
+$iconPath = Join-Path $script:BaseDir "pulseicon.ico"
+
+# Aplica o ícone se o arquivo for encontrado no diretório
+if (Test-Path $iconPath) {
+    $window.Icon = [System.Windows.Media.Imaging.BitmapFrame]::Create($iconPath)
+}
+
 # --- Mapeamento de elementos da UI ---
 $script:NavMenu          = $window.FindName('NavMenu')
 $script:BtnFazerBackup   = $window.FindName('BtnFazerBackup')
