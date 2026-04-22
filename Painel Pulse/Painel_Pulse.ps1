@@ -911,8 +911,9 @@ $xaml = @'
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0">
+                    <!--
                     <TextBlock Text="Painel" Foreground="#67687B" FontSize="12"/>
-                    <TextBlock Text="PULSE" FontWeight="ExtraBold" FontSize="22" Foreground="#F4F4F4" Margin="0,0,0,20"/>
+                    <TextBlock Text="PULSE" FontWeight="ExtraBold" FontSize="22" Foreground="#F4F4F4" Margin="0,0,0,20"/> -->
                     <Button x:Name="BtnFazerBackup" Content="Fazer Backup" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Stretch" Margin="0,0,0,20" Padding="0,8"/>
                 </StackPanel>
                 
@@ -940,7 +941,7 @@ $xaml = @'
                             <TextBlock Grid.Column="1" Text="Restaurar" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
                         </Grid>
                     </ListBoxItem>
-                    <ListBoxItem Tag="reparar" Margin="0,0,0,25">
+                    <ListBoxItem Tag="reparar">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="30"/>
@@ -1007,7 +1008,7 @@ $xaml = @'
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button x:Name="BtnRestaurar" Grid.Row="0" Content="Restaurar" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,0,8"/>
+                    <Button x:Name="BtnRestaurar" Grid.Row="0" Content="Restauração do Sistema" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,0,8"/>
                     <Button x:Name="BtnAbrirLog" Grid.Row="1" Content="Abrir Log" Style="{StaticResource SecondaryButtonStyle}"/>
                 </Grid>
             </Grid>
