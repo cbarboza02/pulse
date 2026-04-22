@@ -4,7 +4,10 @@ $Base     = Join-Path $env:TEMP "Painel Pulse"
 $JsonDir  = Join-Path $Base "json"
 $CmdsDir  = Join-Path $Base "comandos"
 $PS1Path  = Join-Path $Base "Painel_Pulse.ps1"
+$EXEPath  = Join-Path $Base "Painel Pulse.exe"
 $IconPath  = Join-Path $Base "pulseicon.ico"
+$TempPs1     = Join-Path $env:TEMP "temp_painel_pulse.ps1"
+$TempIcon    = Join-Path $env:TEMP "temp_pulseicon.ico"
 $JsonFiles = @(
     "pulse_geral.json",
     "pulse_hardware.json",
@@ -59,24 +62,33 @@ function Download-Arquivo {
     }
 }
 
-# BAIXA O ARQUIVO PRINCIPAL (.PS1) E O ÍCONE
+# BAIXA O Painel_Pulse.ps1 E O pulseicon.ico
 # ==========================================
-$ok = Download-Arquivo -Url "$RepoBase/Painel_Pulse.ps1" -Destino $PS1Path
-if (-not $ok -or -not (Test-Path $PS1Path)) {
-    if (Test-Path $Base) { Remove-Item -Path $Base -Recurse -Force -ErrorAction SilentlyContinue }
-    Show-Erro "Falha ao baixar o arquivo principal.`nVerifique sua conexão e tente novamente."
-    exit 1
-}
-$content = Get-Content -Path $PS1Path -Raw -Encoding UTF8
+$ok = Download-Arquivo -Url "$RepoBase/Painel_Pulse.ps1" -Destino $TempPs1
+$content = Get-Content -Path $TempPs1 -Raw -Encoding UTF8
 $utf8Bom = New-Object System.Text.UTF8Encoding $true
-[System.IO.File]::WriteAllText($PS1Path, $content, $utf8Bom)
+[System.IO.File]::WriteAllText($TempPs1, $content, $utf8Bom)
 
-$ok = Download-Arquivo -Url "$RepoBase/pulseicon.ico" -Destino $IconPath
-if (-not $ok -or -not (Test-Path $IconPath)) {
-    if (Test-Path $Base) { Remove-Item -Path $Base -Recurse -Force -ErrorAction SilentlyContinue }
-    Show-Erro "Falha ao baixar o ícone.`nVerifique sua conexão e tente novamente."
-    exit 1
-}
+$ok = Download-Arquivo -Url "$RepoBase/pulseicon.ico" -Destino $TempIcon
+
+# CONVERTE O .PS1 PARA .EXE
+# ==========================================
+$content = Get-Content $TempPs1 -Raw -Encoding UTF8
+$content = $content -replace '^#Requires.*\r?\n', ''
+$tempPath = Join-Path $env:TEMP "build_painel_pulse.ps1"
+[System.IO.File]::WriteAllText($tempPath, $content, [System.Text.UTF8Encoding]::new($true))
+
+Invoke-PS2EXE $TempPs1 $EXEPath -noConsole -title "Painel Pulse" -company "PulseOS" -iconFile $TempIcon
+
+Remove-Item $tempPath -Force -ErrorAction SilentlyContinue
+
+# REMOVE OS ARQUIVOS TEMPORÁRIOS
+# ==========================================
+Remove-Item $TempPs1 -Force -ErrorAction SilentlyContinue
+    if (Test-Path $TempIcon) { 
+        Remove-Item $TempIcon -Force -ErrorAction SilentlyContinue 
+        Write-Host "    [+] Arquivos temporários removidos." -ForegroundColor Gray
+    }
 
 # BAIXA OS ARQUIVOS JSON
 # ==========================================
@@ -94,4 +106,4 @@ foreach ($json in $JsonFiles) {
 
 # EXECUTA O PAINEL COMO ADMINISTRADOR
 # ==========================================
-Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$PS1Path`"" -Verb RunAs
+Start-Process -FilePath $EXEPath
