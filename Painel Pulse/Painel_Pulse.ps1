@@ -1763,7 +1763,7 @@ function New-OptCard {
          'visual'      = 0xf4a5
          'privacidade' = 0xed1a
          'internet'    = 0xe774
-         'restaurar'   = 0xe777
+         'restaurar'   = 0xf156
          'reparar'     = 0xe90f
          'outros'      = 0xea86
     }
@@ -1775,7 +1775,7 @@ function New-OptCard {
          'visual'      = 19
          'privacidade' = 18
          'internet'    = 18
-         'restaurar'   = 19
+         'restaurar'   = 18
          'reparar'     = 19
          'outros'      = 19
     }
