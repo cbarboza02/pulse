@@ -22,7 +22,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_device-setup-manager.bat apply",
     "Revert": ".\\comandos\\geral_geral_device-setup-manager.bat revert",
-    "Foco": "fluidez"
+    "Foco": "windows"
   },
   {
     "Id": "geral.apps-segundo-plano",
@@ -71,7 +71,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_services-pipe-timeout.bat apply",
     "Revert": ".\\comandos\\geral_geral_services-pipe-timeout.bat revert",
-    "Foco": "fluidez"
+    "Foco": "windows"
   },
   {
     "Id": "geral.manutencao-automatica",
@@ -96,7 +96,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_manutencao-automatica.bat apply",
     "Revert": ".\\comandos\\geral_geral_manutencao-automatica.bat revert",
-    "Foco": "fluidez"
+    "Foco": "windows"
   },
   {
     "Id": "geral.plano-energia",
@@ -146,7 +146,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_sleep-timeout.bat apply",
     "Revert": ".\\comandos\\geral_geral_sleep-timeout.bat revert",
-    "Foco": "fluidez"
+    "Foco": "windows"
   },
   {
     "Id": "geral.hibernacao",
@@ -352,7 +352,7 @@
     },
     "Apply": ".\\comandos\\geral_geral_recursos-experimentais.bat apply",
     "Revert": ".\\comandos\\geral_geral_recursos-experimentais.bat revert",
-    "Foco": "fluidez",
+    "Foco": "windows",
     "Favorito": "sim"
   },
   {
@@ -378,7 +378,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_instalacao-automatica.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_instalacao-automatica.bat revert",
-    "Foco": "fluidez",
+    "Foco": "windows",
     "Favorito": "sim"
   },
   {
@@ -403,7 +403,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_mover-copiar-para.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_mover-copiar-para.bat revert",
-    "Foco": "fluidez"
+    "Foco": "windows"
   },
   {
     "Id": "geral.preenchimento-automatico",
@@ -428,7 +428,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_preenchimento-automatico.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_preenchimento-automatico.bat revert",
-    "Foco": "fluidez"
+    "Foco": "windows"
   },
   {
     "Id": "geral.aeroshake",
@@ -453,7 +453,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_aeroshake.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_aeroshake.bat revert",
-    "Foco": "fluidez"
+    "Foco": "windows"
   },
   {
     "Id": "geral.acesso-rapido",
@@ -478,7 +478,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_acesso-rapido.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_acesso-rapido.bat revert",
-    "Foco": "fluidez"
+    "Foco": "windows"
   },
   {
     "Id": "geral.finalizar-tarefa",
@@ -501,7 +501,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_finalizar-tarefa.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_finalizar-tarefa.bat revert",
-    "Foco": "fluidez",
+    "Foco": "windows",
     "Favorito": "sim"
   },
   {
@@ -623,7 +623,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_foto-classico.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_foto-classico.bat revert",
-    "Foco": "fluidez"
+    "Foco": "windows"
   },
   {
     "Id": "geral.desfoque-bloqueio",
@@ -723,7 +723,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_dicas-sugestoes.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_dicas-sugestoes.bat revert",
-    "Foco": "fluidez",
+    "Foco": "windows",
     "Favorito": "sim"
   },
   {
@@ -749,7 +749,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_teclas-acessibilidade.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_teclas-acessibilidade.bat revert",
-    "Foco": "fluidez",
+    "Foco": "windows",
     "Favorito": "sim"
   },
   {
@@ -773,7 +773,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_numLock.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_numLock.bat revert",
-    "Foco": "fluidez"
+    "Foco": "windows"
   },
   {
     "Id": "geral.itens-ocultos",
@@ -796,7 +796,7 @@
     },
     "Apply": ".\\comandos\\geral_experiencia_itens-ocultos.bat apply",
     "Revert": ".\\comandos\\geral_experiencia_itens-ocultos.bat revert",
-    "Foco": "fluidez"
+    "Foco": "visual"
   },
   {
     "Id": "geral.icone-atalho",
@@ -1033,6 +1033,7 @@
     "Id": "geral.sensores",
     "TabKey": "geral_priv",
     "pulsemode": "sim",
+    "Foco": "privacidade"
     "Name": "Desativar Sensores",
     "Description": "Desativa o acesso de aplicativos aos sensores do sistema, como acelerômetro, giroscópio e sensor de luz.",
     "Tooltip": {
