@@ -1,3 +1,26 @@
+# ==========================================
+# TRAVA DE EXCLUSIVIDADE (PULSE OS)
+# ==========================================
+$RegPath = "HKLM:\SOFTWARE\PulseOS"
+$RegName = "SystemID"
+$ExpectedID = "PULSE-CORE"
+
+$isExclusive = $false
+try {
+    $val = (Get-ItemProperty -Path $RegPath -Name $RegName -ErrorAction Stop).$RegName
+    if ($val -eq $ExpectedID) { $isExclusive = $true }
+} catch {}
+
+if (-not $isExclusive) {
+    Add-Type -AssemblyName PresentationFramework
+    [System.Windows.MessageBox]::Show(
+        "Ferramenta não autorizada. Este utilitário é exclusivo do PulseOS.", 
+        "Painel Pulse", 
+        'OK', 'Error'
+    ) | Out-Null
+    exit
+}
+
 #Requires -Version 5.1
 $RepoBase = "https://raw.githubusercontent.com/cbarboza02/pulse/main/Painel%20Pulse"
 $Base     = Join-Path $env:TEMP "Painel Pulse"
