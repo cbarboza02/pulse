@@ -2,7 +2,7 @@
 # ==========================================
 # LAUNCHER PULSE
 # ==========================================
-$Script:LauncherVersion = "V1.1"
+$Script:LauncherVersion = "V1.0"
 
 # ==========================================
 # CONFIGURACOES GERAIS
@@ -16,9 +16,9 @@ $InstallDir           = "C:\Painel Pulse"
 $InstalledLauncherExe = Join-Path $InstallDir "Launcher Pulse.exe"
 
 $Base     = Join-Path $env:TEMP "Painel Pulse"
-$JsonDir  = Join-Path $Base "json1"
-$CmdsDir  = Join-Path $Base "comandos1"
-$EXEPath  = Join-Path $Base "Painel Pulse1.exe"
+$JsonDir  = Join-Path $Base "json"
+$CmdsDir  = Join-Path $Base "comandos"
+$EXEPath  = Join-Path $Base "Painel Pulse.exe"
 $LogPath  = Join-Path $env:TEMP "Launcher_Pulse.log"
 
 $TempPanelPs1       = Join-Path $env:TEMP "temp_painel_pulse.ps1"
