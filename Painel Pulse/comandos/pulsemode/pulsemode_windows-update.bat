@@ -5,6 +5,7 @@ exit
 
 :apply
 schtasks /Delete /TN "Pulse Mode - Otimizar Windows Update" /F 2>nul
+schtasks /Delete /TN "\PulseOS\Pulse Mode - Otimizar Windows Update" /F 2>nul
 
 if not exist "C:\Painel Pulse\tarefas" md "C:\Painel Pulse\tarefas"
 if not exist "%USERPROFILE%\Documents\Painel Pulse\Logs" md "%USERPROFILE%\Documents\Painel Pulse\Logs"
@@ -65,7 +66,7 @@ echo # 5. Log de execucao da tarefa
 echo Add-Content -Path '%USERPROFILE%\Documents\Painel Pulse\Logs\PulseLog_otimizar-windows-update.txt' -Value ^('[TAREFA] Executada em: ' + ^(Get-Date^)^)
 ) > "C:\Painel Pulse\tarefas\pulsemode_otimizar-windows-update.ps1"
 
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$f='C:\Painel Pulse\tarefas\pulsemode_otimizar-windows-update.ps1'; $arg='-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File '+[char]34+$f+[char]34; $a=New-ScheduledTaskAction -Execute 'powershell.exe' -Argument $arg; $t=New-ScheduledTaskTrigger -AtLogOn; $t.Delay='PT20S'; $p=New-ScheduledTaskPrincipal -UserId 'SYSTEM' -LogonType ServiceAccount -RunLevel Highest; $s=New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries; Register-ScheduledTask -TaskName 'Pulse Mode - Otimizar Windows Update' -Action $a -Trigger $t -Principal $p -Settings $s -Force"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$TaskPath='\PulseOS\'; try { $svc=New-Object -ComObject Schedule.Service; $svc.Connect(); $root=$svc.GetFolder('\'); try { $null=$root.GetFolder('PulseOS') } catch { $null=$root.CreateFolder('PulseOS') } } catch {}; $f='C:\Painel Pulse\tarefas\pulsemode_otimizar-windows-update.ps1'; $arg='-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File '+[char]34+$f+[char]34; $a=New-ScheduledTaskAction -Execute 'powershell.exe' -Argument $arg; $t=New-ScheduledTaskTrigger -AtLogOn; $t.Delay='PT20S'; $p=New-ScheduledTaskPrincipal -UserId 'SYSTEM' -LogonType ServiceAccount -RunLevel Highest; $s=New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries; Register-ScheduledTask -TaskPath $TaskPath -TaskName 'Pulse Mode - Otimizar Windows Update' -Action $a -Trigger $t -Principal $p -Settings $s -Force"
 
 powershell -NoProfile -ExecutionPolicy Bypass -Command "Add-Content -Path '%USERPROFILE%\Documents\Painel Pulse\Logs\PulseLog_otimizar-windows-update.txt' -Value ('[PAINEL PULSE] Arquivo e tarefa criados com sucesso em: ' + (Get-Date))"
 
@@ -74,6 +75,7 @@ exit
 
 :revert
 schtasks /Delete /TN "Pulse Mode - Otimizar Windows Update" /F 2>nul
+schtasks /Delete /TN "\PulseOS\Pulse Mode - Otimizar Windows Update" /F 2>nul
 
 if exist "C:\Painel Pulse\tarefas\pulsemode_otimizar-windows-update.ps1" (
     del /f /q "C:\Painel Pulse\tarefas\pulsemode_otimizar-windows-update.ps1"
