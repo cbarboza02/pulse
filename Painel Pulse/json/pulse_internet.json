@@ -1,0 +1,150 @@
+[
+  {
+    "Id": "internet.teredo",
+    "TabKey": "internet",
+    "pulsemode": "",
+    "Foco": "internet",
+    "Name": "Desativar Teredo",
+    "Description": "Desativa o Teredo, mecanismo de tunelamento IPv6 sobre IPv4, eliminando o overhead de encapsulamento e as conexões periódicas ao servidor Teredo da Microsoft.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina o overhead de encapsulamento IPv6/IPv4 do Teredo na pilha de rede",
+        "Remove conexões periódicas ao servidor Teredo da Microsoft em segundo plano",
+        "Reduz latência de rede ao simplificar a pilha de protocolos ativos"
+      ],
+      "Cons": [
+        "Conectividade IPv6 pura via Teredo ficará indisponível",
+        "Pode exigir reconfiguração caso o sistema dependa de IPv6 para algum serviço específico"
+      ],
+      "Unavailable": [
+        "O tunelamento IPv6 via Teredo ficará indisponível",
+        "Jogos e serviços da Microsoft Store que utilizam Teredo para conectividade IPv6 podem ser afetados"
+      ]
+    },
+    "Apply": ".\\comandos\\internet_teredo.bat apply",
+    "Revert": ".\\comandos\\internet_teredo.bat revert",
+    "Favorito": "sim"
+  },
+  {
+    "Id": "internet.nagle-algorithm",
+    "TabKey": "internet",
+    "pulsemode": "sim",
+    "Foco": "internet",
+    "Name": "Desativar Algoritmo de Nagle",
+    "Description": "Desativa o Algoritmo de Nagle, que agrupa pacotes TCP pequenos antes de enviá-los, introduzindo latência artificial em troca de eficiência de throughput.",
+    "Tooltip": {
+      "Pros": [
+        "Reduz latência de envio em jogos online, VoIP e aplicações de tempo real",
+        "Pacotes são enviados imediatamente sem esperar acumulação de dados",
+        "Melhora responsividade percebida em conexões de alta frequência de pacotes"
+      ],
+      "Cons": [
+        "Pode aumentar o número de pacotes enviados, elevando levemente o uso da rede",
+        "Em conexões de baixa qualidade, pode aumentar fragmentação de pacotes",
+        "Sem impacto perceptível em downloads ou streaming de alta largura de banda"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\internet_nagle-algorithm.bat apply",
+    "Revert": ".\\comandos\\internet_nagle-algorithm.bat revert",
+    "Favorito": "sim"
+  },
+  {
+    "Id": "internet.network-throttling",
+    "TabKey": "internet",
+    "pulsemode": "sim",
+    "Foco": "internet",
+    "Name": "Desativar Network Throttling Index",
+    "Description": "Desativa o limite de processamento de pacotes de rede imposto pelo Windows, que por padrão restringe a cerca de 10 pacotes por milissegundo para priorizar multimídia.",
+    "Tooltip": {
+      "Pros": [
+        "Remove o gargalo artificial de processamento de pacotes de rede",
+        "Melhor desempenho em conexões de alta velocidade e baixa latência",
+        "Benefício direto em jogos online com alto volume de pacotes UDP"
+      ],
+      "Cons": [
+        "Pode aumentar levemente o uso de CPU em situações de alto tráfego de rede",
+        "O Windows pode priorizar menos o tráfego de mídia em segundo plano",
+        "Impacto variável dependendo do hardware e do driver da placa de rede"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\internet_network-throttling.bat apply",
+    "Revert": ".\\comandos\\internet_network-throttling.bat revert",
+    "Favorito": "sim"
+  },
+  {
+    "Id": "internet.energia-nic",
+    "TabKey": "internet",
+    "pulsemode": "sim",
+    "Foco": "internet",
+    "Name": "Desativar Economia de Energia NIC",
+    "Description": "Desativa o gerenciamento de energia da placa de rede, impedindo que o Windows reduza sua velocidade ou a suspenda para economizar energia.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina micro-desconexões e variações de latência causadas por transições de energia da NIC",
+        "A placa de rede mantém desempenho máximo constante sem redução de clock",
+        "Conexão mais estável e responsiva durante sessões longas de jogo ou trabalho"
+      ],
+      "Cons": [
+        "Aumenta o consumo de energia da placa de rede continuamente",
+        "Impacto relevante na duração de bateria em notebooks",
+        "Benefício imperceptível em conexões com baixa taxa de transferência"
+      ],
+      "Unavailable": [
+        "O gerenciamento de energia da placa de rede pelo Windows ficará indisponível",
+        "A suspensão automática da NIC para economia de energia ficará indisponível"
+      ]
+    },
+    "Apply": ".\\comandos\\internet_energia-nic.bat apply",
+    "Revert": ".\\comandos\\internet_energia-nic.bat revert",
+    "Favorito": "sim"
+  },
+  {
+    "Id": "internet.rsc-lso-interrupt",
+    "TabKey": "internet",
+    "pulsemode": "sim",
+    "Foco": "internet",
+    "Name": "Desativar RSC, LSO e Interrupt Moderation",
+    "Description": "Desativa o Receive Segment Coalescing (RSC) Large Send Offload (LSO) e o Interrupt Moderation, que agrupam segmentos TCP para aumentar eficiência, mas adicionam latência no processo.",
+    "Tooltip": {
+      "Pros": [
+        "Reduz latência de recepção ao entregar pacotes à CPU sem esperar agrupamento",
+        "Elimina o atraso artificial introduzido pelo agrupamento de interrupções de rede",
+        "Benefício perceptível em jogos online e aplicações interativas sensíveis a latência"
+      ],
+      "Cons": [
+        "Reduz eficiência de throughput em transferências grandes (downloads, cópias de rede)",
+        "Aumenta o número de interrupções de CPU por pacote recebido",
+        "Pode elevar levemente o uso de CPU em conexões de alta velocidade"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\internet_rcs-lso-interrupt.bat apply",
+    "Revert": ".\\comandos\\internet_rcs-lso-interrupt.bat revert",
+    "Favorito": "sim"
+  },
+  {
+    "Id": "internet.tcp-connection",
+    "TabKey": "internet",
+    "pulsemode": "sim",
+    "Foco": "internet",
+    "Name": "Ajustar TCP Connection Settings",
+    "Description": "Ajusta parâmetros TCP globais: desativa auto-tuning e timestamps, ativa ECN e define janela de recepção fixa de 1 MB, reduzindo overhead por pacote e latência de congestionamento.",
+    "Tooltip": {
+      "Pros": [
+        "Desativar timestamps reduz overhead em cada pacote TCP transmitido",
+        "ECN detecta congestionamento sem causar perda de pacotes",
+        "Janela TCP fixa de 1 MB adequada para conexões domésticas sem variações de auto-tuning"
+      ],
+      "Cons": [
+        "Desativar auto-tuning pode reduzir throughput em conexões de alta latência ou internacionais",
+        "Algumas configurações dependem de suporte do servidor remoto para ter efeito",
+        "Requer reinicialização para aplicação completa de todos os parâmetros"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\internet_tcp-connection.bat apply",
+    "Revert": ".\\comandos\\internet_tcp-connection.bat revert"
+  }
+]
