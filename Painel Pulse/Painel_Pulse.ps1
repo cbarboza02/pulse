@@ -584,6 +584,41 @@ $xaml = @'
             </Setter>
         </Style>
 
+        <Style x:Key="NavMenuFooterItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Foreground" Value="#67687B"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="14,10"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="8" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#191923"/>
+                                <Setter Property="BorderBrush" Value="#242436"/>
+                                <Setter Property="Foreground" Value="#F4F4F4"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#12121B"/>
+                                <Setter Property="BorderBrush" Value="#242436"/>
+                                <Setter Property="Foreground" Value="#D1D1D1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="TopTabItemStyle" TargetType="TabItem">
             <Setter Property="Foreground" Value="#515662"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -817,7 +852,7 @@ $xaml = @'
         </Style>
 
         <Style x:Key="MiniCancelButton" TargetType="Button">
-            <Setter Property="Background" Value="#0A0A0F"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#9EA7B8"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="12,6"/>
@@ -936,7 +971,52 @@ $xaml = @'
                     <!--
                     <TextBlock Text="Painel" Foreground="#67687B" FontSize="12"/>
                     <TextBlock Text="PULSE" FontWeight="ExtraBold" FontSize="22" Foreground="#F4F4F4" Margin="0,0,0,20"/> -->
-                    <Button x:Name="BtnFazerBackup" Content="Fazer Backup" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Stretch" Margin="0,0,0,20" Padding="0,8"/>
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="BtnFazerBackup"
+                                Grid.Column="0"
+                                Content="Backup"
+                                Style="{StaticResource AccentButtonStyle}"
+                                HorizontalAlignment="Stretch"
+                                Margin="0,0,5,0"
+                                Padding="0,8"
+                                ToolTip="Fazer Backup"/>
+
+                        <Button x:Name="BtnRestaurar"
+                                Grid.Column="1"
+                                Style="{StaticResource MiniCancelButton}"
+                                HorizontalAlignment="Stretch"
+                                Margin="0,0,0,0"
+                                Padding="2,2"
+                                ToolTip="Restaurar Sistema">
+                            <TextBlock FontFamily="Segoe Fluent Icons"
+                                       Text="&#xF738;"
+                                       FontSize="16"
+                                       FontWeight="Normal"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Button>
+
+                        <Button x:Name="BtnAbrirLog"
+                                Grid.Column="2"
+                                Style="{StaticResource MiniCancelButton}"
+                                HorizontalAlignment="Stretch"
+                                Margin="0"
+                                Padding="2,2"
+                                ToolTip="Abrir Log">
+                            <TextBlock FontFamily="Segoe Fluent Icons"
+                                       Text="&#xF000;"
+                                       FontSize="16"
+                                       FontWeight="Normal"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Button>
+                    </Grid>
                 </StackPanel>
                 
                 <ListBox x:Name="NavMenu" Grid.Row="1" Background="Transparent" BorderThickness="0" 
@@ -951,26 +1031,6 @@ $xaml = @'
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" FontFamily="Segoe Fluent Icons" Text="&#xE80F;" VerticalAlignment="Center" FontSize="16"/>
                             <TextBlock Grid.Column="1" Text="Início" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
-                        </Grid>
-                    </ListBoxItem>
-                    <ListBoxItem Tag="restaurar">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" FontFamily="Segoe Fluent Icons" Text="&#xE777;" VerticalAlignment="Center" FontSize="16"/>
-                            <TextBlock Grid.Column="1" Text="Restaurar" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
-                        </Grid>
-                    </ListBoxItem>
-                    <ListBoxItem Tag="reparar">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" FontFamily="Segoe Fluent Icons" Text="&#xE90F;" VerticalAlignment="Center" FontSize="16"/>
-                            <TextBlock Grid.Column="1" Text="Reparar" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
                         </Grid>
                     </ListBoxItem>
                     <ListBoxItem Tag="pulsemode" Margin="0,0,0,25">
@@ -1025,14 +1085,36 @@ $xaml = @'
                     </ListBoxItem>
                 </ListBox>
 
-                <Grid Grid.Row="2" Margin="0,10,0,10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Button x:Name="BtnRestaurar" Grid.Row="0" Content="Restaurar Sistema" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,0,8"/>
-                    <Button x:Name="BtnAbrirLog" Grid.Row="1" Content="Abrir Log" Style="{StaticResource SecondaryButtonStyle}"/>
-                </Grid>
+                <ListBox x:Name="NavMenuFooter"
+                         Grid.Row="2"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         Margin="0,10,0,10"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ItemContainerStyle="{StaticResource NavMenuFooterItemStyle}">
+
+                    <ListBoxItem Tag="restaurar">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontFamily="Segoe Fluent Icons" Text="&#xE777;" VerticalAlignment="Center" FontSize="16"/>
+                            <TextBlock Grid.Column="1" Text="Restaurar" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
+                        </Grid>
+                    </ListBoxItem>
+
+                    <ListBoxItem Tag="reparar">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontFamily="Segoe Fluent Icons" Text="&#xE90F;" VerticalAlignment="Center" FontSize="16"/>
+                            <TextBlock Grid.Column="1" Text="Reparar" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
+                        </Grid>
+                    </ListBoxItem>
+                </ListBox>
             </Grid>
         </Border>
 
@@ -1692,6 +1774,7 @@ if (Test-Path $iconPath) {
 
 # --- Mapeamento de elementos da UI ---
 $script:NavMenu          = $window.FindName('NavMenu')
+$script:NavMenuFooter    = $window.FindName('NavMenuFooter')
 $script:BtnFazerBackup   = $window.FindName('BtnFazerBackup')
 $script:BtnRestaurar     = $window.FindName('BtnRestaurar')
 $script:BtnAbrirLog      = $window.FindName('BtnAbrirLog')
@@ -3866,9 +3949,10 @@ $window.Add_ContentRendered({
 })
 
 # --- Navegação do menu lateral ---
-$script:NavMenu.Add_SelectionChanged({
-    param($s, $e)
-    if ($e.Source -ne $s) { return }
+$script:SuppressNavSelection = $false
+
+function Show-PulsePage {
+    param([string]$Tag)
 
     $script:Page_Inicio.Visibility      = 'Collapsed'
     $script:Page_Restaurar.Visibility   = 'Collapsed'
@@ -3879,18 +3963,43 @@ $script:NavMenu.Add_SelectionChanged({
     $script:Page_Limpeza.Visibility     = 'Collapsed'
     $script:Page_PulseMode.Visibility   = 'Collapsed'
 
+    switch ($Tag) {
+        'inicio'      { $script:Page_Inicio.Visibility      = 'Visible' }
+        'pulsemode'   { $script:Page_PulseMode.Visibility   = 'Visible' }
+        'restaurar'   { $script:Page_Restaurar.Visibility   = 'Visible' }
+        'reparar'     { $script:Page_Reparar.Visibility     = 'Visible' }
+        'geral'       { $script:Page_Geral.Visibility       = 'Visible' }
+        'hardware'    { $script:Page_Hardware.Visibility    = 'Visible' }
+        'internet'    { $script:Page_Internet.Visibility    = 'Visible' }
+        'limpeza'     { $script:Page_Limpeza.Visibility     = 'Visible' }
+    }
+}
+
+$script:NavMenu.Add_SelectionChanged({
+    param($s, $e)
+    if ($e.Source -ne $s -or $script:SuppressNavSelection) { return }
+
     $selectedItem = $script:NavMenu.SelectedItem
     if ($null -ne $selectedItem) {
-        switch ($selectedItem.Tag) {
-            'inicio'      { $script:Page_Inicio.Visibility      = 'Visible' }
-            'pulsemode'   { $script:Page_PulseMode.Visibility   = 'Visible' }
-            'restaurar'   { $script:Page_Restaurar.Visibility   = 'Visible' }
-            'reparar'     { $script:Page_Reparar.Visibility     = 'Visible' }
-            'geral'       { $script:Page_Geral.Visibility       = 'Visible' }
-            'hardware'    { $script:Page_Hardware.Visibility    = 'Visible' }
-            'internet'    { $script:Page_Internet.Visibility    = 'Visible' }
-            'limpeza'     { $script:Page_Limpeza.Visibility     = 'Visible' }
-        }
+        $script:SuppressNavSelection = $true
+        $script:NavMenuFooter.SelectedIndex = -1
+        $script:SuppressNavSelection = $false
+
+        Show-PulsePage -Tag ([string]$selectedItem.Tag)
+    }
+})
+
+$script:NavMenuFooter.Add_SelectionChanged({
+    param($s, $e)
+    if ($e.Source -ne $s -or $script:SuppressNavSelection) { return }
+
+    $selectedItem = $script:NavMenuFooter.SelectedItem
+    if ($null -ne $selectedItem) {
+        $script:SuppressNavSelection = $true
+        $script:NavMenu.SelectedIndex = -1
+        $script:SuppressNavSelection = $false
+
+        Show-PulsePage -Tag ([string]$selectedItem.Tag)
     }
 })
 
@@ -3964,7 +4073,7 @@ $script:BtnFazerBackup.Add_Click({
             "Erro de Backup", 'OK', 'Error'
         ) | Out-Null
     } finally {
-        $script:BtnFazerBackup.Content = "Fazer Backup"
+        $script:BtnFazerBackup.Content = "Backup"
         $script:BtnFazerBackup.IsEnabled = $true
     }
 })
@@ -3991,13 +4100,13 @@ $script:BtnSearchApp.Add_Click({
     }
 })
 
-# --- Botão: Restaurar Sistema ---
+# --- Botão de ícone: Restaurar Sistema ---
 $script:BtnRestaurar.Add_Click({
     Write-PulseLog "Usuário acionou o atalho de Restauração do Sistema."
     Start-Process "rstrui.exe"
 })
 
-# --- Botão: Abrir Log ---
+# --- Botão de ícone: Abrir Log ---
 $script:BtnAbrirLog.Add_Click({
     Write-PulseLog "Usuário solicitou a abertura do arquivo de Log."
     Start-Process "notepad.exe" $script:LogFile
