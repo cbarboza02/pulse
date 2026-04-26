@@ -13,7 +13,7 @@ $PanelScriptUrl    = "$RepoBase/Painel_Pulse.ps1"
 $IconUrl           = "$RepoBase/pulseicon.ico"
 
 $InstallDir           = "C:\Painel Pulse"
-$InstalledLauncherExe = Join-Path $InstallDir "Launcher Pulse.exe"
+$InstalledLauncherExe = Join-Path $InstallDir "Painel Pulse.exe"
 
 $Base     = Join-Path $env:TEMP "Painel Pulse"
 $JsonDir  = Join-Path $Base "json"
@@ -27,7 +27,7 @@ $TempPanelIcon      = Join-Path $env:TEMP "temp_pulseicon.ico"
 
 $TempLauncherPs1    = Join-Path $env:TEMP "Launcher_Pulse.remote.ps1"
 $TempLauncherBuild  = Join-Path $env:TEMP "Launcher_Pulse.build.ps1"
-$TempLauncherExe    = Join-Path $env:TEMP "Launcher Pulse.update.exe"
+$TempLauncherExe    = Join-Path $env:TEMP "Painel Pulse.update.exe"
 $TempLauncherIcon   = Join-Path $env:TEMP "Launcher_Pulse.update.ico"
 $UpdateHelperPath   = Join-Path $env:TEMP "PulseOS_Launcher_Update_Helper.ps1"
 
@@ -163,10 +163,30 @@ function Test-IsAdmin {
 function Ensure-PS2EXE {
     if (Get-Command Invoke-PS2EXE -ErrorAction SilentlyContinue) { return $true }
 
-    try { Import-Module ps2exe -ErrorAction SilentlyContinue } catch {}
-    if (Get-Command Invoke-PS2EXE -ErrorAction SilentlyContinue) { return $true }
+    try {
+        Import-Module ps2exe -Force -ErrorAction SilentlyContinue
+        if (Get-Command Invoke-PS2EXE -ErrorAction SilentlyContinue) { return $true }
+    } catch {}
 
-    Show-Erro "PS2EXE nao foi encontrado neste Windows.`nO comando Invoke-PS2EXE precisa estar disponivel para converter o Painel Pulse."
+    try {
+        Initialize-Tls
+        $ProgressPreference = 'SilentlyContinue'
+
+        Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted -ErrorAction SilentlyContinue
+        Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -ErrorAction SilentlyContinue | Out-Null
+        Install-Module -Name ps2exe -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop | Out-Null
+        Import-Module ps2exe -Force -ErrorAction Stop
+
+        if (Get-Command Invoke-PS2EXE -ErrorAction SilentlyContinue) {
+            Write-Log "PS2EXE instalado/carregado com sucesso."
+            return $true
+        }
+    }
+    catch {
+        Write-Log "Falha ao instalar/carregar PS2EXE: $($_.Exception.Message)"
+    }
+
+    Show-Erro "PS2EXE nao foi encontrado e nao foi possivel instala-lo automaticamente.`nVerifique a internet/PowerShellGet e tente novamente."
     return $false
 }
 
@@ -267,7 +287,7 @@ try {
     try {
         Add-Type -AssemblyName PresentationFramework -ErrorAction Stop
         [System.Windows.MessageBox]::Show(
-            "Falha ao atualizar o Launcher Pulse:`n$($_.Exception.Message)",
+            "Falha ao atualizar o Painel Pulse:`n$($_.Exception.Message)",
             "Painel Pulse",
             'OK',
             'Error'
@@ -290,7 +310,7 @@ try {
 
         return $true
     } catch {
-        Show-Erro "Falha ao iniciar a atualizacao do Launcher Pulse.`n$($_.Exception.Message)"
+        Show-Erro "Falha ao iniciar a atualizacao do Painel Pulse.`n$($_.Exception.Message)"
         return $false
     }
 }
@@ -357,12 +377,12 @@ function Update-LauncherIfNeeded {
         Download-Arquivo -Url $IconUrl -Destino $TempLauncherIcon | Out-Null
 
         if (-not (New-BuildScript -InputPs1 $TempLauncherPs1 -OutputPs1 $TempLauncherBuild)) {
-            Show-Erro "Nao foi possivel preparar a nova versao do Launcher Pulse."
+            Show-Erro "Nao foi possivel preparar a nova versao do Painel Pulse."
             return $false
         }
 
-        if (-not (Convert-PS1ToExe -InputPs1 $TempLauncherBuild -OutputExe $TempLauncherExe -IconFile $TempLauncherIcon -Title "Launcher Pulse")) {
-            Show-Erro "Nao foi possivel converter a nova versao do Launcher Pulse para .exe."
+        if (-not (Convert-PS1ToExe -InputPs1 $TempLauncherBuild -OutputExe $TempLauncherExe -IconFile $TempLauncherIcon -Title "Painel Pulse")) {
+            Show-Erro "Nao foi possivel converter a nova versao do Painel Pulse para .exe."
             return $false
         }
 
@@ -370,7 +390,7 @@ function Update-LauncherIfNeeded {
             return $false
         }
 
-        Show-Info "Uma nova versao do Launcher Pulse foi encontrada.`nO launcher sera atualizado e aberto novamente."
+        Show-Info "Uma nova versao do Painel Pulse foi encontrada.`nO launcher sera atualizado e aberto novamente."
         exit 0
     } catch {
         Write-Log "Falha inesperada no auto-update do launcher: $($_.Exception.Message)"
