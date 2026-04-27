@@ -2,7 +2,7 @@
 # ==========================================
 # LAUNCHER PULSE
 # ==========================================
-$Script:LauncherVersion = "V1.1"
+$Script:LauncherVersion = "V1.0.1"
 
 # ==========================================
 # CONFIGURACOES GERAIS
@@ -161,32 +161,135 @@ function Test-IsAdmin {
 }
 
 function Ensure-PS2EXE {
-    if (Get-Command Invoke-PS2EXE -ErrorAction SilentlyContinue) { return $true }
+    function Test-PS2EXEAvailable {
+        try {
+            $cmd = Get-Command Invoke-PS2EXE -ErrorAction SilentlyContinue
+            if ($null -ne $cmd) {
+                Write-Log "PS2EXE encontrado: $($cmd.Source)"
+                return $true
+            }
+        } catch {}
 
-    try {
-        Import-Module ps2exe -Force -ErrorAction SilentlyContinue
-        if (Get-Command Invoke-PS2EXE -ErrorAction SilentlyContinue) { return $true }
-    } catch {}
+        try {
+            Import-Module ps2exe -Force -ErrorAction SilentlyContinue
+            $cmd = Get-Command Invoke-PS2EXE -ErrorAction SilentlyContinue
+            if ($null -ne $cmd) {
+                Write-Log "PS2EXE importado com sucesso: $($cmd.Source)"
+                return $true
+            }
+        } catch {
+            Write-Log "Falha ao importar PS2EXE existente: $($_.Exception.Message)"
+        }
+
+        return $false
+    }
+
+    function Add-PulseModulePaths {
+        try {
+            $candidatePaths = @(
+                (Join-Path ([Environment]::GetFolderPath('MyDocuments')) "WindowsPowerShell\Modules"),
+                (Join-Path ([Environment]::GetFolderPath('MyDocuments')) "PowerShell\Modules"),
+                (Join-Path $env:ProgramFiles "WindowsPowerShell\Modules"),
+                (Join-Path $env:ProgramFiles "PowerShell\Modules")
+            ) | Where-Object { $_ -and (Test-Path -LiteralPath $_) }
+
+            $current = @($env:PSModulePath -split ';' | Where-Object { $_ })
+            foreach ($path in $candidatePaths) {
+                if ($current -notcontains $path) {
+                    $env:PSModulePath = "$env:PSModulePath;$path"
+                }
+            }
+        } catch {}
+    }
+
+    if (Test-PS2EXEAvailable) { return $true }
+
+    Add-PulseModulePaths
+    if (Test-PS2EXEAvailable) { return $true }
 
     try {
         Initialize-Tls
+        Add-PulseModulePaths
+
         $ProgressPreference = 'SilentlyContinue'
+        $ConfirmPreference = 'None'
 
-        Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted -ErrorAction SilentlyContinue
-        Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -ErrorAction SilentlyContinue | Out-Null
-        Install-Module -Name ps2exe -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop | Out-Null
-        Import-Module ps2exe -Force -ErrorAction Stop
+        Write-Log "PS2EXE nao encontrado. Tentando instalar automaticamente..."
 
-        if (Get-Command Invoke-PS2EXE -ErrorAction SilentlyContinue) {
-            Write-Log "PS2EXE instalado/carregado com sucesso."
-            return $true
+        if (-not (Get-Command Install-Module -ErrorAction SilentlyContinue)) {
+            Write-Log "Install-Module nao esta disponivel neste Windows/PowerShell."
+            return $false
+        }
+
+        try {
+            $nugetProvider = Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue
+            if ($null -eq $nugetProvider) {
+                Write-Log "Provider NuGet nao encontrado. Instalando..."
+                Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Confirm:$false -ErrorAction Stop | Out-Null
+            }
+            Import-PackageProvider -Name NuGet -Force -ErrorAction SilentlyContinue | Out-Null
+        }
+        catch {
+            Write-Log "Falha ao preparar provider NuGet: $($_.Exception.Message)"
+        }
+
+        try {
+            $repo = Get-PSRepository -Name "PSGallery" -ErrorAction SilentlyContinue
+            if ($null -eq $repo) {
+                Write-Log "Repositorio PSGallery nao encontrado. Registrando repositorio padrao..."
+                Register-PSRepository -Default -ErrorAction Stop
+            }
+
+            Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted -ErrorAction SilentlyContinue
+        }
+        catch {
+            Write-Log "Falha ao preparar PSGallery: $($_.Exception.Message)"
+        }
+
+        $installScopes = @("CurrentUser")
+        if (Test-IsAdmin) {
+            $installScopes += "AllUsers"
+        }
+
+        foreach ($scope in $installScopes) {
+            try {
+                Write-Log "Tentando instalar PS2EXE no escopo $scope..."
+                Install-Module `
+                    -Name ps2exe `
+                    -Repository PSGallery `
+                    -Scope $scope `
+                    -Force `
+                    -AllowClobber `
+                    -SkipPublisherCheck `
+                    -Confirm:$false `
+                    -ErrorAction Stop | Out-Null
+
+                Add-PulseModulePaths
+
+                try {
+                    Import-Module ps2exe -Force -ErrorAction Stop
+                } catch {
+                    Write-Log "Modulo instalado, mas falhou ao importar no escopo $scope: $($_.Exception.Message)"
+                }
+
+                if (Test-PS2EXEAvailable) {
+                    Write-Log "PS2EXE instalado/carregado com sucesso no escopo $scope."
+                    return $true
+                }
+            }
+            catch {
+                Write-Log "Falha ao instalar PS2EXE no escopo $scope: $($_.Exception.Message)"
+            }
         }
     }
     catch {
-        Write-Log "Falha ao instalar/carregar PS2EXE: $($_.Exception.Message)"
+        Write-Log "Falha geral ao instalar/carregar PS2EXE: $($_.Exception.Message)"
     }
 
-    Show-Erro "PS2EXE nao foi encontrado e nao foi possivel instala-lo automaticamente.`nVerifique a internet/PowerShellGet e tente novamente."
+    Add-PulseModulePaths
+    if (Test-PS2EXEAvailable) { return $true }
+
+    Show-Erro "PS2EXE nao foi encontrado e a instalacao automatica falhou.`nVerifique a conexao com a internet, PSGallery/PowerShellGet e tente novamente."
     return $false
 }
 
