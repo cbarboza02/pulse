@@ -269,7 +269,7 @@ function Ensure-PS2EXE {
                 try {
                     Import-Module ps2exe -Force -ErrorAction Stop
                 } catch {
-                    Write-Log "Modulo instalado, mas falhou ao importar no escopo $scope: $($_.Exception.Message)"
+                    Write-Log "Modulo instalado, mas falhou ao importar no escopo $($scope): $($_.Exception.Message)"
                 }
 
                 if (Test-PS2EXEAvailable) {
@@ -278,7 +278,7 @@ function Ensure-PS2EXE {
                 }
             }
             catch {
-                Write-Log "Falha ao instalar PS2EXE no escopo $scope: $($_.Exception.Message)"
+                Write-Log "Falha ao instalar PS2EXE no escopo $($scope): $($_.Exception.Message)"
             }
         }
     }
