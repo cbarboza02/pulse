@@ -4204,7 +4204,7 @@ Update-PulseModeItems
 Update-MasterPulseToggleState
 
 $window.Add_Closing({
-    Write-PulseLog "Painel Pulse encerrado. Iniciando limpeza de arquivos temporários."
+    Write-PulseLog "Painel Pulse encerrado."
     $global:PulseQueueTimer.Stop()
 
     $dirToDelete = $script:BaseDir
