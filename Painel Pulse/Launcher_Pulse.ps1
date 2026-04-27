@@ -2,7 +2,7 @@
 # ==========================================
 # LAUNCHER PULSE
 # ==========================================
-$Script:LauncherVersion = "V1.0.1"
+$Script:LauncherVersion = "V1.1"
 
 # ==========================================
 # CONFIGURACOES GERAIS
