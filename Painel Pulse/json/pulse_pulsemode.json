@@ -166,33 +166,6 @@
     "Favorito": "sim"
   },
   {
-    "Id": "pulsemode.xbox-servicos",
-    "TabKey": "pulsemode",
-    "pulsemode": "exclusivo",
-    "Name": "Otimizar Serviços Xbox",
-    "Description": "Desativa o GameDVR, a GameBar e os serviços Xbox não essenciais, mantendo apenas os necessários para jogos que utilizam Xbox Live, GamePass e Microsoft Store.",
-    "Tooltip": {
-      "Pros": [
-        "Elimina a captura de gameplay em segundo plano do GameDVR, liberando CPU e VRAM",
-        "Remove a GameBar e suas notificações, reduzindo overhead durante sessões de jogo",
-        "Serviços Xbox não utilizados ficam como manual, iniciando apenas sob demanda"
-      ],
-      "Cons": [
-        "A captura de clipes e screenshots via GameBar ficará indisponível",
-        "O Auto Game Mode da GameBar deixará de ativar automaticamente",
-        "Controles Xbox via USB/Bluetooth podem demorar mais para ser reconhecidos na primeira conexão"
-      ],
-      "Unavailable": [
-        "O GameDVR e a captura de gameplay integrada ficarão indisponíveis",
-        "A GameBar (Win+G) ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\pulsemode_servicos-xbox.bat apply",
-    "Revert": ".\\comandos\\pulsemode_servicos-xbox.bat revert",
-    "Foco": "jogos",
-    "Favorito": "sim"
-  },
-  {
     "Id": "pulsemode.iopagelimit",
     "TabKey": "pulsemode",
     "pulsemode": "exclusivo",
