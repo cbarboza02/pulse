@@ -1,0 +1,690 @@
+[
+  {
+    "Id": "geral.apps-segundo-plano",
+    "TabKey": "geral_geral",
+    "pulsemode": "sim",
+    "Name": "Desativar Aplicativos em Segundo Plano",
+    "Description": "Desativa globalmente a execução de aplicativos UWP e da Microsoft Store em segundo plano, impedindo que recebam dados, enviem notificações ou executem tarefas sem estarem em uso.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina o consumo de CPU, RAM e rede por aplicativos UWP em segundo plano",
+        "Reduz a atividade de disco causada por sincronização e atualizações de apps em background",
+        "Menor interferência de processos de aplicativos durante sessões de jogo"
+      ],
+      "Cons": [
+        "Aplicativos como Clima, Calendário e Email não atualizarão em segundo plano",
+        "Notificações de apps que dependem de execução em background podem parar de funcionar",
+        "Alguns aplicativos podem demorar mais para carregar ao serem abertos pela primeira vez"
+      ],
+      "Unavailable": [
+        "A execução e atualização de aplicativos UWP em segundo plano ficará indisponível",
+        "Notificações de apps que dependem de background ficará indisponível"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_geral_apps-segundo-plano.bat apply",
+    "Revert": ".\\comandos\\geral_geral_apps-segundo-plano.bat revert",
+    "Foco": "fluidez"
+  },
+  {
+    "Id": "geral.manutencao-automatica",
+    "TabKey": "geral_geral",
+    "pulsemode": "sim",
+    "Name": "Desativar Manutenção Automática",
+    "Description": "Desativa a Manutenção Automática do Windows e suas tarefas agendadas, que executam diagnósticos, desfragmentação e outras operações em segundo plano em horários programados.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina picos de uso de CPU e disco causados pelas tarefas de manutenção automática",
+        "Impede que o sistema execute diagnósticos e desfragmentação durante sessões de jogo",
+        "Maior previsibilidade de desempenho ao remover operações agendadas em segundo plano"
+      ],
+      "Cons": [
+        "O sistema não executará automaticamente tarefas de diagnóstico e otimização periódica",
+        "A desfragmentação automática de HDDs precisará ser feita manualmente",
+        "Problemas de saúde do sistema podem demorar mais para ser detectados"
+      ],
+      "Unavailable": [
+        "A Manutenção Automática do Windows e suas tarefas agendadas ficarão indisponíveis"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_geral_manutencao-automatica.bat apply",
+    "Revert": ".\\comandos\\geral_geral_manutencao-automatica.bat revert",
+    "Foco": "windows"
+  },
+  {
+    "Id": "geral.plano-energia",
+    "TabKey": "geral_geral",
+    "pulsemode": "sim",
+    "Name": "Ativar Plano de Energia Desempenho Máximo",
+    "Description": "Ativa o plano de energia Desempenho Máximo, priorizando performance em vez de economia de energia.",
+    "Tooltip": {
+      "Pros": [
+        "Maximiza o desempenho do processador e demais componentes",
+        "Elimina latências causadas por transições de estado de energia",
+        "Melhora a consistência de desempenho em jogos e aplicações pesadas"
+      ],
+      "Cons": [
+        "Aumenta significativamente o consumo de energia elétrica",
+        "Pode elevar a temperatura e o ruído do sistema",
+        "Reduz a duração da bateria em notebooks"
+      ],
+      "Unavailable": [
+        "Os planos de economia de energia serão substituídos pelo plano de desempenho máximo"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_geral_plano-energia.bat apply",
+    "Revert": ".\\comandos\\geral_geral_plano-energia.bat revert",
+    "Foco": "fluidez",
+    "Favorito": "sim"
+  },
+  {
+    "Id": "geral.sleep-timeout",
+    "TabKey": "geral_geral",
+    "Name": "Desativar Sleep Timeout",
+    "Description": "Desativa o timeout de suspensão automática, impedindo que o sistema entre em modo sleep por inatividade.",
+    "Tooltip": {
+      "Pros": [
+        "Evita interrupções em tarefas longas como downloads e renderizações",
+        "Elimina delay de retorno ao trabalho após inatividade",
+        "Mantém conexões de rede e processos em segundo plano ativos"
+      ],
+      "Cons": [
+        "Aumenta o consumo de energia em períodos de inatividade",
+        "Pode reduzir a vida útil de componentes por uso contínuo",
+        "Sem economia de energia automática ao deixar o PC inativo"
+      ],
+      "Unavailable": [
+        "O sistema não entrará mais em modo sleep automaticamente por inatividade"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_geral_sleep-timeout.bat apply",
+    "Revert": ".\\comandos\\geral_geral_sleep-timeout.bat revert",
+    "Foco": "windows"
+  },
+  {
+    "Id": "geral.hibernacao",
+    "TabKey": "geral_geral",
+    "pulsemode": "sim",
+    "Favorito": "sim",
+    "Name": "Desativar Hibernação",
+    "Description": "Desativa o modo de hibernação do Windows, liberando espaço em disco ocupado pelo arquivo hiberfil.sys.",
+    "Tooltip": {
+      "Pros": [
+        "Libera espaço em disco equivalente ao tamanho da RAM instalada",
+        "Reduz o tempo de desligamento do sistema",
+        "Elimina leituras e gravações desnecessárias no disco"
+      ],
+      "Cons": [
+        "O sistema não poderá salvar o estado atual ao desligar",
+        "Maior consumo de energia em períodos de inatividade prolongada",
+        "Tempo de inicialização a frio pode ser maior em alguns cenários"
+      ],
+      "Unavailable": [
+        "O modo Hibernação ficará indisponível",
+        "A opção 'Hibernar' será removida do menu de energia"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_geral_hibernacao.bat apply",
+    "Revert": ".\\comandos\\geral_geral_hibernacao.bat revert",
+    "Foco": "fluidez"
+  },
+  {
+    "Id": "geral.economia-energia",
+    "TabKey": "geral_geral",
+    "pulsemode": "sim",
+    "Name": "Desativar Economia de Energia para Dispositivos",
+    "Description": "Desativa o gerenciamento de economia de energia para dispositivos como USB, adaptadores de rede e outros.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina desconexões intermitentes de dispositivos USB e de rede",
+        "Melhora a estabilidade de periféricos como mouses e teclados sem fio",
+        "Reduz latência em adaptadores de rede wireless"
+      ],
+      "Cons": [
+        "Aumento no consumo de energia de dispositivos conectados",
+        "Maior impacto na duração da bateria em notebooks",
+        "Dispositivos USB permanecerão energizados mesmo sem uso"
+      ],
+      "Unavailable": [
+        "O gerenciamento de energia automático para dispositivos USB ficará indisponível",
+        "Adaptadores de rede não serão mais desligados automaticamente por inatividade"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_geral_economia-energia.bat apply",
+    "Revert": ".\\comandos\\geral_geral_economia-energia.bat revert",
+    "Foco": "fluidez"
+  },
+  {
+    "Id": "geral.estimativa-energia",
+    "TabKey": "geral_geral",
+    "pulsemode": "sim",
+    "Name": "Desativar Estimativa de Energia",
+    "Description": "Desativa o serviço de estimativa de energia do Windows, reduzindo overhead de monitoramento em segundo plano.",
+    "Tooltip": {
+      "Pros": [
+        "Reduz uso de CPU pelo serviço de estimativa em segundo plano",
+        "Elimina leituras periódicas desnecessárias de sensores de energia",
+        "Menor interferência em tarefas com requisitos de tempo real"
+      ],
+      "Cons": [
+        "Estimativas de duração de bateria podem ficar imprecisas",
+        "Relatórios de consumo energético do sistema ficam indisponíveis",
+        "Diagnósticos de energia podem ser afetados"
+      ],
+      "Unavailable": [
+        "A estimativa de duração de bateria pode ficar indisponível ou imprecisa",
+        "Relatórios de energia do Windows ficará indisponível"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_geral_estimativa-energia.bat apply",
+    "Revert": ".\\comandos\\geral_geral_estimativa-energia.bat revert",
+    "Foco": "fluidez"
+  },
+  {
+    "Id": "geral.atraso-windows",
+    "TabKey": "geral_geral",
+    "pulsemode": "sim",
+    "Name": "Desativar Atrasos do Windows",
+    "Description": "Remove o atraso artificial imposto pelo Windows na inicialização de apps e o delay de animação na exibição de menus do Windows e reduz os timeouts de encerramento de processos e serviços, tornando o desligamento do Windows mais rápido.",
+    "Tooltip": {
+      "Pros": [
+        "Desligamento significativamente mais rápido",
+        "Elimina delay artificial desnecessário imposto pelo Windows",
+        "Interface mais responsiva e fluida"
+      ],
+      "Cons": [
+        "Processos com poucos segundos para salvar dados podem ser forçados a fechar",
+        "Risco de perda de dados em aplicações que demoram para salvar",
+        "Alguns serviços podem não finalizar de forma limpa"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\geral_geral_atrasos-windows.bat apply",
+    "Revert": ".\\comandos\\geral_geral_atrasos-windows.bat revert",
+    "Foco": "fluidez",
+    "Favorito": "sim"
+  },
+  {
+    "Id": "geral.apps-travados",
+    "TabKey": "geral_geral",
+    "pulsemode": "sim",
+    "Name": "Configurar Encerramento de Apps Travados",
+    "Description": "Configura o Windows para encerrar aplicativos que param de responder com menos atraso.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina janelas de diálogo pedindo confirmação para fechar apps travados",
+        "Desligamento e logoff mais ágeis",
+        "Reduz tempo perdido aguardando resposta de processos parados"
+      ],
+      "Cons": [
+        "Apps travados serão encerrados sem aviso, podendo causar perda de dados",
+        "Sem chance de salvar trabalho não salvo antes do encerramento forçado",
+        "Pode encerrar processos legítimos que demoram mais para responder"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\geral_geral_apps-travados.bat apply",
+    "Revert": ".\\comandos\\geral_geral_apps-travados.bat revert",
+    "Foco": "fluidez",
+    "Favorito": "sim"
+  },
+  {
+    "Id": "geral.efeitos-visuais",
+    "TabKey": "geral_geral",
+    "pulsemode": "sim",
+    "Favorito": "sim",
+    "Name": "Ajustar Efeitos Visuais do Windows",
+    "Description": "Desativa animações e efeitos visuais desnecessários do Windows, liberando recursos de CPU e GPU.",
+    "Tooltip": {
+      "Pros": [
+        "Reduz uso de GPU e CPU com renderização de animações",
+        "Interface mais rápida e responsiva, especialmente em hardware modesto",
+        "Menor consumo de memória pelo sistema de composição visual"
+      ],
+      "Cons": [
+        "Visual do sistema ficará mais simples e sem animações",
+        "Transições entre janelas e menus serão abruptas",
+        "Experiência estética do Windows será reduzida"
+      ],
+      "Unavailable": [
+        "Animações de janelas, menus e transições ficarão indisponíveis",
+        "Efeitos de transparência e sombras serão desativados"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_geral_efeitos-visuais.bat apply",
+    "Revert": ".\\comandos\\geral_geral_efeitos-visuais.bat revert",
+    "Foco": "visual"
+  },
+  {
+    "Id": "geral.prefetch-superfetch",
+    "TabKey": "geral_geral",
+    "pulsemode": "sim",
+    "Name": "Desativar Prefetch e Superfetch",
+    "Description": "Desativa o Prefetch e o Superfetch (SysMain), serviços que pré-carregam dados em RAM de forma preditiva.",
+    "Tooltip": {
+      "Pros": [
+        "Reduz atividade de disco em segundo plano causada pelo pré-carregamento",
+        "Recomendado para sistemas com SSD, onde o ganho do Prefetch é nulo",
+        "Menor consumo de RAM por dados pré-carregados desnecessariamente"
+      ],
+      "Cons": [
+        "Em sistemas com HDD, aplicativos podem demorar mais para abrir",
+        "Sem pré-carregamento de dados frequentemente usados em RAM",
+        "Pode aumentar o tempo de carregamento de apps na inicialização em HDDs"
+      ],
+      "Unavailable": [
+        "O serviço SysMain (Superfetch) ficará indisponível",
+        "O pré-carregamento preditivo de aplicativos ficará indisponível"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_geral_prefetch-superfetch.bat apply",
+    "Revert": ".\\comandos\\geral_geral_prefetch-superfetch.bat revert",
+    "Foco": "fluidez",
+    "Favorito": "sim"
+  },
+  {
+    "Id": "geral.mover-copiar-para",
+    "TabKey": "geral_exp",
+    "pulsemode": "sim",
+    "Favorito": "sim",
+    "Name": "Exibir 'Mover/Copiar para...' no Menu de Contexto",
+    "Description": "Exibe as opções 'Copiar para' e 'Mover para' no menu de contexto, mantendo o padrão PulseOS para facilitar operações de arquivos.",
+    "Tooltip": {
+      "Pros": [
+        "Facilita copiar ou mover arquivos diretamente pelo menu de contexto",
+        "Mantém o comportamento definido pelo PulseOS"
+      ],
+      "Cons": [
+        "Adiciona duas entradas extras ao menu de contexto clássico"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\geral_experiencia_mover-copiar-para.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_mover-copiar-para.bat revert",
+    "Foco": "windows"
+  },
+  {
+    "Id": "geral.preenchimento-automatico",
+    "TabKey": "geral_exp",
+    "pulsemode": "sim",
+    "Name": "Desativar Preenchimento Automático",
+    "Description": "Desativa o preenchimento automático de formulários e campos de texto integrado ao Windows e ao Explorer.",
+    "Tooltip": {
+      "Pros": [
+        "Evita sugestões indesejadas ao digitar em campos e barras de endereço",
+        "Maior privacidade ao não exibir histórico de entradas anteriores",
+        "Reduz distração causada por sugestões automáticas"
+      ],
+      "Cons": [
+        "Digitação repetida de caminhos e termos sem sugestões automáticas",
+        "Menor produtividade ao navegar em pastas frequentes no Explorer",
+        "Histórico útil de entradas não será mais exibido"
+      ],
+      "Unavailable": [
+        "O preenchimento automático na barra de endereço do Explorer ficará indisponível"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_experiencia_preenchimento-automatico.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_preenchimento-automatico.bat revert",
+    "Foco": "windows"
+  },
+  {
+    "Id": "geral.acesso-rapido",
+    "TabKey": "geral_exp",
+    "pulsemode": "",
+    "Name": "Desativar Histórico do Acesso Rápido",
+    "Description": "Desativa o rastreamento de arquivos e pastas recentes exibidos no Acesso Rápido do Explorador de Arquivos.",
+    "Tooltip": {
+      "Pros": [
+        "Aumenta a privacidade ao não registrar arquivos e pastas acessados",
+        "Elimina exibição de itens recentes indesejados no Acesso Rápido",
+        "Reduz leituras de registro e disco para rastrear histórico"
+      ],
+      "Cons": [
+        "Arquivos e pastas recentes não serão mais exibidos no Acesso Rápido",
+        "Acesso rápido a itens usados frequentemente será perdido",
+        "Navegação até pastas frequentes exigirá mais cliques"
+      ],
+      "Unavailable": [
+        "O histórico de arquivos e pastas recentes no Acesso Rápido ficará indisponível"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_experiencia_acesso-rapido.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_acesso-rapido.bat revert",
+    "Foco": "windows"
+  },
+  {
+    "Id": "geral.barra-tarefas",
+    "TabKey": "geral_exp",
+    "Name": "Ajustar Barra de Tarefas à Esquerda",
+    "Description": "Alinha os ícones da barra de tarefas do Windows 11 à esquerda, como no Windows 10.",
+    "Tooltip": {
+      "Pros": [
+        "Layout familiar para usuários acostumados com Windows 10 e versões anteriores",
+        "Ícones em posição fixa e previsível, sem deslocar conforme apps abertos",
+        "Preferência ergonômica para usuários com monitores ultrawide"
+      ],
+      "Cons": [
+        "Abandona o design centralizado padrão do Windows 11",
+        "Mudança puramente estética sem impacto em desempenho",
+        "Pode conflitar com personalizações visuais do Windows 11"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\geral_experiencia_barra-tarefas.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_barra-tarefas.bat revert",
+    "Foco": "visual"
+  },
+  {
+    "Id": "geral.area-transferencia",
+    "TabKey": "geral_exp",
+    "Name": "Desativar Área de Transferência",
+    "Description": "Desativa o histórico da Área de Transferência do Windows, impedindo o armazenamento de itens copiados.",
+    "Tooltip": {
+      "Pros": [
+        "Maior privacidade ao não armazenar histórico de itens copiados",
+        "Reduz uso de memória pelo serviço de histórico da área de transferência",
+        "Elimina sincronização de área de transferência com outros dispositivos"
+      ],
+      "Cons": [
+        "Não será possível acessar itens copiados anteriormente via Win+V",
+        "Histórico de múltiplos itens copiados ficará indisponível",
+        "Sincronização de clipboard entre dispositivos será desativada"
+      ],
+      "Unavailable": [
+        "O histórico da Área de Transferência ficará indisponível (Win+V)",
+        "A sincronização da área de transferência entre dispositivos ficará indisponível"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_experiencia_area-transferencia.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_area-transferencia.bat revert",
+    "Foco": "fluidez"
+  },
+  {
+    "Id": "geral.assistente-foco",
+    "TabKey": "geral_exp",
+    "Name": "Desativar Assistente de Foco",
+    "Description": "Desativa o Assistente de Foco do Windows, que suprime notificações automaticamente em certas situações.",
+    "Tooltip": {
+      "Pros": [
+        "Remove processo em segundo plano do Assistente de Foco",
+        "Elimina ativação automática indesejada durante jogos ou apresentações",
+        "Maior controle manual sobre quando notificações são exibidas"
+      ],
+      "Cons": [
+        "Notificações não serão mais suprimidas automaticamente durante foco",
+        "Sem modo automático de silenciar alertas durante jogos ou reuniões",
+        "O gerenciamento de notificações passa a ser totalmente manual"
+      ],
+      "Unavailable": [
+        "O Assistente de Foco ficará indisponível"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_experiencia_assistente-foco.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_assistente-foco.bat revert",
+    "Foco": "fluidez"
+  },
+  {
+    "Id": "geral.central-acoes",
+    "TabKey": "geral_exp",
+    "Name": "Desativar Central de Ações",
+    "Description": "Desativa a Central de Ações do Windows, removendo o painel lateral de notificações e configurações rápidas.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina o painel de notificações e ações rápidas em segundo plano",
+        "Reduz distrações causadas por notificações acumuladas",
+        "Libera pequenos recursos de sistema usados pelo painel"
+      ],
+      "Cons": [
+        "Acesso rápido a Wi-Fi, Bluetooth, brilho e volume via painel será perdido",
+        "Notificações de apps não serão mais exibidas no painel central",
+        "Ajustes rápidos exigirão navegação pelo menu de Configurações"
+      ],
+      "Unavailable": [
+        "O painel de notificações ficará indisponível",
+        "As ações rápidas (Wi-Fi, Bluetooth, brilho etc.) no painel ficarão indisponíveis"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_experiencia_central-acoes.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_central-acoes.bat revert",
+    "Foco": "fluidez"
+  },
+  {
+    "Id": "geral.foto-classico",
+    "TabKey": "geral_exp",
+    "pulsemode": "sim",
+    "Name": "Restaurar Visualizador de Fotos Clássico",
+    "Description": "Restaura o Visualizador de Fotos do Windows clássico (Windows Photo Viewer) como programa padrão para abrir imagens, substituindo o aplicativo Fotos moderno.",
+    "Tooltip": {
+      "Pros": [
+        "Visualizador de Fotos clássico abre imagens de forma mais rápida e leve que o app Fotos",
+        "Não requer inicialização de processo UWP, eliminando o delay de abertura de imagens",
+        "Interface simples sem anúncios ou sugestões do aplicativo Fotos moderno"
+      ],
+      "Cons": [
+        "O aplicativo Fotos moderno deixa de ser o padrão para os formatos configurados",
+        "Recursos do app Fotos como edição, albuns e integração com OneDrive ficam inacessíveis pelo padrão",
+        "Formatos mais novos como HEIC podem não ser suportados pelo visualizador clássico"
+      ],
+      "Unavailable": [
+        "O aplicativo Fotos moderno deixará de ser o programa padrão para imagens"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_experiencia_foto-classico.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_foto-classico.bat revert",
+    "Foco": "windows"
+  },
+  {
+    "Id": "geral.notificacoes",
+    "TabKey": "geral_exp",
+    "Name": "Desativar Notificações",
+    "Description": "Desativa o sistema de notificações do Windows, impedindo que aplicativos exibam alertas e banners.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina interrupções de banners e sons de notificação",
+        "Reduz distrações durante trabalho ou jogos",
+        "Menor uso de recursos pelo serviço de notificações"
+      ],
+      "Cons": [
+        "Alertas importantes de sistema e segurança não serão exibidos",
+        "Notificações de apps como e-mail e mensagens serão silenciadas",
+        "Avisos do Windows Defender e atualizações não aparecerão"
+      ],
+      "Unavailable": [
+        "O sistema de notificações de todos os aplicativos ficará indisponível",
+        "Banners e alertas do sistema ficará indisponíveis"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_experiencia_notificacoes.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_notificacoes.bat revert",
+    "Foco": "fluidez"
+  },
+  {
+    "Id": "geral.indexacao-pesquisa",
+    "TabKey": "geral_exp",
+    "Name": "Desativar Indexação de Pesquisa",
+    "Description": "Desativa o serviço de indexação de arquivos da Pesquisa do Windows, reduzindo uso de disco e CPU em segundo plano.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina uso intensivo de disco causado pelo processo de indexação",
+        "Reduz uso de CPU pelo serviço Windows Search em segundo plano",
+        "Recomendado para SSDs para reduzir escritas desnecessárias"
+      ],
+      "Cons": [
+        "Pesquisa de arquivos no Explorer ficará mais lenta",
+        "Resultados de pesquisa podem demorar mais para aparecer",
+        "Pesquisa por conteúdo dentro de arquivos pode parar de funcionar"
+      ],
+      "Unavailable": [
+        "A indexação de arquivos e conteúdo ficará indisponível",
+        "Resultados de pesquisa rápidos no menu Iniciar podem ser afetados"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_experiencia_indexacao-pesquisa.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_indexacao-pesquisa.bat revert",
+    "Foco": "fluidez"
+  },
+  {
+    "Id": "geral.teclas-acessibilidade",
+    "TabKey": "geral_exp",
+    "pulsemode": "sim",
+    "Name": "Desativar Teclas de Acessibilidade",
+    "Description": "Desativa atalhos automáticos de StickyKeys, FilterKeys e ToggleKeys para evitar interrupções acidentais durante uso e jogos.",
+    "Tooltip": {
+      "Pros": [
+        "Evita pop-ups acidentais ao pressionar Shift repetidamente",
+        "Reduz interrupções em jogos e digitação",
+        "Mantém o padrão PulseOS para acessibilidade por atalhos"
+      ],
+      "Cons": [
+        "Quem depende desses atalhos precisará reativá-los manualmente ou pela aba Restaurar quando disponível"
+      ],
+      "Unavailable": [
+        "Atalhos automáticos de StickyKeys, FilterKeys e ToggleKeys ficarão indisponíveis"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_experiencia_teclas-acessibilidade.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_teclas-acessibilidade.bat revert",
+    "Foco": "windows",
+    "Favorito": "sim"
+  },
+  {
+    "Id": "geral.itens-ocultos",
+    "TabKey": "geral_exp",
+    "pulsemode": "",
+    "Name": "Mostrar Itens Ocultos",
+    "Description": "Exibe arquivos e pastas ocultos no Explorador de Arquivos, facilitando o acesso a itens do sistema.",
+    "Tooltip": {
+      "Pros": [
+        "Acesso direto a arquivos e pastas ocultas pelo sistema",
+        "Facilita manutenção, diagnóstico e personalização do sistema",
+        "Útil para desenvolvedores e usuários avançados"
+      ],
+      "Cons": [
+        "Arquivos críticos do sistema ficam visíveis e suscetíveis a exclusão acidental",
+        "Interface do Explorer fica mais poluída com itens normalmente ocultos",
+        "Usuários iniciantes podem se confundir com arquivos de sistema exibidos"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\geral_experiencia_itens-ocultos.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_itens-ocultos.bat revert",
+    "Foco": "visual"
+  },
+  {
+    "Id": "geral.icone-atalho",
+    "TabKey": "geral_exp",
+    "pulsemode": "sim",
+    "Favorito": "sim",
+    "Name": "Remover Ícone e Sufixo de Atalhos",
+    "Description": "Remove a seta de atalho dos ícones e o sufixo ' - Atalho' do nome de arquivos de atalho criados.",
+    "Tooltip": {
+      "Pros": [
+        "Visual mais limpo na área de trabalho sem a seta de atalho nos ícones",
+        "Nomes de atalhos ficam mais curtos e organizados",
+        "Aparência mais profissional e personalizada da área de trabalho"
+      ],
+      "Cons": [
+        "Dificulta distinguir visualmente atalhos de arquivos originais",
+        "Usuários iniciantes podem se confundir sobre o que é atalho ou arquivo real",
+        "Mudança puramente estética sem impacto em desempenho"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\geral_experiencia_icone-atalho.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_icone-atalho.bat revert",
+    "Foco": "visual"
+  },
+  {
+    "Id": "geral.extensoes-arquivos",
+    "TabKey": "geral_exp",
+    "pulsemode": "sim",
+    "Name": "Mostrar Extensões dos Arquivos",
+    "Description": "Mostra as extensões dos arquivos no Explorador, mantendo o padrão PulseOS para facilitar identificação e segurança ao lidar com arquivos.",
+    "Tooltip": {
+      "Pros": [
+        "Facilita identificar o tipo real dos arquivos",
+        "Ajuda a evitar arquivos disfarçados com dupla extensão",
+        "Mantém o comportamento visual definido pelo PulseOS"
+      ],
+      "Cons": [
+        "Nomes de arquivos podem ficar um pouco mais longos visualmente"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\geral_experiencia_extensoes-arquivos.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_extensoes-arquivos.bat revert",
+    "Foco": "fluidez",
+    "Favorito": "sim"
+  },
+  {
+    "Id": "geral.segundos-relogio",
+    "TabKey": "geral_exp",
+    "pulsemode": "sim",
+    "Favorito": "sim",
+    "Name": "Mostrar Segundos no Relógio",
+    "Description": "Mostra os segundos no relógio da barra de tarefas, mantendo o padrão visual do PulseOS.",
+    "Tooltip": {
+      "Pros": [
+        "Permite acompanhar o tempo com mais precisão",
+        "Mantém o comportamento visual definido pelo PulseOS"
+      ],
+      "Cons": [
+        "Pode gerar atualização visual mais frequente na barra de tarefas"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\geral_experiencia_segundos-relogio.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_segundos-relogio.bat revert",
+    "Foco": "visual"
+  },
+  {
+    "Id": "geral.menu-contexto-classico",
+    "TabKey": "geral_exp",
+    "pulsemode": "sim",
+    "Favorito": "sim",
+    "Name": "Ativar Menu de Contexto Clássico",
+    "Description": "Ativa o menu de contexto clássico do Windows 10 no Windows 11, exibindo mais opções diretamente.",
+    "Tooltip": {
+      "Pros": [
+        "Acesso direto a todas as opções sem clicar em 'Mostrar mais opções'",
+        "Layout familiar para usuários vindos do Windows 10",
+        "Mais opções visíveis de uma vez, aumentando a produtividade"
+      ],
+      "Cons": [
+        "Menu de contexto maior e mais extenso visualmente",
+        "Abandona o design modernizado e simplificado do Windows 11",
+        "Pode parecer desatualizado esteticamente no Windows 11"
+      ],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\geral_experiencia_menu-contexto-classico.bat apply",
+    "Revert": ".\\comandos\\geral_experiencia_menu-contexto-classico.bat revert",
+    "Foco": "visual"
+  },
+  {
+    "Id": "geral.privacidade-amd",
+    "TabKey": "geral_priv",
+    "pulsemode": "sim",
+    "gpu": "AMD",
+    "Foco": "privacidade",
+    "Name": "Desativar Programa de Experiência do Usuário e Telemetria AMD",
+    "Description": "Desativa a telemetria e coleta de dados do driver e software AMD Radeon, melhorando privacidade e reduzindo overhead.",
+    "Tooltip": {
+      "Pros": [
+        "Elimina envio de dados de telemetria à AMD em segundo plano",
+        "Reduz tráfego de rede gerado pelo driver AMD",
+        "Melhora privacidade ao impedir coleta de dados"
+      ],
+      "Cons": [
+        "Dados para diagnóstico e melhoria de drivers não serão coletados",
+        "Relatórios automáticos de problemas não serão enviados à AMD",
+        "Menor contribuição para melhorias futuras do ecossistema AMD"
+      ],
+      "Unavailable": [
+        "A telemetria e o Programa de Experiência do Usuário AMD ficarão indisponíveis"
+      ]
+    },
+    "Apply": ".\\comandos\\geral_privacidade_privacidade-amd.bat apply",
+    "Revert": ".\\comandos\\geral_privacidade_privacidade-amd.bat revert"
+  }
+]
