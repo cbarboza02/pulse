@@ -2,7 +2,7 @@
 # ==========================================
 # LAUNCHER PULSE
 # ==========================================
-$Script:LauncherVersion = "V1.0.2"
+$Script:LauncherVersion = "V1.0.3"
 
 # ==========================================
 # CONFIGURACOES GERAIS
@@ -10,6 +10,7 @@ $Script:LauncherVersion = "V1.0.2"
 $RepoBase = "https://raw.githubusercontent.com/cbarboza02/pulse/main/Painel%20Pulse"
 $LauncherScriptUrl = "$RepoBase/Launcher_Pulse.ps1"
 $PanelScriptUrl    = "$RepoBase/Painel_Pulse.ps1"
+$VerifierScriptUrl = "$RepoBase/verificar_pulseos.ps1"
 $IconUrl           = "$RepoBase/pulseicon.ico"
 
 $InstallDir           = "C:\Painel Pulse"
@@ -24,6 +25,7 @@ $LogPath  = Join-Path $env:TEMP "Launcher_Pulse.log"
 $TempPanelPs1       = Join-Path $env:TEMP "temp_painel_pulse.ps1"
 $TempPanelBuildPs1  = Join-Path $env:TEMP "build_painel_pulse.ps1"
 $TempPanelIcon      = Join-Path $env:TEMP "temp_pulseicon.ico"
+$TempVerifierPs1    = Join-Path $env:TEMP "verificar_pulseos.ps1"
 
 $TempLauncherPs1    = Join-Path $env:TEMP "Launcher_Pulse.remote.ps1"
 $TempLauncherBuild  = Join-Path $env:TEMP "Launcher_Pulse.build.ps1"
@@ -501,6 +503,48 @@ function Update-LauncherIfNeeded {
     }
 }
 
+
+# ==========================================
+# VERIFICADOR DE ESTADO DO PULSEOS
+# ==========================================
+function Invoke-PulseStateVerifier {
+    try {
+        Write-Log "Baixando verificar_pulseos.ps1..."
+
+        if (Test-Path -LiteralPath $TempVerifierPs1) {
+            Remove-Item -LiteralPath $TempVerifierPs1 -Force -ErrorAction SilentlyContinue
+        }
+
+        if (-not (Download-Arquivo -Url $VerifierScriptUrl -Destino $TempVerifierPs1) -or -not (Test-Path -LiteralPath $TempVerifierPs1)) {
+            Write-Log "Falha ao baixar verificar_pulseos.ps1. O Painel sera aberto com o PulseState.json existente, se houver."
+            return $false
+        }
+
+        $powershellExe = Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\powershell.exe"
+        $arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$TempVerifierPs1`""
+
+        Write-Log "Executando verificar_pulseos.ps1..."
+        $process = Start-Process -FilePath $powershellExe -ArgumentList $arguments -WindowStyle Hidden -Wait -PassThru -ErrorAction Stop
+
+        if (($null -ne $process.ExitCode) -and ($process.ExitCode -ne 0)) {
+            Write-Log "verificar_pulseos.ps1 finalizou com codigo $($process.ExitCode)."
+            return $false
+        }
+
+        Write-Log "verificar_pulseos.ps1 executado com sucesso."
+        return $true
+    }
+    catch {
+        Write-Log "Falha ao executar verificar_pulseos.ps1: $($_.Exception.Message)"
+        return $false
+    }
+    finally {
+        if (Test-Path -LiteralPath $TempVerifierPs1) {
+            Remove-Item -LiteralPath $TempVerifierPs1 -Force -ErrorAction SilentlyContinue
+        }
+    }
+}
+
 # ==========================================
 # INICIO DA EXECUCAO
 # ==========================================
@@ -558,7 +602,7 @@ if (-not (Convert-PS1ToExe -InputPs1 $TempPanelBuildPs1 -OutputExe $EXEPath -Ico
 # ==========================================
 # REMOVE ARQUIVOS TEMPORARIOS DE CONVERSAO
 # ==========================================
-foreach ($tmp in @($TempPanelPs1, $TempPanelBuildPs1, $TempPanelIcon, $TempLauncherPs1, $TempLauncherBuild, $TempLauncherIcon)) {
+foreach ($tmp in @($TempPanelPs1, $TempPanelBuildPs1, $TempPanelIcon, $TempVerifierPs1, $TempLauncherPs1, $TempLauncherBuild, $TempLauncherIcon)) {
     if (Test-Path -LiteralPath $tmp) {
         Remove-Item -LiteralPath $tmp -Force -ErrorAction SilentlyContinue
     }
@@ -579,6 +623,11 @@ foreach ($json in $JsonFiles) {
         exit 1
     }
 }
+
+# ==========================================
+# ATUALIZA O PULSESTATE ANTES DE ABRIR O PAINEL
+# ==========================================
+Invoke-PulseStateVerifier | Out-Null
 
 # ==========================================
 # EXECUTA O PAINEL
