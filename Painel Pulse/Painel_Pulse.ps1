@@ -120,6 +120,116 @@ function Save-PulseState {
     } catch { Write-PulseLog "Erro ao salvar PulseState.json: $($_.Exception.Message)" }
 }
 
+function Test-PulseDefaultValue {
+    param([string]$Value)
+
+    if ([string]::IsNullOrWhiteSpace($Value)) { return $true }
+
+    $normalized = $Value.Trim().ToLowerInvariant()
+    return ($normalized -eq "false" -or $normalized -eq "padrao" -or $normalized -eq "padrão")
+}
+
+function Get-PulseValueParamFromCommand {
+    param(
+        [object]$Item,
+        [string]$CommandOrParam
+    )
+
+    if ([string]::IsNullOrWhiteSpace($CommandOrParam)) { return "" }
+
+    $valueText = $CommandOrParam.Trim()
+
+    if ($null -ne $Item -and $null -ne $Item.Values) {
+        foreach ($value in @($Item.Values)) {
+            if ($null -ne $value.Param -and ([string]$value.Param).Trim() -eq $valueText) {
+                return ([string]$value.Param).Trim()
+            }
+            if ($null -ne $value.Command -and ([string]$value.Command).Trim() -eq $valueText) {
+                if ($null -ne $value.Param -and -not [string]::IsNullOrWhiteSpace([string]$value.Param)) {
+                    return ([string]$value.Param).Trim()
+                }
+
+                $cmd = ([string]$value.Command).Trim()
+                $lastSpace = $cmd.LastIndexOf(' ')
+                if ($lastSpace -ge 0) { return $cmd.Substring($lastSpace + 1).Trim() }
+            }
+        }
+    }
+
+    $lastSpaceFallback = $valueText.LastIndexOf(' ')
+    if ($lastSpaceFallback -ge 0 -and $valueText -match '\\|/') {
+        return $valueText.Substring($lastSpaceFallback + 1).Trim()
+    }
+
+    return $valueText
+}
+
+function Get-PulseCommandFromValueParam {
+    param(
+        [object]$Item,
+        [string]$Param
+    )
+
+    if ($null -eq $Item -or $null -eq $Item.Values -or [string]::IsNullOrWhiteSpace($Param)) { return "" }
+
+    foreach ($value in @($Item.Values)) {
+        if ($null -ne $value.Param -and ([string]$value.Param).Trim() -eq $Param.Trim()) {
+            return ([string]$value.Command).Trim()
+        }
+    }
+
+    return ""
+}
+
+function Set-PulseOptionState {
+    param(
+        [string]$Id,
+        $Value
+    )
+
+    if ($null -eq $global:PulseState) { $global:PulseState = @{} }
+
+    $legacyKey = "$Id`_Value"
+    if ($global:PulseState.ContainsKey($legacyKey)) {
+        $global:PulseState.Remove($legacyKey)
+    }
+
+    if ($Value -is [bool]) {
+        $global:PulseState[$Id] = [bool]$Value
+        return
+    }
+
+    $param = [string]$Value
+    if (Test-PulseDefaultValue -Value $param) {
+        $global:PulseState[$Id] = $false
+    } else {
+        $global:PulseState[$Id] = $param.Trim()
+    }
+}
+
+function Split-PulseCommandString {
+    param([string]$Command)
+
+    $result = [ordered]@{
+        BatRel = ""
+        Param  = ""
+    }
+
+    if ([string]::IsNullOrWhiteSpace($Command)) { return $result }
+
+    $cmdFull = $Command.Trim()
+    $lastSpace = $cmdFull.LastIndexOf(' ')
+
+    if ($lastSpace -ge 0) {
+        $result.BatRel = $cmdFull.Substring(0, $lastSpace).TrimStart('.').TrimStart('\').TrimStart('/')
+        $result.Param  = $cmdFull.Substring($lastSpace + 1).Trim()
+    } else {
+        $result.BatRel = $cmdFull.TrimStart('.').TrimStart('\').TrimStart('/')
+    }
+
+    return $result
+}
+
 # ==========================================
 # LÓGICA DE DETEÇÃO DE HARDWARE
 # ==========================================
@@ -310,14 +420,31 @@ function Load-PageOptimizations {
         $idStr = [string]$item.Id
         $memoriaAtiva = $false
         $valorSalvo = ""
-        
-        if ($null -ne $global:PulseState[$idStr]) {
-            $memoriaAtiva = [bool]$global:PulseState[$idStr]
-        }
-        
-        # Lê a configuração que foi salva para esse item específico
-        if ($null -ne $global:PulseState["$idStr`_Value"]) {
-            $valorSalvo = [string]$global:PulseState["$idStr`_Value"]
+        $temValores = ($null -ne $item.Values -and @($item.Values).Count -gt 0)
+
+        if ($temValores) {
+            $rawValue = $null
+
+            if ($null -ne $global:PulseState[$idStr]) {
+                $rawValue = $global:PulseState[$idStr]
+            } elseif ($null -ne $global:PulseState["$idStr`_Value"]) {
+                # Compatibilidade/migração do formato antigo:
+                # "id_Value": ".\comandos\arquivo.bat perfil"
+                $rawValue = $global:PulseState["$idStr`_Value"]
+                $global:PulseState.Remove("$idStr`_Value")
+            }
+
+            if ($rawValue -is [bool]) {
+                $memoriaAtiva = [bool]$rawValue
+                $valorSalvo = ""
+            } else {
+                $valorSalvo = Get-PulseValueParamFromCommand -Item $item -CommandOrParam ([string]$rawValue)
+                $memoriaAtiva = -not (Test-PulseDefaultValue -Value $valorSalvo)
+            }
+        } else {
+            if ($null -ne $global:PulseState[$idStr]) {
+                try { $memoriaAtiva = [bool]$global:PulseState[$idStr] } catch { $memoriaAtiva = $false }
+            }
         }
 
         $result += [PSCustomObject]@{
@@ -2059,25 +2186,30 @@ function New-OptCard {
         $selectedCmdString = Show-ValuesModal -Item $item -OwnerWindow $window
         if (-not $selectedCmdString) { return }
         
-        # SALVA A ESCOLHA NA MEMÓRIA
-        $item.SavedValue = $selectedCmdString
-        $global:PulseState["$($item.Id)_Value"] = $selectedCmdString
+        # SALVA A ESCOLHA NA MEMÓRIA NO FORMATO SIMPLES:
+        # "id": "perfil" para perfis ativos, ou "id": false para padrão/padrao.
+        $selectedParam = Get-PulseValueParamFromCommand -Item $item -CommandOrParam $selectedCmdString
+        $item.SavedValue = $selectedParam
+        Set-PulseOptionState -Id ([string]$item.Id) -Value $selectedParam
         Save-PulseState
-        
-        [string]$cmdFull = $selectedCmdString
-        $cmdFull = $cmdFull.Trim()
-        [int]$lastSpace = $cmdFull.LastIndexOf(' ')
-        
-        if ($lastSpace -ge 0) {
-            $batRel = $cmdFull.Substring(0, $lastSpace).TrimStart('.').TrimStart('\').TrimStart('/')
-            $param  = $cmdFull.Substring($lastSpace + 1)
-        } else {
-            $batRel = $cmdFull.TrimStart('.').TrimStart('\').TrimStart('/')
-            $param  = ""
-        }
+
+        $cmdFull = Get-PulseCommandFromValueParam -Item $item -Param $selectedParam
+        $cmdInfo = Split-PulseCommandString -Command $cmdFull
+        $batRel = $cmdInfo.BatRel
+        $param  = $cmdInfo.Param
         $bat = Join-Path $capturedBaseDir $batRel
 
-        if ([string]::IsNullOrWhiteSpace($bat) -or -not (Test-Path $bat)) {
+        if (Test-PulseDefaultValue -Value $selectedParam) {
+            $item.IsChecked = $false
+            $toggle.IsChecked = $false
+            $btnEdit.Visibility = 'Collapsed'
+        } else {
+            $item.IsChecked = $true
+            $toggle.IsChecked = $true
+            $btnEdit.Visibility = 'Visible'
+        }
+
+        if ([string]::IsNullOrWhiteSpace($bat)) {
             [System.Windows.MessageBox]::Show("Arquivo não encontrado:`n$bat", "Painel Pulse – Erro", 'OK', 'Error') | Out-Null
             return
         }
@@ -2100,22 +2232,29 @@ function New-OptCard {
                 }
                 $btnEdit.Visibility = 'Visible'
                 
-                # SALVA A ESCOLHA NA MEMÓRIA
-                $item.SavedValue = $selectedCmdString
-                $global:PulseState["$($item.Id)_Value"] = $selectedCmdString
-                
-                [string]$cmdFull = $selectedCmdString
-                $cmdFull = $cmdFull.Trim()
-                [int]$lastSpace = $cmdFull.LastIndexOf(' ')
-                
-                if ($lastSpace -ge 0) {
-                    $batRel = $cmdFull.Substring(0, $lastSpace).TrimStart('.').TrimStart('\').TrimStart('/')
-                    $param  = $cmdFull.Substring($lastSpace + 1)
-                } else {
-                    $batRel = $cmdFull.TrimStart('.').TrimStart('\').TrimStart('/')
-                    $param  = ""
-                }
-                $bat = Join-Path $capturedBaseDir $batRel
+                # SALVA A ESCOLHA NA MEMÓRIA NO FORMATO SIMPLES:
+        # "id": "perfil" para perfis ativos, ou "id": false para padrão/padrao.
+        $selectedParam = Get-PulseValueParamFromCommand -Item $item -CommandOrParam $selectedCmdString
+        $item.SavedValue = $selectedParam
+        Set-PulseOptionState -Id ([string]$item.Id) -Value $selectedParam
+        Save-PulseState
+
+        $cmdFull = Get-PulseCommandFromValueParam -Item $item -Param $selectedParam
+        $cmdInfo = Split-PulseCommandString -Command $cmdFull
+        $batRel = $cmdInfo.BatRel
+        $param  = $cmdInfo.Param
+        $bat = Join-Path $capturedBaseDir $batRel
+
+        if (Test-PulseDefaultValue -Value $selectedParam) {
+            $item.IsChecked = $false
+            $toggle.IsChecked = $false
+            $btnEdit.Visibility = 'Collapsed'
+        } else {
+            $item.IsChecked = $true
+            $toggle.IsChecked = $true
+            $btnEdit.Visibility = 'Visible'
+        }
+
 
             } else {
                 $bat = $applyBat
@@ -2133,10 +2272,17 @@ function New-OptCard {
         }
 
         [bool]$estadoVisual = if ($toggle.IsChecked -eq $true) { $true } else { $false }
+
+        if ($null -ne $item.Values -and @($item.Values).Count -gt 0) {
+            $estadoVisual = -not (Test-PulseDefaultValue -Value ([string]$item.SavedValue))
+            $toggle.IsChecked = $estadoVisual
+            if ($estadoVisual) { $btnEdit.Visibility = 'Visible' } else { $btnEdit.Visibility = 'Collapsed' }
+            Set-PulseOptionState -Id ([string]$item.Id) -Value ([string]$item.SavedValue)
+        } else {
+            Set-PulseOptionState -Id ([string]$item.Id) -Value $estadoVisual
+        }
+
         $item.IsChecked = $estadoVisual
-        
-        if ($null -eq $global:PulseState) { $global:PulseState = @{} }
-        $global:PulseState[[string]$item.Id] = $estadoVisual
         Save-PulseState
 
     }.GetNewClosure())
@@ -3090,7 +3236,7 @@ function Show-ValuesModal {
     # --- Passo 1: Cria todos os Toggles primeiro ---
     foreach ($val in $Item.Values) {
         $tb = [System.Windows.Controls.Primitives.ToggleButton]::new()
-        $tb.Tag = $val.Command
+        $tb.Tag = $val.Param
 
         # Cria um StackPanel para conter o Título e a Descrição
         $stack = [System.Windows.Controls.StackPanel]::new()
@@ -3438,7 +3584,9 @@ $script:TglPulseModeMaster.Add_Click({
 
         foreach ($item in $todosItensPulse) {
             $item.IsChecked = $true
-            $global:PulseState[[string]$item.Id] = $true
+            if ($null -eq $item.Values -or @($item.Values).Count -eq 0) {
+                Set-PulseOptionState -Id ([string]$item.Id) -Value $true
+            }
             
             $batAbs = ""
             $param = ""
@@ -3446,18 +3594,15 @@ $script:TglPulseModeMaster.Add_Click({
             if ($configEscolhida.ContainsKey($item.Id)) {
                 $cmdFull = $configEscolhida[$item.Id].Trim()
                 
-                # SALVA A ESCOLHA FEITA PELO PULSE MODE
-                $item.SavedValue = $cmdFull
-                $global:PulseState["$($item.Id)_Value"] = $cmdFull
-                
-                $lastSpace = $cmdFull.LastIndexOf(' ')
-                if ($lastSpace -ge 0) {
-                    $batRel = $cmdFull.Substring(0, $lastSpace).TrimStart('.').TrimStart('\').TrimStart('/')
-                    $param  = $cmdFull.Substring($lastSpace + 1)
-                } else {
-                    $batRel = $cmdFull.TrimStart('.').TrimStart('\').TrimStart('/')
-                    $param  = ""
-                }
+                # SALVA A ESCOLHA FEITA PELO PULSE MODE NO FORMATO SIMPLES
+                $selectedParam = Get-PulseValueParamFromCommand -Item $item -CommandOrParam $cmdFull
+                $item.SavedValue = $selectedParam
+                Set-PulseOptionState -Id ([string]$item.Id) -Value $selectedParam
+
+                $cmdFull = Get-PulseCommandFromValueParam -Item $item -Param $selectedParam
+                $cmdInfo = Split-PulseCommandString -Command $cmdFull
+                $batRel = $cmdInfo.BatRel
+                $param  = $cmdInfo.Param
                 $batAbs = Join-Path $script:BaseDir $batRel
             } else {
                 $batAbs = $item.ApplyBat
@@ -3759,7 +3904,7 @@ function Show-PulseConfigModal {
         # 3. Criação dos botões de valor
         foreach ($val in $item.Values) {
             $btn = [System.Windows.Controls.Primitives.ToggleButton]::new()
-            $btn.Tag = $val.Command
+            $btn.Tag = $val.Param
             
             # --- CONSTRUÇÃO DO CONTEÚDO (Texto + Descrição) ---
             $btnContentStack = [System.Windows.Controls.StackPanel]::new()
