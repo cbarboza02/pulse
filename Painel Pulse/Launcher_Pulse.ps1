@@ -2,7 +2,7 @@
 # ==========================================
 # LAUNCHER PULSE
 # ==========================================
-$Script:LauncherVersion = "V1.0.4"
+$Script:LauncherVersion = "V1.0.5"
 
 # ==========================================
 # CONFIGURACOES GERAIS
@@ -192,7 +192,8 @@ function Ensure-PS2EXE {
                 (Join-Path ([Environment]::GetFolderPath('MyDocuments')) "WindowsPowerShell\Modules"),
                 (Join-Path ([Environment]::GetFolderPath('MyDocuments')) "PowerShell\Modules"),
                 (Join-Path $env:ProgramFiles "WindowsPowerShell\Modules"),
-                (Join-Path $env:ProgramFiles "PowerShell\Modules")
+                (Join-Path $env:ProgramFiles "PowerShell\Modules"),
+                (Join-Path $env:LOCALAPPDATA "PackageManagement\ProviderAssemblies")
             ) | Where-Object { $_ -and (Test-Path -LiteralPath $_) }
 
             $current = @($env:PSModulePath -split ';' | Where-Object { $_ })
@@ -204,67 +205,144 @@ function Ensure-PS2EXE {
         } catch {}
     }
 
+    function Enable-PackageManagementSilentMode {
+        try {
+            $script:OldProgressPreference = $ProgressPreference
+            $script:OldConfirmPreference  = $ConfirmPreference
+            $script:OldWarningPreference  = $WarningPreference
+
+            $script:ProgressPreference = 'SilentlyContinue'
+            $script:ConfirmPreference  = 'None'
+            $script:WarningPreference  = 'SilentlyContinue'
+
+            $PSDefaultParameterValues['Install-PackageProvider:Confirm'] = $false
+            $PSDefaultParameterValues['Install-Module:Confirm']          = $false
+            $PSDefaultParameterValues['Set-PSRepository:Confirm']        = $false
+            $PSDefaultParameterValues['Register-PSRepository:Confirm']   = $false
+        } catch {}
+    }
+
+    function Ensure-NuGetProviderSilent {
+        try {
+            Initialize-Tls
+
+            $provider = Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction SilentlyContinue |
+                Sort-Object Version -Descending |
+                Select-Object -First 1
+
+            if ($null -eq $provider) {
+                Write-Log "Provider NuGet nao encontrado. Instalando silenciosamente..."
+
+                $cmdInstallProvider = Get-Command Install-PackageProvider -ErrorAction SilentlyContinue
+                if ($null -eq $cmdInstallProvider) {
+                    Write-Log "Install-PackageProvider nao esta disponivel neste Windows/PowerShell."
+                    return $false
+                }
+
+                $providerParams = @{
+                    Name           = 'NuGet'
+                    MinimumVersion = '2.8.5.201'
+                    Scope          = 'CurrentUser'
+                    Force          = $true
+                    Confirm        = $false
+                    ErrorAction    = 'Stop'
+                }
+
+                if ($cmdInstallProvider.Parameters.ContainsKey('ForceBootstrap')) {
+                    $providerParams['ForceBootstrap'] = $true
+                }
+
+                Install-PackageProvider @providerParams | Out-Null
+            } else {
+                Write-Log "Provider NuGet encontrado: $($provider.Version)"
+            }
+
+            try {
+                Import-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -ErrorAction Stop | Out-Null
+            } catch {
+                Import-PackageProvider -Name NuGet -Force -ErrorAction SilentlyContinue | Out-Null
+            }
+
+            $provider = Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction SilentlyContinue |
+                Sort-Object Version -Descending |
+                Select-Object -First 1
+
+            return ($null -ne $provider)
+        }
+        catch {
+            Write-Log "Falha ao preparar provider NuGet silenciosamente: $($_.Exception.Message)"
+            return $false
+        }
+    }
+
+    function Ensure-PSGalleryTrusted {
+        try {
+            $repo = Get-PSRepository -Name 'PSGallery' -ErrorAction SilentlyContinue
+            if ($null -eq $repo) {
+                Write-Log "Repositorio PSGallery nao encontrado. Registrando repositorio padrao..."
+                Register-PSRepository -Default -ErrorAction Stop
+            }
+
+            Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted -ErrorAction SilentlyContinue
+            return $true
+        }
+        catch {
+            Write-Log "Falha ao preparar PSGallery: $($_.Exception.Message)"
+            return $false
+        }
+    }
+
     if (Test-PS2EXEAvailable) { return $true }
 
     Add-PulseModulePaths
     if (Test-PS2EXEAvailable) { return $true }
 
     try {
+        Enable-PackageManagementSilentMode
         Initialize-Tls
         Add-PulseModulePaths
 
-        $ProgressPreference = 'SilentlyContinue'
-        $ConfirmPreference = 'None'
-
-        Write-Log "PS2EXE nao encontrado. Tentando instalar automaticamente..."
+        Write-Log "PS2EXE nao encontrado. Tentando instalar automaticamente em modo silencioso..."
 
         if (-not (Get-Command Install-Module -ErrorAction SilentlyContinue)) {
             Write-Log "Install-Module nao esta disponivel neste Windows/PowerShell."
             return $false
         }
 
-        try {
-            $nugetProvider = Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue
-            if ($null -eq $nugetProvider) {
-                Write-Log "Provider NuGet nao encontrado. Instalando..."
-                Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Confirm:$false -ErrorAction Stop | Out-Null
-            }
-            Import-PackageProvider -Name NuGet -Force -ErrorAction SilentlyContinue | Out-Null
-        }
-        catch {
-            Write-Log "Falha ao preparar provider NuGet: $($_.Exception.Message)"
+        if (-not (Ensure-NuGetProviderSilent)) {
+            Write-Log "Provider NuGet nao foi preparado. A instalacao do PS2EXE sera ignorada para evitar prompt interativo."
+            return $false
         }
 
-        try {
-            $repo = Get-PSRepository -Name "PSGallery" -ErrorAction SilentlyContinue
-            if ($null -eq $repo) {
-                Write-Log "Repositorio PSGallery nao encontrado. Registrando repositorio padrao..."
-                Register-PSRepository -Default -ErrorAction Stop
-            }
+        Ensure-PSGalleryTrusted | Out-Null
 
-            Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted -ErrorAction SilentlyContinue
-        }
-        catch {
-            Write-Log "Falha ao preparar PSGallery: $($_.Exception.Message)"
-        }
-
-        $installScopes = @("CurrentUser")
+        $installScopes = @('CurrentUser')
         if (Test-IsAdmin) {
-            $installScopes += "AllUsers"
+            $installScopes += 'AllUsers'
         }
+
+        $cmdInstallModule = Get-Command Install-Module -ErrorAction SilentlyContinue
 
         foreach ($scope in $installScopes) {
             try {
                 Write-Log "Tentando instalar PS2EXE no escopo $scope..."
-                Install-Module `
-                    -Name ps2exe `
-                    -Repository PSGallery `
-                    -Scope $scope `
-                    -Force `
-                    -AllowClobber `
-                    -SkipPublisherCheck `
-                    -Confirm:$false `
-                    -ErrorAction Stop | Out-Null
+
+                $moduleParams = @{
+                    Name               = 'ps2exe'
+                    Repository         = 'PSGallery'
+                    Scope              = $scope
+                    Force              = $true
+                    AllowClobber       = $true
+                    SkipPublisherCheck = $true
+                    Confirm            = $false
+                    ErrorAction        = 'Stop'
+                }
+
+                if ($cmdInstallModule.Parameters.ContainsKey('AcceptLicense')) {
+                    $moduleParams['AcceptLicense'] = $true
+                }
+
+                Install-Module @moduleParams | Out-Null
 
                 Add-PulseModulePaths
 
@@ -291,9 +369,10 @@ function Ensure-PS2EXE {
     Add-PulseModulePaths
     if (Test-PS2EXEAvailable) { return $true }
 
-    Show-Erro "PS2EXE nao foi encontrado e a instalacao automatica falhou.`nVerifique a conexao com a internet, PSGallery/PowerShellGet e tente novamente."
+    Show-Erro "PS2EXE nao foi encontrado e a instalacao automatica silenciosa falhou.`nVerifique a conexao com a internet, PSGallery/PowerShellGet e tente novamente."
     return $false
 }
+
 
 function New-BuildScript {
     param(
