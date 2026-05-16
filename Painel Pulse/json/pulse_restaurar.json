@@ -1,0 +1,122 @@
+[
+  {
+    "Id": "restaurar.impressao",
+    "TabKey": "restaurar",
+    "Foco": "restaurar",
+    "Favorito": "sim",
+    "Name": "Restaurar Impressão",
+    "Description": "Reativa impressão, fax e scanners, incluindo o Spooler de Impressão e serviços relacionados.",
+    "Tooltip": {
+      "Pros": [],
+      "Cons": [],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\restaurar_impressao.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_impressao.bat padrao"
+  },
+  {
+    "Id": "restaurar.virtualizacao-hyper-v",
+    "TabKey": "restaurar",
+    "Foco": "restaurar",
+    "Favorito": "sim",
+    "Name": "Restaurar Virtualização e Hyper-V",
+    "Description": "Reativa Hyper-V, Plataforma de Máquina Virtual e Hypervisor para WSL 2, Docker e máquinas virtuais.",
+    "Tooltip": {
+      "Pros": [],
+      "Cons": [],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\restaurar_virtualizacao-hyper-v.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_virtualizacao-hyper-v.bat padrao"
+  },
+  {
+    "Id": "restaurar.configuracoes-inicio",
+    "TabKey": "restaurar",
+    "Foco": "restaurar",
+    "Favorito": "sim",
+    "Name": "Restaurar 'Início' de Configurações",
+    "Description": "Restaura a página 'Início' no aplicativo Configurações do Windows 11.",
+    "Tooltip": {
+      "Pros": [],
+      "Cons": [],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\restaurar_configuracoes-inicio.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_configuracoes-inicio.bat padrao"
+  },
+  {
+    "Id": "restaurar.explorer-inicio-acesso-rapido",
+    "TabKey": "restaurar",
+    "Foco": "restaurar",
+    "Favorito": "sim",
+    "Name": "Restaurar 'Início/Acesso Rápido' do Explorador de Arquivos",
+    "Description": "Restaura Início, Acesso Rápido, arquivos recentes e pastas frequentes no Explorador.",
+    "Tooltip": {
+      "Pros": [],
+      "Cons": [],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\restaurar_explorer-inicio-acesso-rapido.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_explorer-inicio-acesso-rapido.bat padrao"
+  },
+  {
+    "Id": "restaurar.som-de-inicializacao",
+    "TabKey": "restaurar",
+    "Foco": "restaurar",
+    "Favorito": "sim",
+    "Name": "Restaurar Som de Inicialização",
+    "Description": "Reativa o som de inicialização do Windows e restaura o evento sonoro de logon.",
+    "Tooltip": {
+      "Pros": [],
+      "Cons": [],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\restaurar_som-de-inicializacao.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_som-de-inicializacao.bat padrao"
+  },
+  {
+    "Id": "restaurar.jump-lists",
+    "TabKey": "restaurar",
+    "Foco": "restaurar",
+    "Favorito": "sim",
+    "Name": "Restaurar Jump Lists",
+    "Description": "Restaura listas recentes de aplicativos, arquivos usados recentemente e histórico das Jump Lists.",
+    "Tooltip": {
+      "Pros": [],
+      "Cons": [],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\restaurar_jump-lists.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_jump-lists.bat padrao"
+  },
+  {
+    "Id": "restaurar.widgets",
+    "TabKey": "restaurar",
+    "Foco": "restaurar",
+    "Favorito": "sim",
+    "Name": "Restaurar Widgets",
+    "Description": "Reativa Widgets, Notícias e Interesses/Feeds e o botão de Widgets na barra de tarefas.",
+    "Tooltip": {
+      "Pros": [],
+      "Cons": [],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\restaurar_widgets.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_widgets.bat padrao"
+  },
+  {
+    "Id": "restaurar.recursos-servicos-xbox",
+    "TabKey": "restaurar",
+    "Foco": "restaurar",
+    "Favorito": "sim",
+    "Name": "Restaurar Recursos e Serviços Xbox",
+    "Description": "Reativa Game Bar, Game DVR e serviços Xbox usados por jogos, gravação, login e recursos da Microsoft Store.",
+    "Tooltip": {
+      "Pros": [],
+      "Cons": [],
+      "Unavailable": []
+    },
+    "Apply": ".\\comandos\\restaurar_recursos-servicos-xbox.bat restaurar",
+    "Revert": ".\\comandos\\restaurar_recursos-servicos-xbox.bat padrao"
+  }
+]
