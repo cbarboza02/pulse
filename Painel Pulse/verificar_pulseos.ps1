@@ -16,6 +16,18 @@ $StateDir = Join-Path $DocPath 'Painel Pulse'
 $StatePath = Join-Path $StateDir 'PulseState.json'
 if (-not (Test-Path -LiteralPath $StateDir)) { New-Item -ItemType Directory -Path $StateDir -Force | Out-Null }
 
+function Test-PulseStateValueActive {
+    param($Value)
+    if ($null -eq $Value) { return $false }
+    if ($Value -is [bool]) { return [bool]$Value }
+    if ($Value -is [string]) {
+        $norm = $Value.Trim().ToLowerInvariant()
+        if ($norm.Length -eq 0) { return $false }
+        if ($norm -eq 'false' -or $norm -eq 'padrao' -or $norm -eq 'padrão' -or $norm -eq 'revert') { return $false }
+        return $true
+    }
+    return $true
+}
 function Import-PulseState {
     $State = [ordered]@{}
     try {
@@ -24,7 +36,9 @@ function Import-PulseState {
             if (-not [string]::IsNullOrWhiteSpace($Content)) {
                 $Json = $Content | ConvertFrom-Json -ErrorAction Stop
                 foreach ($Prop in $Json.PSObject.Properties) {
-                    if ($Prop.Name -notlike '*_Value') { $State[$Prop.Name] = $Prop.Value }
+                    if (($Prop.Name -notlike '*_Value') -and (Test-PulseStateValueActive -Value $Prop.Value)) {
+                        $State[$Prop.Name] = $Prop.Value
+                    }
                 }
             }
         }
@@ -38,11 +52,9 @@ function Save-PulseState {
         foreach ($key in ($State.Keys | Sort-Object)) {
             if ($key -notlike '*_Value') {
                 $value = $State[$key]
-                if ($value -is [string]) {
-                    $norm = $value.Trim().ToLowerInvariant()
-                    if ($norm -eq 'padrao' -or $norm -eq 'padrão' -or $norm -eq 'false' -or $norm.Length -eq 0) { $ordered[$key] = $false }
-                    else { $ordered[$key] = $value.Trim() }
-                } else { $ordered[$key] = $value }
+                if (-not (Test-PulseStateValueActive -Value $value)) { continue }
+                if ($value -is [string]) { $ordered[$key] = $value.Trim() }
+                else { $ordered[$key] = $value }
             }
         }
         $ordered | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $StatePath -Encoding UTF8 -Force
@@ -97,6 +109,7 @@ function Test-RegValue {
     return ([string]$Current -eq [string]$Expected)
 }
 function Test-RegMissing { param([string]$Path,[string]$Name) return ($null -eq (Get-RegValue -Path $Path -Name $Name)) }
+function Test-RegExists { param([string]$Path,[string]$Name) return ($null -ne (Get-RegValue -Path $Path -Name $Name)) }
 function Test-RegKeyMissing { param([string]$Path) try { return (-not (Test-Path -LiteralPath (Convert-RegPath $Path))) } catch { return $false } }
 function Test-ServiceStartType { param([string]$Name,[string]$Expected) try { $svc = Get-Service -Name $Name -ErrorAction Stop; return ($svc.StartType.ToString() -eq $Expected) } catch { return $false } }
 function Test-ServiceNotDisabled { param([string]$Name) try { $svc = Get-Service -Name $Name -ErrorAction Stop; return ($svc.StartType.ToString() -ne 'Disabled') } catch { return $false } }
@@ -122,6 +135,7 @@ function Test-PulseCheck {
     switch ([string]$Check.Type) {
         'RegValue' { return (Test-RegValue -Path $Check.Path -Name $Check.Name -Expected $Check.Expected -Type $Check.RegType) }
         'RegMissing' { return (Test-RegMissing -Path $Check.Path -Name $Check.Name) }
+        'RegExists' { return (Test-RegExists -Path $Check.Path -Name $Check.Name) }
         'RegKeyMissing' { return (Test-RegKeyMissing -Path $Check.Path) }
         'ServiceStartType' { return (Test-ServiceStartType -Name $Check.Name -Expected $Check.Expected) }
         'ServiceNotDisabled' { return (Test-ServiceNotDisabled -Name $Check.Name) }
@@ -151,43 +165,9 @@ $PulseChecks = [ordered]@{
             @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy'; Name = 'LetAppsRunInBackground'; Expected = '2'; RegType = 'REG_DWORD' }
         )
     }
-    'geral.manutencao-automatica' = [ordered]@{
-        'apply' = @(
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance'; Name = 'MaintenanceDisabled'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'TaskState'; Task = 'Microsoft\Windows\TaskScheduler\Regular Maintenance'; Expected = 'Disabled' }
-            @{ Type = 'TaskState'; Task = 'Microsoft\Windows\TaskScheduler\Maintenance Configurator'; Expected = 'Disabled' }
-            @{ Type = 'TaskState'; Task = 'Microsoft\Windows\Diagnosis\Scheduled'; Expected = 'Disabled' }
-            @{ Type = 'TaskState'; Task = 'Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector'; Expected = 'Disabled' }
-            @{ Type = 'TaskState'; Task = 'Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver'; Expected = 'Disabled' }
-            @{ Type = 'TaskState'; Task = 'Microsoft\Windows\DiskFootprint\Diagnostics'; Expected = 'Disabled' }
-            @{ Type = 'TaskState'; Task = 'Microsoft\Windows\WDI\ResolutionHost'; Expected = 'Disabled' }
-        )
-    }
     'geral.plano-energia' = [ordered]@{
         'apply' = @(
             @{ Type = 'ActivePowerPlan'; Pattern = 'Ultimate|Desempenho\s+Maximo|Desempenho\s+Máximo' }
-        )
-    }
-    'geral.sleep-timeout' = [ordered]@{
-        'apply' = @(
-            @{ Type = 'PowerCfgValue'; Scheme = 'SCHEME_CURRENT'; Subgroup = 'SUB_SLEEP'; Setting = 'STANDBYIDLE'; Expected = 0; Mode = 'AC' }
-            @{ Type = 'PowerCfgValue'; Scheme = 'SCHEME_CURRENT'; Subgroup = 'SUB_SLEEP'; Setting = 'STANDBYIDLE'; Expected = 0; Mode = 'DC' }
-            @{ Type = 'PowerCfgValue'; Scheme = 'SCHEME_CURRENT'; Subgroup = 'SUB_SLEEP'; Setting = 'HIBERNATEIDLE'; Expected = 0; Mode = 'AC' }
-            @{ Type = 'PowerCfgValue'; Scheme = 'SCHEME_CURRENT'; Subgroup = 'SUB_SLEEP'; Setting = 'HIBERNATEIDLE'; Expected = 0; Mode = 'DC' }
-            @{ Type = 'PowerCfgValue'; Scheme = 'SCHEME_CURRENT'; Subgroup = 'SUB_VIDEO'; Setting = 'VIDEOIDLE'; Expected = 0; Mode = 'AC' }
-            @{ Type = 'PowerCfgValue'; Scheme = 'SCHEME_CURRENT'; Subgroup = 'SUB_VIDEO'; Setting = 'VIDEOIDLE'; Expected = 0; Mode = 'DC' }
-            @{ Type = 'PowerCfgValue'; Scheme = 'SCHEME_CURRENT'; Subgroup = 'SUB_DISK'; Setting = 'DISKIDLE'; Expected = 0; Mode = 'AC' }
-            @{ Type = 'PowerCfgValue'; Scheme = 'SCHEME_CURRENT'; Subgroup = 'SUB_DISK'; Setting = 'DISKIDLE'; Expected = 0; Mode = 'DC' }
-        )
-    }
-    'geral.hibernacao' = [ordered]@{
-        'apply' = @(
-            @{ Type = 'Hibernation'; Expected = 'Off' }
-            @{ Type = 'PowerCfgValue'; Scheme = 'SCHEME_CURRENT'; Subgroup = 'SUB_SLEEP'; Setting = 'HYBRIDSLEEP'; Expected = 0; Mode = 'AC' }
-            @{ Type = 'PowerCfgValue'; Scheme = 'SCHEME_CURRENT'; Subgroup = 'SUB_SLEEP'; Setting = 'HYBRIDSLEEP'; Expected = 0; Mode = 'DC' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power'; Name = 'HiberbootEnabled'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Control\Power'; Name = 'HibernateEnabled'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Control\Power'; Name = 'HibernateEnabledDefault'; Expected = '0'; RegType = 'REG_DWORD' }
         )
     }
     'geral.economia-energia' = [ordered]@{
@@ -196,21 +176,6 @@ $PulseChecks = [ordered]@{
             @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Services\usbhub\Parameters'; Name = 'DisableSelectiveSuspend'; Expected = '1'; RegType = 'REG_DWORD' }
             @{ Type = 'PowerCfgValue'; Scheme = 'SCHEME_CURRENT'; Subgroup = '501a4d13-42af-4429-9fd1-a8218c268e20'; Setting = 'ee12f906-d277-404b-b6da-e5fa1a576df5'; Expected = 0; Mode = 'AC' }
             @{ Type = 'PowerCfgValue'; Scheme = 'SCHEME_CURRENT'; Subgroup = '501a4d13-42af-4429-9fd1-a8218c268e20'; Setting = 'ee12f906-d277-404b-b6da-e5fa1a576df5'; Expected = 0; Mode = 'DC' }
-        )
-    }
-    'geral.estimativa-energia' = [ordered]@{
-        'apply' = @(
-            @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Control\Power'; Name = 'EnergyEstimationEnabled'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Control\Power'; Name = 'EnergyEstimationDisabled'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Control\Power'; Name = 'UserBatteryDischargeEstimator'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Control\Power'; Name = 'EEEnabled'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Control\Power'; Name = 'SleepStudyEnabled'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Power\PowerSettings'; Name = 'EnergyEstimationEnabled'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Power\PowerSettings'; Name = 'EventProcessingEnabled'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'TaskState'; Task = 'Microsoft\Windows\Power Efficiency Diagnostics\SleepStudy'; Expected = 'Disabled' }
-            @{ Type = 'TaskState'; Task = 'Microsoft\Windows\Power Efficiency Diagnostics\Calibration'; Expected = 'Disabled' }
-            @{ Type = 'TaskState'; Task = 'Microsoft\Windows\Power Efficiency Diagnostics\BackgroundEnergyDiagnostics'; Expected = 'Disabled' }
-            @{ Type = 'ServiceStartType'; Name = 'SensrSvc'; Expected = 'Disabled' }
         )
     }
     'geral.atraso-windows' = [ordered]@{
@@ -271,14 +236,6 @@ $PulseChecks = [ordered]@{
         'apply' = @(
             @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Classes\AllFilesystemObjects\shellex\ContextMenuHandlers\Copy To'; Name = '(Default)'; Expected = '{C2FBB630-2971-11D1-A18C-00C04FD75D13}'; RegType = 'REG_SZ' }
             @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Classes\AllFilesystemObjects\shellex\ContextMenuHandlers\Move To'; Name = '(Default)'; Expected = '{C2FBB631-2971-11D1-A18C-00C04FD75D13}'; RegType = 'REG_SZ' }
-        )
-    }
-    'geral.preenchimento-automatico' = [ordered]@{
-        'apply' = @(
-            @{ Type = 'RegValue'; Path = 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoComplete'; Name = 'AutoSuggest'; Expected = 'no'; RegType = 'REG_SZ' }
-            @{ Type = 'RegValue'; Path = 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoComplete'; Name = 'Append Completion'; Expected = 'no'; RegType = 'REG_SZ' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer'; Name = 'DisableSearchBoxSuggestions'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer'; Name = 'DisableSearchBoxSuggestions'; Expected = '1'; RegType = 'REG_DWORD' }
         )
     }
     'geral.acesso-rapido' = [ordered]@{
@@ -829,16 +786,22 @@ $PulseChecks = [ordered]@{
         'apply' = @(
             @{ Type = 'RegValue'; Path = 'HKCU\Software\Microsoft\GameBar'; Name = 'AutoGameModeEnabled'; Expected = '1'; RegType = 'REG_DWORD' }
             @{ Type = 'RegValue'; Path = 'HKCU\Software\Microsoft\GameBar'; Name = 'AllowAutoGameMode'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKCU\Software\Microsoft\Windows\CurrentVersion\GameBar'; Name = 'AutoGameModeEnabled'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKCU\Software\Microsoft\Windows\CurrentVersion\GameBar'; Name = 'AllowAutoGameMode'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR'; Name = 'AppCaptureEnabled'; Expected = '0'; RegType = 'REG_DWORD' }
             @{ Type = 'RegValue'; Path = 'HKCU\System\GameConfigStore'; Name = 'GameDVR_Enabled'; Expected = '0'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKCU\System\GameConfigStore'; Name = 'GameDVR_FSEBehavior'; Expected = '2'; RegType = 'REG_DWORD' }
             @{ Type = 'RegValue'; Path = 'HKCU\System\GameConfigStore'; Name = 'GameDVR_FSEBehaviorMode'; Expected = '2'; RegType = 'REG_DWORD' }
             @{ Type = 'RegValue'; Path = 'HKCU\System\GameConfigStore'; Name = 'GameDVR_HonorUserFSEBehaviorMode'; Expected = '1'; RegType = 'REG_DWORD' }
             @{ Type = 'RegValue'; Path = 'HKCU\System\GameConfigStore'; Name = 'GameDVR_DXGIHonorFSEWindowsCompatible'; Expected = '1'; RegType = 'REG_DWORD' }
             @{ Type = 'RegValue'; Path = 'HKCU\System\GameConfigStore'; Name = 'GameDVR_EFSEBehaviorMode'; Expected = '0'; RegType = 'REG_DWORD' }
             @{ Type = 'RegValue'; Path = 'HKCU\System\GameConfigStore'; Name = 'GameDVR_DSEBehavior'; Expected = '2'; RegType = 'REG_DWORD' }
             @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR'; Name = 'AllowGameDVR'; Expected = '0'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR'; Name = 'value'; Expected = '0'; RegType = 'REG_DWORD' }
             @{ Type = 'RegValue'; Path = 'HKCU\Software\Microsoft\GameBar'; Name = 'ShowStartupPanel'; Expected = '0'; RegType = 'REG_DWORD' }
             @{ Type = 'RegValue'; Path = 'HKCU\Software\Microsoft\GameBar'; Name = 'GamePanelStartupTipIndex'; Expected = '3'; RegType = 'REG_DWORD' }
             @{ Type = 'RegValue'; Path = 'HKCU\Software\Microsoft\GameBar'; Name = 'UseNexusForGameBarEnabled'; Expected = '0'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKCU\Software\Microsoft\Windows\CurrentVersion\GameBar'; Name = 'UseNexusForGameBarEnabled'; Expected = '0'; RegType = 'REG_DWORD' }
         )
     }
     'pulsemode.cfg' = [ordered]@{
@@ -861,8 +824,41 @@ $PulseChecks = [ordered]@{
             @{ Type = 'ScheduledTaskExists'; Task = 'PulseOS\Pulse Mode - Otimizar Windows Update' }
             @{ Type = 'ServiceStartType'; Name = 'UsoSvc'; Expected = 'Disabled' }
             @{ Type = 'ServiceStartType'; Name = 'bits'; Expected = 'Disabled' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc'; Name = 'Start'; Expected = 4; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'NoAutoUpdate'; Expected = 1; RegType = 'REG_DWORD' }
+            @{ Type = 'ServiceStartType'; Name = 'WpnService'; Expected = 'Disabled' }
+            @{ Type = 'ServiceStartType'; Name = 'wuauserv'; Expected = 'Manual' }
+            @{ Type = 'ServiceStartType'; Name = 'dosvc'; Expected = 'Manual' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc'; Name = 'Start'; Expected = '4'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization'; Name = 'DODownloadMode'; Expected = '0'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization'; Name = 'DOUploadMode'; Expected = '0'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization'; Name = 'DOMaxUploadRate'; Expected = '0'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization'; Name = 'DOMaxBackgroundUploadBandwidth'; Expected = '0'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization'; Name = 'DOMaxForegroundUploadBandwidth'; Expected = '0'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegMissing'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'DisableWindowsUpdateAccess' }
+            @{ Type = 'RegMissing'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'SetDisableUXWUAccess' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'ExcludeWUDriversInQualityUpdate'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'SetActiveHours'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'ActiveHoursStart'; Expected = '8'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'ActiveHoursEnd'; Expected = '23'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'ManagePreviewBuilds'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'ManagePreviewBuildsPolicyValue'; Expected = '0'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'NoAutoUpdate'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'AUOptions'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'NoAutoRebootWithLoggedOnUsers'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'RebootWarningTimeoutEnabled'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'RebootWarningTimeout'; Expected = '60'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'ScheduledInstallDay'; Expected = '0'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'ScheduledInstallTime'; Expected = '3'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching'; Name = 'SearchOrderConfig'; Expected = '0'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching'; Name = 'DontSearchWindowsUpdate'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching'; Name = 'DontPromptForWindowsUpdate'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Device Metadata'; Name = 'PreventDeviceMetadataFromNetwork'; Expected = '1'; RegType = 'REG_DWORD' }
+            @{ Type = 'RegExists'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'PauseUpdatesStartTime' }
+            @{ Type = 'RegExists'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'PauseUpdatesExpiryTime' }
+            @{ Type = 'RegExists'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'PauseFeatureUpdatesStartTime' }
+            @{ Type = 'RegExists'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'PauseFeatureUpdatesEndTime' }
+            @{ Type = 'RegExists'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'PauseQualityUpdatesStartTime' }
+            @{ Type = 'RegExists'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'PauseQualityUpdatesEndTime' }
+            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'FlightSettingsMaxPauseDays'; Expected = '35'; RegType = 'REG_DWORD' }
         )
     }
     'pulsemode.svchostsplit' = [ordered]@{
@@ -1030,8 +1026,14 @@ foreach ($id in $PulseChecks.Keys) {
             break
         }
     }
-    if (-not $detected) { $State[$id] = $false }
+    if (-not $detected) {
+        if ($State.ContainsKey($id)) { $State.Remove($id) }
+    }
 }
-foreach ($key in @($State.Keys)) { if ($key -like '*_Value') { $State.Remove($key) } }
+$ObsoletePulseChecks = @('geral.manutencao-automatica','geral.sleep-timeout','geral.hibernacao','geral.estimativa-energia','geral.preenchimento-automatico')
+foreach ($obsolete in $ObsoletePulseChecks) { if ($State.ContainsKey($obsolete)) { $State.Remove($obsolete) } }
+foreach ($key in @($State.Keys)) {
+    if (($key -like '*_Value') -or (-not (Test-PulseStateValueActive -Value $State[$key]))) { $State.Remove($key) }
+}
 Save-PulseState -State $State
 exit 0
