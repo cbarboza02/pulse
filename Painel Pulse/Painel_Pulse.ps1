@@ -1671,7 +1671,6 @@ $xaml = @'
                     <TabControl x:Name="Tabs_Geral" Grid.Row="2" Style="{StaticResource TopTabsStyle}">
                         <TabItem Header="Geral"       Style="{StaticResource TopTabItemStyle}" Tag="geral_geral"/>
                         <TabItem Header="Experiência" Style="{StaticResource TopTabItemStyle}" Tag="geral_exp"/>
-                        <TabItem Header="Privacidade" Style="{StaticResource TopTabItemStyle}" Tag="geral_priv"/>
                     </TabControl>
 
                     <!-- Conteúdo: lista ou mensagem de vazio -->
