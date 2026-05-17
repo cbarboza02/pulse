@@ -819,48 +819,6 @@ $PulseChecks = [ordered]@{
             @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel'; Name = 'GlobalTimerResolutionRequests'; Expected = '1'; RegType = 'REG_DWORD' }
         )
     }
-    'pulsemode.windows-update' = [ordered]@{
-        'apply' = @(
-            @{ Type = 'ScheduledTaskExists'; Task = 'PulseOS\Pulse Mode - Otimizar Windows Update' }
-            @{ Type = 'ServiceStartType'; Name = 'UsoSvc'; Expected = 'Disabled' }
-            @{ Type = 'ServiceStartType'; Name = 'bits'; Expected = 'Disabled' }
-            @{ Type = 'ServiceStartType'; Name = 'WpnService'; Expected = 'Disabled' }
-            @{ Type = 'ServiceStartType'; Name = 'wuauserv'; Expected = 'Manual' }
-            @{ Type = 'ServiceStartType'; Name = 'dosvc'; Expected = 'Manual' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc'; Name = 'Start'; Expected = '4'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization'; Name = 'DODownloadMode'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization'; Name = 'DOUploadMode'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization'; Name = 'DOMaxUploadRate'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization'; Name = 'DOMaxBackgroundUploadBandwidth'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization'; Name = 'DOMaxForegroundUploadBandwidth'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegMissing'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'DisableWindowsUpdateAccess' }
-            @{ Type = 'RegMissing'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'SetDisableUXWUAccess' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'ExcludeWUDriversInQualityUpdate'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'SetActiveHours'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'ActiveHoursStart'; Expected = '8'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'ActiveHoursEnd'; Expected = '23'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'ManagePreviewBuilds'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'; Name = 'ManagePreviewBuildsPolicyValue'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'NoAutoUpdate'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'AUOptions'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'NoAutoRebootWithLoggedOnUsers'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'RebootWarningTimeoutEnabled'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'RebootWarningTimeout'; Expected = '60'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'ScheduledInstallDay'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'; Name = 'ScheduledInstallTime'; Expected = '3'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching'; Name = 'SearchOrderConfig'; Expected = '0'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching'; Name = 'DontSearchWindowsUpdate'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching'; Name = 'DontPromptForWindowsUpdate'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Device Metadata'; Name = 'PreventDeviceMetadataFromNetwork'; Expected = '1'; RegType = 'REG_DWORD' }
-            @{ Type = 'RegExists'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'PauseUpdatesStartTime' }
-            @{ Type = 'RegExists'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'PauseUpdatesExpiryTime' }
-            @{ Type = 'RegExists'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'PauseFeatureUpdatesStartTime' }
-            @{ Type = 'RegExists'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'PauseFeatureUpdatesEndTime' }
-            @{ Type = 'RegExists'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'PauseQualityUpdatesStartTime' }
-            @{ Type = 'RegExists'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'PauseQualityUpdatesEndTime' }
-            @{ Type = 'RegValue'; Path = 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'; Name = 'FlightSettingsMaxPauseDays'; Expected = '35'; RegType = 'REG_DWORD' }
-        )
-    }
     'pulsemode.svchostsplit' = [ordered]@{
         'apply' = @(
             @{ Type = 'RegValue'; Path = 'HKLM\SYSTEM\CurrentControlSet\Control'; Name = 'SvcHostSplitThresholdInKB'; Expected = '4294967295'; RegType = 'REG_DWORD' }
@@ -1030,7 +988,7 @@ foreach ($id in $PulseChecks.Keys) {
         if ($State.ContainsKey($id)) { $State.Remove($id) }
     }
 }
-$ObsoletePulseChecks = @('geral.manutencao-automatica','geral.sleep-timeout','geral.hibernacao','geral.estimativa-energia','geral.preenchimento-automatico')
+$ObsoletePulseChecks = @('geral.manutencao-automatica','geral.sleep-timeout','geral.hibernacao','geral.estimativa-energia','geral.preenchimento-automatico','pulsemode.windows-update')
 foreach ($obsolete in $ObsoletePulseChecks) { if ($State.ContainsKey($obsolete)) { $State.Remove($obsolete) } }
 foreach ($key in @($State.Keys)) {
     if (($key -like '*_Value') -or (-not (Test-PulseStateValueActive -Value $State[$key]))) { $State.Remove($key) }
