@@ -394,33 +394,6 @@
     "Foco": "jogos"
   },
   {
-    "Id": "pulsemode.windows-update",
-    "TabKey": "pulsemode",
-    "pulsemode": "exclusivo",
-    "Name": "Otimizar Windows Update",
-    "Description": "Desativa a atualização automática de drivers via Windows Update, bloqueia o upload P2P da Otimização de Entrega e cria uma tarefa agendada que para o serviço do Windows Update e pausa as atualizações por 7 dias a cada logon.",
-    "Tooltip": {
-      "Pros": [
-        "Impede que o Windows Update substitua drivers instalados manualmente por versões genéricas",
-        "Bloqueia o upload de atualizações para outros computadores via Delivery Optimization",
-        "A tarefa agendada garante que o Windows Update permaneça pausado automaticamente a cada boot"
-      ],
-      "Cons": [
-        "Atualizações de segurança críticas não serão instaladas automaticamente",
-        "Drivers de hardware não receberão atualizações automáticas via Windows Update",
-        "A pausa de 7 dias requer renovação manual ou via tarefa após o período expirar"
-      ],
-      "Unavailable": [
-        "A atualização automática de drivers via Windows Update ficará indisponível",
-        "O compartilhamento P2P de atualizações via Delivery Optimization ficará indisponível"
-      ]
-    },
-    "Apply": ".\\comandos\\pulsemode_windows-update.bat apply",
-    "Revert": ".\\comandos\\pulsemode_windows-update.bat revert",
-    "Foco": "fluidez",
-    "Favorito": "sim"
-  },
-  {
     "Id": "pulsemode.svchostsplit",
     "TabKey": "pulsemode",
     "pulsemode": "exclusivo",
