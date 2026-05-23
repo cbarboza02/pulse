@@ -118,20 +118,5 @@
     },
     "Apply": ".\\comandos\\reparar\\reparar_menu-iniciar-explorer.bat reparar",
     "Revert": ".\\comandos\\reparar\\reparar_menu-iniciar-explorer.bat padrao"
-  },
-  {
-    "Id": "reparar.arquivos-sistema",
-    "TabKey": "reparar",
-    "Foco": "reparar",
-    "Favorito": "sim",
-    "Name": "Reparar Arquivos do Sistema",
-    "Description": "Executa DISM e SFC para corrigir arquivos corrompidos do Windows.",
-    "Tooltip": {
-      "Pros": [],
-      "Cons": [],
-      "Unavailable": []
-    },
-    "Apply": ".\\comandos\\reparar\\reparar_arquivos-sistema.bat reparar",
-    "Revert": ".\\comandos\\reparar\\reparar_arquivos-sistema.bat padrao"
   }
 ]
